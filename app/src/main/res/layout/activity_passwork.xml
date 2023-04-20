@@ -54,7 +54,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/img_back"
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="43dp"
                 android:layout_marginTop="16dp"
-                android:text="Đăng ký tài khoản"
+                android:text="Tạo mật khẩu"
                 android:textColor="@color/main_blue"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -82,11 +82,11 @@
 
             <TextView
                 android:id="@+id/tv_intro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="293dp"
+                android:layout_height="32dp"
                 android:layout_marginStart="43dp"
                 android:layout_marginTop="6dp"
-                android:text="Tạo tài khoản để bắt đầu sử dụng CAN nha!"
+                android:text="Mật khẩu từ 8 -13 ký tự, chứa ít nhất một ký tự  đặc biệt, có ít nhất một chữ hoa và một chữ số. "
                 android:textColor="@color/main_blue"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -98,10 +98,10 @@
                 android:layout_height="46dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="35dp"
-                android:drawableStart="@drawable/user_icon"
+                android:drawableStart="@drawable/password"
                 android:drawablePadding="10dp"
                 android:ems="10"
-                android:hint="Họ và tên"
+                android:hint="Mật khẩu"
                 android:inputType="textPersonName"
                 android:textColor="#A5A4AD"
                 android:textColorHint="#A5A4AD"
@@ -114,107 +114,39 @@
                 android:layout_height="46dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="28dp"
-                android:drawableStart="@drawable/mssv"
+                android:drawableStart="@drawable/password"
                 android:drawablePadding="10dp"
                 android:ems="10"
-                android:hint="MSSV"
+                android:hint="Nhập lại mật khẩu"
                 android:inputType="textPersonName"
                 android:textColor="#A5A4AD"
                 android:textColorHint="#A5A4AD"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edt_password" />
 
-            <EditText
-                android:id="@+id/edt_email"
-                android:layout_width="300dp"
-                android:layout_height="46dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="28dp"
-                android:drawableStart="@drawable/email"
-                android:drawablePadding="10dp"
-                android:ems="10"
-                android:hint="Email"
-                android:inputType="textPersonName"
-                android:textColor="#A5A4AD"
-                android:textColorHint="#A5A4AD"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edt_pass_again" />
-
-            <EditText
-                android:id="@+id/edt_birthday"
-                android:layout_width="300dp"
-                android:layout_height="46dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="28dp"
-                android:drawableStart="@drawable/birthday"
-                android:drawablePadding="10dp"
-                android:ems="10"
-                android:hint="Ngày sinh"
-                android:inputType="textPersonName"
-                android:textColor="#A5A4AD"
-                android:textColorHint="#A5A4AD"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edt_email" />
-
-            <EditText
-                android:id="@+id/edt_address"
-                android:layout_width="300dp"
-                android:layout_height="46dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="28dp"
-                android:drawableStart="@drawable/address"
-                android:drawablePadding="10dp"
-                android:ems="10"
-                android:hint="Địa chỉ"
-                android:inputType="textPersonName"
-                android:textColor="#A5A4AD"
-                android:textColorHint="#A5A4AD"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edt_birthday" />
-
-            <EditText
-                android:id="@+id/edt_phone"
-                android:layout_width="300dp"
-                android:layout_height="46dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="28dp"
-                android:drawableStart="@drawable/phone"
-                android:drawablePadding="10dp"
-                android:ems="10"
-                android:hint="Số điện thoại"
-                android:inputType="textPersonName"
-                android:textColor="#A5A4AD"
-                android:textColorHint="#A5A4AD"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edt_address" />
-
-            <EditText
-                android:id="@+id/edt_major"
-                android:layout_width="300dp"
-                android:layout_height="46dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="28dp"
-                android:drawableStart="@drawable/major"
-                android:drawablePadding="10dp"
-                android:ems="10"
-                android:hint="Ngành học"
-                android:inputType="textPersonName"
-                android:textColor="#A5A4AD"
-                android:textColorHint="#A5A4AD"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edt_phone" />
-
             <TextView
-                android:id="@+id/tv_next"
+                android:id="@+id/tv_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="253dp"
-                android:layout_marginTop="28dp"
-                android:text="Tiếp theo >"
-                android:textColor="@color/third_blue"
-                android:textSize="14sp"
+                android:layout_marginStart="65dp"
+                android:layout_marginTop="8dp"
+                android:text="Bạn đã có tài khoản CAN? Đăng nhập ngay"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edt_major" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="300dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="52dp"
+                android:text="Đăng ký"
+                android:textColor="#FFFFFF"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edt_pass_again"
+                android:background="@drawable/btn_register"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
