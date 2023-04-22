@@ -31,5 +31,14 @@ public class WelcomeActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_up_login, R.anim.no_animation);
             }
         });
+        findViewById(R.id.btn_signin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(WelcomeActivity.this, RegisterActivity.class);
+                startActivity(intent);
+                // Thiết lập animation cho LoginActivity
+                overridePendingTransition(R.anim.slide_up_login, R.anim.no_animation);
+            }
+        });
     }
 }
