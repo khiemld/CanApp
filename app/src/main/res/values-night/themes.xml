@@ -12,5 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <!-- Làm mất title của app        -->
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">true</item>
+        <!-- Kết thúc  -->
     </style>
 </resources>

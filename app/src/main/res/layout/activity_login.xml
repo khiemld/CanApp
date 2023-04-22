@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
-    android:background="@drawable/open_background">
+    android:id="@+id/loginlayout"
+    android:background="@android:color/transparent">
 
     <ImageView
         android:id="@+id/img_logo2"
@@ -95,6 +96,9 @@
             android:drawableLeft="@drawable/email"
             android:drawablePadding="8dp"
             android:hint="Email"
+            android:textColor="@color/main_blue"
+            android:textColorHint="@color/main_blue"
+            android:inputType="textPersonName"
             android:paddingStart="8dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
@@ -112,6 +116,9 @@
             android:drawableLeft="@drawable/password"
             android:drawablePadding="8dp"
             android:hint="Mật khẩu"
+            android:textColorHint="@color/main_blue"
+            android:textColor="@color/main_blue"
+            android:inputType="textPassword"
             android:paddingStart="8dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"

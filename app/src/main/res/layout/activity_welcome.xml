@@ -53,7 +53,7 @@
         android:layout_marginStart="58dp"
         android:background="@drawable/background_btnsignin"
         android:backgroundTint="#FFAA4C"
-        android:text="Đăng nhập"
+        android:text="Đăng ký"
         android:textSize="20sp"
         android:textColor="#FFF"/>
 
