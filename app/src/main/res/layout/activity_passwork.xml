@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
-    android:background="@color/second_blue">
+    android:background="@drawable/open_background">
 
     <ImageView
         android:id="@+id/img_avatar"
@@ -102,8 +102,7 @@
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="Mật khẩu"
-                android:inputType="textPersonName"
-                android:textColor="#A5A4AD"
+                android:inputType="textWebPassword"
                 android:textColorHint="#A5A4AD"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_intro" />
@@ -118,8 +117,7 @@
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="Nhập lại mật khẩu"
-                android:inputType="textPersonName"
-                android:textColor="#A5A4AD"
+                android:inputType="textWebPassword"
                 android:textColorHint="#A5A4AD"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edt_password" />

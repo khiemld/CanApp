@@ -5,7 +5,9 @@ plugins {
 android {
     namespace 'com.example.canapp'
     compileSdk 33
-
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
         applicationId "com.example.canapp"
         minSdk 24
