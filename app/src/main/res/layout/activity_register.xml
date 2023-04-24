@@ -45,13 +45,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constrain_intro"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="200dp"
+        android:layout_height="535dp"
         android:background="@drawable/backgroud_fill"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/img_back"
@@ -94,6 +93,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="90dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_intro">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -105,14 +107,14 @@
                     android:layout_width="300dp"
                     android:layout_height="46dp"
                     android:layout_marginStart="28dp"
+                    android:backgroundTint="@color/main_blue"
                     android:drawableStart="@drawable/user_icon"
                     android:drawablePadding="10dp"
                     android:ems="10"
                     android:hint="Họ và tên"
                     android:inputType="textPersonName"
-                    android:textColorHint="#A5A4AD"
                     android:textColor="@color/main_blue"
-                    android:backgroundTint="@color/main_blue"
+                    android:textColorHint="#A5A4AD"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -122,9 +124,9 @@
                     android:layout_height="46dp"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="28dp"
+                    android:backgroundTint="@color/main_blue"
                     android:drawableStart="@drawable/mssv"
                     android:drawablePadding="10dp"
-                    android:backgroundTint="@color/main_blue"
                     android:ems="10"
                     android:hint="MSSV"
                     android:inputType="textPersonName"
@@ -139,14 +141,14 @@
                     android:layout_height="46dp"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="28dp"
+                    android:backgroundTint="@color/main_blue"
                     android:drawableStart="@drawable/email"
                     android:drawablePadding="10dp"
-                    android:backgroundTint="@color/main_blue"
                     android:ems="10"
                     android:hint="Email"
                     android:inputType="textWebEmailAddress"
-                    android:textColorHint="#A5A4AD"
                     android:textColor="@color/main_blue"
+                    android:textColorHint="#A5A4AD"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edt_pass_again" />
 
@@ -156,14 +158,14 @@
                     android:layout_height="46dp"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="28dp"
-                    android:drawableStart="@drawable/birthday"
                     android:backgroundTint="@color/main_blue"
+                    android:drawableStart="@drawable/birthday"
                     android:drawablePadding="10dp"
                     android:ems="10"
                     android:hint="Ngày sinh"
                     android:inputType="date"
-                    android:textColorHint="#A5A4AD"
                     android:textColor="@color/main_blue"
+                    android:textColorHint="#A5A4AD"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edt_email" />
 
@@ -173,14 +175,14 @@
                     android:layout_height="46dp"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="28dp"
-                    android:drawableStart="@drawable/address"
                     android:backgroundTint="@color/main_blue"
+                    android:drawableStart="@drawable/address"
                     android:drawablePadding="10dp"
                     android:ems="10"
                     android:hint="Địa chỉ"
                     android:inputType="textPostalAddress"
-                    android:textColorHint="#A5A4AD"
                     android:textColor="@color/main_blue"
+                    android:textColorHint="#A5A4AD"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edt_birthday" />
 
@@ -190,14 +192,14 @@
                     android:layout_height="46dp"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="28dp"
-                    android:drawableStart="@drawable/phone"
                     android:backgroundTint="@color/main_blue"
+                    android:drawableStart="@drawable/phone"
                     android:drawablePadding="10dp"
                     android:ems="10"
                     android:hint="Số điện thoại"
                     android:inputType="phone"
-                    android:textColorHint="#A5A4AD"
                     android:textColor="@color/main_blue"
+                    android:textColorHint="#A5A4AD"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edt_address" />
 
@@ -207,14 +209,14 @@
                     android:layout_height="46dp"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="28dp"
-                    android:drawableStart="@drawable/major"
                     android:backgroundTint="@color/main_blue"
+                    android:drawableStart="@drawable/major"
                     android:drawablePadding="10dp"
                     android:ems="10"
                     android:hint="Ngành học"
                     android:inputType="textPersonName"
-                    android:textColorHint="#A5A4AD"
                     android:textColor="@color/main_blue"
+                    android:textColorHint="#A5A4AD"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edt_phone" />
 
