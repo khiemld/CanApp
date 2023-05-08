@@ -9,11 +9,14 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.example.canapp.ulti.SharedPrefManager;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -21,6 +24,12 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        if (SharedPrefManager.getInstance(this).isLoggedIn()){
+            finish();
+            Log.d("message", "Success");
+            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        }
 
         findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
             @Override

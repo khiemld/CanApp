@@ -20,11 +20,7 @@ public class User implements Serializable {
     @SerializedName("password")
     private String password;
 
-    @SerializedName("idRole")
-    private int idRole;
-
     @SerializedName("image")
-    @Nullable
     private String avatar;
 
     @SerializedName("address")
@@ -39,24 +35,19 @@ public class User implements Serializable {
     @SerializedName("active")
     private boolean active;
 
-    @SerializedName("__v")
-    private int __v;
-
     public User() {
     }
 
-    public User(String _id, String name, String email, String password, int idRole, @Nullable String avatar, String address, String major, String phone, boolean active, int __v) {
+    public User(String _id, String name, String email, String password, String avatar, String address, String major, String phone, boolean active) {
         this._id = _id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.idRole = idRole;
         this.avatar = avatar;
         this.address = address;
         this.major = major;
         this.phone = phone;
         this.active = active;
-        this.__v = __v;
     }
 
     public String get_id() {
@@ -91,20 +82,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public int getIdRole() {
-        return idRole;
-    }
-
-    public void setIdRole(int idRole) {
-        this.idRole = idRole;
-    }
-
-    @Nullable
     public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(@Nullable String avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 
@@ -138,13 +120,5 @@ public class User implements Serializable {
 
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    public int get__v() {
-        return __v;
-    }
-
-    public void set__v(int __v) {
-        this.__v = __v;
     }
 }

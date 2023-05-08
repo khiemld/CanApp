@@ -1,10 +1,9 @@
 package com.example.canapp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,6 +20,7 @@ import com.example.canapp.api.ApiService;
 import com.example.canapp.api.RetrofitClient;
 import com.example.canapp.model.User;
 import com.example.canapp.model.UserLogin;
+import com.example.canapp.ulti.SharedPrefManager;
 
 
 import retrofit2.Call;
@@ -35,6 +36,10 @@ public class LoginActivity extends AppCompatActivity {
     ApiService apiService;
 
     private EditText edt_email, edt_password;
+
+    private CheckBox cb_remember;
+
+    User user = new User();
 
     public LoginActivity() {
     }
@@ -131,6 +136,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
                 UserLogin userLogin = response.body();
                 if (response.isSuccessful() && !userLogin.isError()){
+                    user = response.body().getUser();
+                    if (cb_remember.isChecked()){
+                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+                    }
+                    finish();
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                     startActivity(intent);
                 } else {
@@ -155,5 +165,6 @@ public class LoginActivity extends AppCompatActivity {
         loginLayout = findViewById(R.id.loginlayout);
         edt_email = findViewById(R.id.edt_emaillogin);
         edt_password = findViewById(R.id.edt_passwordlogin);
+        cb_remember = findViewById(R.id.cb_rememberlogin);
     }
 }
