@@ -21,6 +21,7 @@ public class My_Profile extends AppCompatActivity {
     Toolbar top_bar;
     ImageView img_menu;
     ConstraintLayout constrain_project;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

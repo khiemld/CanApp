@@ -34,7 +34,7 @@ public class ResetPassword_Login2 extends AppCompatActivity {
         edt_pass = findViewById(R.id.edt_password);
         edt_pass_again = findViewById(R.id.edt_password_again);
         tv_noti=findViewById(R.id.tv_noti);
-        btn_reset = findViewById(R.id.btn_reset);
+        btn_reset = findViewById(R.id.btn_register);
         img_back=findViewById(R.id.img_back);
         tv_noti_pass_again=findViewById(R.id.tv_noti_pass_again);
     }

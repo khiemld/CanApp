@@ -20,7 +20,7 @@ public class PassworkActivity extends AppCompatActivity {
     private View passwordLayout;
     private float deltaY;
     EditText edt_pass,edt_pass_again;
-    TextView tv_noti_pass,tv_noti_pass_again;
+    TextView tv_noti_pass,tv_noti_pass_again,tv_login;
     ImageView img_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +31,16 @@ public class PassworkActivity extends AppCompatActivity {
         params.height = WindowManager.LayoutParams.MATCH_PARENT;
         getWindow().setAttributes(params);
         String text = "<font color=#001E6C>Bạn đã có tài khoản CAN?</font> <font color=#FFAA4C>Đăng nhập ngay</font>";
-        TextView tv_login = (TextView)findViewById(R.id.tv_login);
-        tv_login.setText(Html.fromHtml(text));
         AnhXa();
         SetThongBao();
+        tv_login.setText(Html.fromHtml(text));
+        tv_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PassworkActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,6 +86,7 @@ public class PassworkActivity extends AppCompatActivity {
         tv_noti_pass=findViewById(R.id.tv_noti_pass);
         tv_noti_pass_again=findViewById(R.id.tv_noti_pass_again);
         img_back=findViewById(R.id.img_back);
+        tv_login = findViewById(R.id.tv_login);
     }
     public void SetThongBao(){
         edt_pass.addTextChangedListener(new TextWatcher() {

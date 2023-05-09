@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginEnd="20dp"
+    app:cardBackgroundColor="#ffffff"
+    app:cardCornerRadius="5dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="17dp">
+
+        <TextView
+            android:id="@+id/tv_projectof"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintHorizontal_bias="0"
+            android:text="Dự án của"
+            android:textColor="#A5A4AD"
+            android:textSize="10sp"/>
+
+        <TextView
+            android:id="@+id/tv_nameowner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_projectof"
+            app:layout_constraintVertical_bias="0"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/background_nameowner"
+            android:paddingStart="2dp"
+            android:paddingTop="1dp"
+            android:paddingEnd="2dp"
+            android:paddingBottom="1dp"
+            android:text="Yorn and Alice"
+            android:textColor="@color/second_blue"
+            android:textSize="10sp"/>
+
+        <ImageView
+            android:id="@+id/img_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_nameowner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.03"
+            app:layout_constraintHorizontal_bias="0.97"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_option"/>
+
+        <TextView
+            android:id="@+id/tv_titlehometask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nameowner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginTop="14dp"
+            android:text="Đi rồng phải ăn con chim"
+            android:textColor="#A5A4AD"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_descriptionHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tv_titlehometask"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginTop="8dp"
+            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum"
+            android:textColor="#A5A4AD"
+            android:textSize="12sp"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/cr_avatarHome"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_descriptionHome"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="0"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/avatar_profile"/>
+
+        <ImageView
+            android:id="@+id/img_flagHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tv_descriptionHome"
+            app:layout_constraintStart_toEndOf="@+id/cr_avatarHome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_flag"
+            app:tint="#FFAA4C"/>
+
+        <TextView
+            android:id="@+id/tv_dateAddHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tv_descriptionHome"
+            app:layout_constraintStart_toEndOf="@+id/img_flagHome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginStart="8dp"
+            android:text="01.01.2023"
+            android:textColor="#FFAA4C"
+            android:textSize="10sp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+ </androidx.cardview.widget.CardView>
