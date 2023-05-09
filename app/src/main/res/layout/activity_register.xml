@@ -2,45 +2,47 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    app:errorEnabled="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
-    android:id="@+id/registerlayout"
+    android:id="@+id/registerLayout"
     android:background="@android:color/transparent">
 
     <ImageView
-        android:id="@+id/img_avatar"
+        android:id="@+id/img_logo2"
         android:layout_width="65dp"
         android:layout_height="80dp"
-        android:layout_marginStart="37dp"
         android:layout_marginTop="55dp"
-        android:background="@drawable/logo2"
+        android:layout_marginStart="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/logo2"/>
+
+    <TextView
+        android:id="@+id/tv_nameapp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="117dp"
+        android:layout_marginTop="55dp"
+        android:text="CAN"
+        android:textColor="#ffffff"
+        android:textSize="40sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_logo"
+        android:id="@+id/tv_sloganapp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="63dp"
-        android:text="CAN"
-        android:textColor="#FFFFFF"
-        android:textSize="40sp"
-        app:layout_constraintStart_toEndOf="@+id/img_avatar"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="117dp"
+        android:layout_marginTop="109dp"
         android:text="Project is not a big deal"
+        android:textColor="#ffffff"
         android:textSize="20sp"
-        android:textColor="#FFFFFF"
-        app:layout_constraintStart_toEndOf="@+id/img_avatar"
-        app:layout_constraintTop_toBottomOf="@+id/tv_logo" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constrain_intro"
@@ -73,6 +75,7 @@
             android:text="Đăng ký tài khoản"
             android:textColor="@color/main_blue"
             android:textSize="25sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -119,7 +122,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/edt_pass_again"
+                    android:id="@+id/edt_password_again"
                     android:layout_width="300dp"
                     android:layout_height="46dp"
                     android:layout_marginStart="30dp"
@@ -150,7 +153,7 @@
                     android:textColor="@color/main_blue"
                     android:textColorHint="#A5A4AD"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edt_pass_again" />
+                    app:layout_constraintTop_toBottomOf="@+id/edt_password_again" />
 
                 <EditText
                     android:id="@+id/edt_birthday"
@@ -231,6 +234,54 @@
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edt_major" />
+
+                <TextView
+                    android:id="@+id/tv_noti_mssv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="225dp"
+                    android:text="MSSV không hợp lệ"
+                    android:visibility="invisible"
+                    android:textColor="@color/orange"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_password_again" />
+
+                <TextView
+                    android:id="@+id/tv_noti_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="225dp"
+                    android:text="Email không hợp lệ"
+                    android:visibility="invisible"
+                    android:textColor="@color/orange"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_email" />
+
+                <TextView
+                    android:id="@+id/tv_noti_birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="203dp"
+                    android:text="Ngày sinh không hợp lệ"
+                    android:visibility="invisible"
+                    android:textColor="@color/orange"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edt_birthday" />
+
+                <TextView
+                    android:id="@+id/tv_noti_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="188dp"
+                    android:text="Số điện thoại không hợp lệ"
+                    android:visibility="invisible"
+                    android:textColor="@color/orange"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edt_phone" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

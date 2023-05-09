@@ -2,12 +2,15 @@ package com.example.canapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -15,12 +18,18 @@ public class LoginActivity extends AppCompatActivity {
 
     private float deltaY;
 
+    TextView tv_register,tv_forgetpass;
+    Button btn_login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
-
+        AnhXa();
+        Register();
+        Reset();
+        Login();
         // Đặt kích thước cho activity_login bằng với activity_welcome
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
@@ -61,6 +70,38 @@ public class LoginActivity extends AppCompatActivity {
                         return false;
                 }
 
+            }
+        });
+    }
+    public void AnhXa(){
+        tv_register = findViewById(R.id.tv_register);
+        tv_forgetpass=findViewById(R.id.tv_forgetpass);
+        btn_login=findViewById(R.id.btn_login2);
+    }
+    public void Register(){
+        tv_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+    public void Login(){
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,My_Profile.class);
+                startActivity(intent);
+            }
+        });
+    }
+    public void Reset(){
+        tv_forgetpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,ResetPassword.class);
+                startActivity(intent);
             }
         });
     }
