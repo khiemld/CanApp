@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.canapp.ulti.SharedPrefManager;
+
 public class My_Profile extends AppCompatActivity {
 
     Toolbar top_bar;
@@ -68,6 +70,9 @@ public class My_Profile extends AppCompatActivity {
             case R.id.menuReset:
                 Intent intent = new Intent(My_Profile.this,ResetPassword_Login.class);
                 startActivity(intent);
+                break;
+            case R.id.menuLogout:
+                SharedPrefManager.getInstance(getApplicationContext()).logout();
                 break;
             case R.id.menuResetProfile:
                 intent = new Intent(My_Profile.this,EditInformation.class);
