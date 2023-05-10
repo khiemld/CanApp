@@ -1,9 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WelcomeActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".WelcomeActivity"
+    android:background="@drawable/open_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center_horizontal">
+
+
+    <ImageView
+        android:layout_width="184dp"
+        android:layout_height="195dp"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="CAN"
+        android:textSize="40sp"
+        android:letterSpacing="0.25"
+        android:textStyle="bold"
+        android:textColor="#fff"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Project is not a big deal"
+        android:textSize="20sp"
+        android:textColor="#fff"/>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="304dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/background_btnlogin"
+        android:text="Đăng nhập"
+        android:textSize="20sp"
+        android:textColor="#FFF"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/btn_signin"
+        android:layout_width="304dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/background_btnsignin"
+        android:backgroundTint="#FFAA4C"
+        android:text="Đăng ký"
+        android:textSize="20sp"
+        android:textColor="#FFF"
+        android:layout_gravity="center"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

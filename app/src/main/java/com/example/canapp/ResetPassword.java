@@ -1,0 +1,79 @@
+package com.example.canapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class ResetPassword extends AppCompatActivity {
+
+    TextView tv_noti_email,tv_next;
+    EditText edt_email;
+    ImageView img_back;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_reset_password);
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.height = WindowManager.LayoutParams.MATCH_PARENT;
+        getWindow().setAttributes(params);
+        AnhXa();
+        SetThongBao();
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        tv_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ResetPassword.this,ResetPassword2.class);
+                startActivity(intent);
+            }
+        });
+    }
+    public void AnhXa(){
+        edt_email=findViewById(R.id.edt_email);
+        tv_noti_email=findViewById(R.id.tv_noti_email);
+        img_back=findViewById(R.id.img_back);
+        tv_next=findViewById(R.id.tv_next);
+    }
+    public void SetThongBao(){
+        edt_email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String regex = "^([A-Z|a-z|0-9](\\.|_){0,1})+[A-Z|a-z|0-9]\\@([A-Z|a-z|0-9])+((\\.){0,1}[A-Z|a-z|0-9]){2}\\.[a-z]{2,3}$";
+                String string = charSequence.toString();
+                if (string.length() == 0 || !string.matches(regex)){
+                    tv_noti_email.setVisibility(View.VISIBLE);
+                }
+                else {
+                    tv_noti_email.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
+
+
+}
