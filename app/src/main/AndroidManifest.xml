@@ -9,11 +9,6 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
-
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -21,18 +16,33 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CanApp"
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".HomeActivity"
-            android:exported="true" >
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-        </activity>
+            android:name=".AllMyProject"
+            android:exported="false" />
+        <activity
+            android:name=".EditInformation"
+            android:exported="false" />
+        <activity
+            android:name=".ResetPassword_Login2"
+            android:exported="false" />
+        <activity
+            android:name=".ResetPassword_Login"
+            android:exported="false" />
+        <activity
+            android:name=".ResetPassword2"
+            android:exported="true"
+            android:theme="@style/LoginActivityTheme"
+            />
+        <activity
+            android:name=".My_Profile"
+            android:exported="false" />
+        <activity
+            android:name=".ResetPassword"
+            android:exported="true"
+            android:theme="@style/LoginActivityTheme" />
         <activity
             android:name=".PassworkActivity"
             android:exported="true"
@@ -41,20 +51,11 @@
             android:name=".RegisterActivity"
             android:exported="true"
             android:theme="@style/LoginActivityTheme">
-
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
         </activity>
         <activity
             android:name=".WelcomeActivity"
             android:exported="true">
-
-            <intent-filter>
+           <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -63,17 +64,16 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:theme="@style/LoginActivityTheme">
-
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            android:theme="@style/LoginActivityTheme"
+            android:windowSoftInputMode="adjustResize"
+            >
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false">
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="true" >
             <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

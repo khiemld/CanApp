@@ -5,10 +5,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.canapp.adapter.ProjectAdapter;
 import com.example.canapp.model.Project;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +20,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private RecyclerView rv_projectRecent, rv_myProject, rv_projectEnjoy;
     private ProjectAdapter projectAdapter;
+    BottomNavigationItemView account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,13 @@ public class HomeActivity extends AppCompatActivity {
         getAllprojectRecent();
         getAllmyProject();
         getAllprojectEnjoy();
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this,My_Profile.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void getAllprojectEnjoy() {
@@ -69,5 +80,6 @@ public class HomeActivity extends AppCompatActivity {
         rv_projectRecent = findViewById(R.id.rcv_projectRecent);
         rv_myProject = findViewById(R.id.rcv_myProject);
         rv_projectEnjoy = findViewById(R.id.rcv_projectEnjoy);
+        account=findViewById(R.id.ic_account);
     }
 }

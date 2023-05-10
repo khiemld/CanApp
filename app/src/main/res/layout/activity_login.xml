@@ -51,6 +51,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+        <TextView
+            android:id="@+id/tv_noti_pass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="209dp"
+            android:layout_marginTop="2dp"
+            android:text="Mật khẩu không hợp lệ"
+            android:textColor="@color/orange"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_passwordlogin" />
+
         <ImageView
             android:id="@+id/img_loginback"
             android:layout_width="wrap_content"
@@ -98,12 +111,24 @@
             android:hint="Email"
             android:textColor="@color/main_blue"
             android:textColorHint="#A5A4AD"
-            android:inputType="textPersonName"
+            android:inputType="textWebEmailAddress"
             android:paddingStart="8dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_hello" />
+
+        <TextView
+            android:id="@+id/tv_noti_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="209dp"
+            android:text="Email không hợp lệ"
+            android:textColor="@color/orange"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_emaillogin" />
 
         <EditText
             android:id="@+id/edt_passwordlogin"
@@ -131,12 +156,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="31dp"
+            android:buttonTint="@color/main_blue"
             android:checked="false"
-            android:padding="4dp"
+            android:drawablePadding="8dp"
             android:text="Ghi nhớ đăng nhập"
             android:textColor="@color/main_blue"
             android:textStyle="bold"
-            android:button="@drawable/checkbox_selector"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edt_passwordlogin" />
 
@@ -150,7 +175,6 @@
             android:layout_marginEnd="28dp"
             app:layout_constraintTop_toBottomOf="@+id/cb_rememberlogin"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:text="Đăng nhập"
             android:textColor="@color/white"
             android:textSize="20sp"/>
@@ -158,33 +182,41 @@
             android:id="@+id/tv_confirmquestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/btn_login2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
-            app:layout_constraintVertical_bias="0.02"
+            android:layout_marginStart="90dp"
             android:text="Bạn chưa có tài khoản CAN?"
-            android:textSize="15sp"
-            android:textColor="@color/main_blue" />
+            android:textSize="12sp"
+            android:textColor="@color/main_blue"/>
 
         <TextView
-            android:id="@+id/tv_dangkyLogin"
+            android:id="@+id/tv_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/btn_login2"
             app:layout_constraintStart_toEndOf="@+id/tv_confirmquestion"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.05"
-            app:layout_constraintVertical_bias="0.02"
+            android:layout_marginStart="2dp"
             android:text="Đăng ký ngay"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:textColor="@color/orange" />
+            android:textSize="12sp"
+            android:textColor="@color/orange"/>
+
+        <TextView
+            android:id="@+id/tv_forgetpass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="39dp"
+            android:layout_marginEnd="30dp"
+
+            android:text="Quên mật khẩu"
+            android:textColor="#FFAA4C"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_passwordlogin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

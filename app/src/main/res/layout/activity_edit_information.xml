@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditInformation">
+
+    <EditText
+        android:id="@+id/edt_username"
+        android:layout_width="300dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@color/main_blue"
+        android:drawableStart="@drawable/user_icon_2"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:gravity="end"
+        android:inputType="textWebEmailAddress"
+        android:text="Hoàng Vũ Trường Giang"
+        android:textColor="@color/main_blue"
+        android:textColorHint="#A5A4AD"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <EditText
+        android:id="@+id/edt_email"
+        android:layout_width="300dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@color/main_blue"
+        android:drawableStart="@drawable/email_2"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:gravity="end"
+        android:inputType="textWebEmailAddress"
+        android:text="gianghvt.work@gmail.com"
+        android:textColor="@color/main_blue"
+        android:textColorHint="#A5A4AD"
+
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_username" />
+
+    <EditText
+        android:id="@+id/edt_address"
+        android:layout_width="300dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@color/main_blue"
+        android:drawableStart="@drawable/address2"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:gravity="end"
+        android:textSize="12sp"
+        android:inputType="textWebEmailAddress"
+        android:text="Số 40, Chương Dương, Thủ Đức"
+        android:textColor="@color/main_blue"
+        android:textColorHint="#A5A4AD"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_email" />
+
+    <EditText
+        android:id="@+id/edt_major"
+        android:layout_width="300dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@color/main_blue"
+        android:drawableStart="@drawable/major2"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:gravity="end"
+        android:inputType="textWebEmailAddress"
+        android:textSize="12sp"
+        android:text="Tiên nữ Công nghệ"
+        android:textColor="@color/main_blue"
+        android:textColorHint="#A5A4AD"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_address" />
+
+    <EditText
+        android:id="@+id/edt_phone"
+        android:layout_width="300dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@color/main_blue"
+        android:textSize="12sp"
+        android:drawableStart="@drawable/phone2"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:gravity="end"
+        android:inputType="textWebEmailAddress"
+        android:text="0397384473"
+        android:textColor="@color/main_blue"
+        android:textColorHint="#A5A4AD"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_major" />
+
+    <EditText
+        android:id="@+id/edt_birthday"
+        android:layout_width="300dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@color/main_blue"
+        android:drawableStart="@drawable/birthday2"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:gravity="end"
+        android:inputType="textWebEmailAddress"
+        android:textSize="12sp"
+        android:text="28/10/2002"
+        android:textColor="@color/main_blue"
+        android:textColorHint="#A5A4AD"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_phone" />
+
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/vector_register" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="114dp"
+        android:layout_height="114dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="114dp"
+            android:layout_height="114dp">
+
+            <ImageView
+                android:id="@+id/img_update"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/logo2" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="84dp"
+                android:layout_marginTop="78dp"
+                android:background="@drawable/background_update" />
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:layout_marginTop="83dp"
+                app:srcCompat="@drawable/camera" />
+
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="133dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="133dp"
+        android:text="Thông tin"
+        android:textColor="@color/main_blue"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="137dp"
+
+        android:layout_height="38dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/btn_register"
+        app:layout_constraintStart_toEndOf="@+id/constraintLayout"
+        app:layout_constraintTop_toBottomOf="@+id/edt_birthday">
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cập nhật"
+            android:textAlignment="center"
+            android:textColor="#FFFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="137dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+
+        android:background="@drawable/background_btnsignin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_birthday">
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hủy"
+            android:textColor="@color/orange"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/third_blue"
+        app:itemIconTint="@drawable/background_items_menu"
+        app:itemTextColor="@drawable/background_items_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_bar">
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

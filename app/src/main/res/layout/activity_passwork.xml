@@ -9,40 +9,39 @@
     android:id="@+id/passwordLayout">
 
     <ImageView
-        android:id="@+id/img_avatar"
+        android:id="@+id/img_logo2"
         android:layout_width="65dp"
         android:layout_height="80dp"
-        android:layout_marginStart="37dp"
-
         android:layout_marginTop="55dp"
-        android:background="@drawable/logo2"
+        android:layout_marginStart="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/logo2"/>
+
+    <TextView
+        android:id="@+id/tv_nameapp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="117dp"
+        android:layout_marginTop="55dp"
+        android:text="CAN"
+        android:textColor="#ffffff"
+        android:textSize="40sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_logo"
+        android:id="@+id/tv_sloganapp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="63dp"
-        android:text="CAN"
-        android:textColor="#FFFFFF"
-        android:textSize="40sp"
-        app:layout_constraintStart_toEndOf="@+id/img_avatar"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="117dp"
+        android:layout_marginTop="109dp"
         android:text="Project is not a big deal"
+        android:textColor="#ffffff"
         android:textSize="20sp"
-        android:textColor="#FFFFFF"
-        app:layout_constraintStart_toEndOf="@+id/img_avatar"
-        app:layout_constraintTop_toBottomOf="@+id/tv_logo" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -74,6 +73,7 @@
                 android:text="Tạo mật khẩu"
                 android:textColor="@color/main_blue"
                 android:textSize="25sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -93,8 +93,8 @@
                 android:id="@+id/edt_password"
                 android:layout_width="300dp"
                 android:layout_height="46dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="36dp"
                 android:backgroundTint="@color/main_blue"
                 android:drawableStart="@drawable/password"
                 android:drawablePadding="10dp"
@@ -107,7 +107,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_intro" />
 
             <EditText
-                android:id="@+id/edt_pass_again"
+                android:id="@+id/edt_password_again"
                 android:layout_width="300dp"
                 android:layout_height="46dp"
                 android:layout_marginStart="30dp"
@@ -144,7 +144,33 @@
                 android:text="Đăng ký"
                 android:textColor="#FFFFFF"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edt_pass_again" />
+                app:layout_constraintTop_toBottomOf="@+id/edt_password_again" />
+
+            <TextView
+                android:id="@+id/tv_noti_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="209dp"
+                android:layout_marginTop="2dp"
+                android:text="Mật khẩu không hợp lệ"
+                android:textColor="@color/orange"
+                android:textSize="12sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edt_password" />
+
+            <TextView
+                android:id="@+id/tv_noti_pass_again"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="209dp"
+                android:layout_marginTop="2dp"
+                android:text="Mật khẩu không khớp"
+                android:textColor="@color/orange"
+                android:textSize="12sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edt_password_again" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
