@@ -6,7 +6,25 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">true</item>
-        
         <item name="android:windowSoftInputMode">adjustResize|stateHidden</item>
+    </style>
+
+    <style name="Transparent" parent="Theme.AppCompat">
+        <item name="windowNoTitle">true</item>
+        // this property will help hide ActionBar
+        <item name="windowActionBar">false</item>
+        // currently, I don't know why we need this property since use windowNoTitle only already
+        help hide actionbar. I use it because it is used inside Theme.AppCompat.Light.NoActionBar
+        (you can check Theme.AppCompat.Light.NoActionBar code). I think there are some missing case
+        that I don't know
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="statusBarForeground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="statusBarBackground">@android:color/transparent</item>
+        <item name="android:windowFullscreen">true</item>
+        // this property is use for hide StatusBar
     </style>
 </resources>
