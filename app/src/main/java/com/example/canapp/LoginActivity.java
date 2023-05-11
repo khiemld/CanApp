@@ -3,6 +3,7 @@ package com.example.canapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -43,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
     Button btnLogin;
 
-    private CheckBox cb_remember;
+    public CheckBox cb_remember;
 
     User user = new User();
 
@@ -103,7 +104,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
     private void Mapping() {
         loginLayout = findViewById(R.id.loginlayout);
         edt_email = findViewById(R.id.edt_emaillogin);
@@ -142,9 +142,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful() && !userLogin.isError()){
                     user = response.body().getUser();
                     if (cb_remember.isChecked()){
-                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user, true);
+                    } else {
+                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user, false);
                     }
-                    finish();
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                     startActivity(intent);
                 } else {
@@ -206,7 +207,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String string = charSequence.toString();
-                String regex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?])(?=.*[a-zA-Z]).{8,13}$";
+                String regex = "^.{8,13}$";
                 if (string.length() == 0 || !string.matches(regex)){
                     tv_noti_pass.setVisibility(View.VISIBLE);
                 }

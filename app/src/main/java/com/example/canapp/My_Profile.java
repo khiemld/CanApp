@@ -37,7 +37,7 @@ public class My_Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
         AnhXa();
-        if(SharedPrefManager.getInstance(this).isLoggedIn()){
+        if(SharedPrefManager.getInstance(this).getUser() != null){
             user = SharedPrefManager.getInstance(this).getUser();
             tv_username.setText(user.getName());
             tv_phone.setText(user.getPhone());
