@@ -64,9 +64,7 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:theme="@style/LoginActivityTheme"
-            android:windowSoftInputMode="adjustResize"
-            >
+            android:theme="@style/LoginActivityTheme">
         </activity>
         <activity
             android:name=".MainActivity"
