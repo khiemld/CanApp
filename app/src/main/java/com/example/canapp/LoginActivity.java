@@ -57,9 +57,10 @@ public class LoginActivity extends AppCompatActivity {
         params.height = WindowManager.LayoutParams.MATCH_PARENT;
         getWindow().setAttributes(params);
         Mapping();
+        btnLogin.setOnClickListener(v->Login());
+        SetThongBao();
         Register();
         Reset();
-        Login();
         // Thêm TouchListener vào giao diện của LoginActivity
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,9 +127,53 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     public void Login(){
-        btnLogin.setOnClickListener(v->Login());
         String email = edt_email.getText().toString();
         String password = edt_password.getText().toString();
+        //Khoi tao apiService
+        apiService = RetrofitClient.getRetrofit().create(ApiService.class);
+
+        //Thuc hien API login
+        Call<UserLogin> call = apiService.login(email, password);
+
+        call.enqueue(new Callback<UserLogin>() {
+            @Override
+            public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
+                UserLogin userLogin = response.body();
+                if (response.isSuccessful() && !userLogin.isError()){
+                    user = response.body().getUser();
+                    if (cb_remember.isChecked()){
+                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+                    }
+                    finish();
+                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                    startActivity(intent);
+                } else {
+                    try {
+                        Toast.makeText(getApplicationContext(), "Email hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
+
+                    } catch (Exception e){
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserLogin> call, Throwable t) {
+                Log.d("Error:", t.getMessage());
+            }
+        });
+
+    }
+    public void Reset(){
+        tv_forgest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,ResetPassword.class);
+                startActivity(intent);
+            }
+        });
+    }
+    public void SetThongBao(){
         //Kiem tra cac truong email vaf password da duoc nhap chua
         edt_email.addTextChangedListener(new TextWatcher() {
             @Override
@@ -176,48 +221,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        //Khoi tao apiService
-        apiService = RetrofitClient.getRetrofit().create(ApiService.class);
-
-        //Thuc hien API login
-        Call<UserLogin> call = apiService.login(email, password);
-
-        call.enqueue(new Callback<UserLogin>() {
-            @Override
-            public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
-                UserLogin userLogin = response.body();
-                if (response.isSuccessful() && !userLogin.isError()){
-                    user = response.body().getUser();
-                    if (cb_remember.isChecked()){
-                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
-                    }
-                    finish();
-                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                    startActivity(intent);
-                } else {
-                    try {
-                        Toast.makeText(getApplicationContext(), "Email hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
-
-                    } catch (Exception e){
-
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<UserLogin> call, Throwable t) {
-                Log.d("Error:", t.getMessage());
-            }
-        });
-
     }
-    public void Reset(){
-        tv_forgest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,ResetPassword.class);
-                startActivity(intent);
-            }
-        });
-    }
+
 }

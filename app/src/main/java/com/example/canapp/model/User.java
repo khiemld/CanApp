@@ -35,8 +35,12 @@ public class User implements Serializable {
     @SerializedName("active")
     private boolean active;
 
+    @SerializedName("birthday")
+    private String birthday;
+
     public User() {
     }
+
 
     public User(String _id, String name, String email, String password, String avatar, String address, String major, String phone, boolean active) {
         this._id = _id;
@@ -48,6 +52,15 @@ public class User implements Serializable {
         this.major = major;
         this.phone = phone;
         this.active = active;
+    }
+
+    public User(String name, String email, String address, String major, String phone, String birthday) {
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.major = major;
+        this.phone = phone;
+        this.birthday=birthday;
     }
 
     public String get_id() {
@@ -120,5 +133,13 @@ public class User implements Serializable {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 }

@@ -14,21 +14,38 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.canapp.api.ApiService;
+import com.example.canapp.api.RetrofitClient;
+import com.example.canapp.model.User;
 import com.example.canapp.ulti.SharedPrefManager;
+
+import retrofit2.Call;
 
 public class My_Profile extends AppCompatActivity {
 
     Toolbar top_bar;
     ImageView img_menu;
     ConstraintLayout constrain_project;
+    TextView tv_username, tv_email,tv_address,tv_major,tv_phone,tv_birthday;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
         AnhXa();
+        if(SharedPrefManager.getInstance(this).isLoggedIn()){
+            user = SharedPrefManager.getInstance(this).getUser();
+            tv_username.setText(user.getName());
+            tv_phone.setText(user.getPhone());
+            tv_major.setText(user.getMajor());
+            tv_email.setText(user.getEmail());
+            tv_address.setText(user.getAddress());
+        }
+//        Toast.makeText(this, user.getAddress().toString(), Toast.LENGTH_SHORT).show();
         setSupportActionBar(top_bar);
         getSupportActionBar().setTitle("");
         img_menu.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +60,12 @@ public class My_Profile extends AppCompatActivity {
         top_bar = findViewById(R.id.top_bar);
         img_menu=findViewById(R.id.img_menu);
         constrain_project=findViewById(R.id.constraint_project);
+        tv_address=findViewById(R.id.tv_address);
+        tv_birthday=findViewById(R.id.tv_birthday);
+        tv_email=findViewById(R.id.tv_email);
+        tv_major=findViewById(R.id.tv_major);
+        tv_phone=findViewById(R.id.tv_phone);
+        tv_username=findViewById(R.id.tv_username);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,5 +114,6 @@ public class My_Profile extends AppCompatActivity {
             }
         });
     }
+
 
 }

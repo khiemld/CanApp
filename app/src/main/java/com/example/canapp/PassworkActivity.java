@@ -11,9 +11,23 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.canapp.api.ApiService;
+import com.example.canapp.api.RetrofitClient;
+import com.example.canapp.model.User;
+import com.example.canapp.model.UserLogin;
+import com.example.canapp.model.UserRegister;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PassworkActivity extends AppCompatActivity {
 
@@ -22,6 +36,10 @@ public class PassworkActivity extends AppCompatActivity {
     EditText edt_pass,edt_pass_again;
     TextView tv_noti_pass,tv_noti_pass_again,tv_login;
     ImageView img_back;
+    ApiService apiService;
+    UserRegister userRegister;
+
+    Button btn_register;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +63,12 @@ public class PassworkActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dangky();
             }
         });
         passwordLayout.setOnTouchListener(new View.OnTouchListener() {
@@ -87,6 +111,45 @@ public class PassworkActivity extends AppCompatActivity {
         tv_noti_pass_again=findViewById(R.id.tv_noti_pass_again);
         img_back=findViewById(R.id.img_back);
         tv_login = findViewById(R.id.tv_login);
+        btn_register=findViewById(R.id.btn_register);
+    }
+    public void Dangky(){
+        Bundle bundle = getIntent().getExtras();
+        User user1 = (User) bundle.getSerializable("user1");
+        String pass = edt_pass.getText().toString();
+        user1.setPassword(pass);
+        //Toast.makeText(getApplicationContext(), user1.getPassword().toString(), Toast.LENGTH_SHORT).show();
+        apiService = RetrofitClient.getRetrofit().create(ApiService.class);
+
+        //Thuc hien API register
+        Call<UserRegister> call = apiService.register(user1.getName().toString(),user1.getEmail().toString(),
+                user1.getPassword().toString(),user1.getAddress(), user1.getMajor().toString(),
+                user1.getPhone().toString(), user1.getBirthday().toString());
+        call.enqueue(new Callback<UserRegister>() {
+            @Override
+            public void onResponse(Call<UserRegister> call, Response<UserRegister> response) {
+                try {
+                    if (response.isSuccessful()) {
+                        userRegister = response.body();
+                        if (! userRegister.isError()){
+                            Toast.makeText(PassworkActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(PassworkActivity.this, "Thất bại", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } else {
+                        Toast.makeText(PassworkActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserRegister> call, Throwable t) {
+
+            }
+        });
     }
     public void SetThongBao(){
         edt_pass.addTextChangedListener(new TextWatcher() {
