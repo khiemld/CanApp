@@ -28,6 +28,8 @@ public class SharedPrefManager {
 
     private static final String KEY_ACTIVE = "keyactive";
 
+    private static final String KEY_REMEMBER = "keyremember";
+
     private static SharedPrefManager mInstance;
 
     private static Context ctx;
@@ -46,7 +48,7 @@ public class SharedPrefManager {
     }
 
     //Luu thong tin dang nhap vao shared preferences
-    public void userLogin(User user){
+    public void userLogin(User user, boolean remember){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_ID, user.get_id());
@@ -58,6 +60,7 @@ public class SharedPrefManager {
         editor.putString(KEY_MAJOR, user.getMajor());
         editor.putString(KEY_PHONE, user.getPhone());
         editor.putBoolean(KEY_ACTIVE, user.isActive());
+        editor.putBoolean(KEY_REMEMBER, remember);
 
         editor.apply();
     }
@@ -65,6 +68,11 @@ public class SharedPrefManager {
     //Kiem tra trang thai dang nhap
     public boolean isLoggedIn() {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        if (sharedPreferences.getBoolean(KEY_REMEMBER, false)){
+            return sharedPreferences.getString(KEY_NAME, null) != null;
+        } else {
+            clearUser();
+        }
         return sharedPreferences.getString(KEY_NAME, null) != null;
     }
 
@@ -84,6 +92,22 @@ public class SharedPrefManager {
         );
     }
 
+    //Xoa thong tin
+    public void clearUser() {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(KEY_ID);
+        editor.remove(KEY_NAME);
+        editor.remove(KEY_EMAIL);
+        editor.remove(KEY_PASSWORD);
+        editor.remove(KEY_AVATAR);
+        editor.remove(KEY_ADDRESS);
+        editor.remove(KEY_MAJOR);
+        editor.remove(KEY_PHONE);
+        editor.remove(KEY_ACTIVE);
+        editor.remove(KEY_REMEMBER);
+        editor.apply();
+    }
     //Dang xuat
     public void logout() {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
