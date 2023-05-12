@@ -146,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         SharedPrefManager.getInstance(getApplicationContext()).userLogin(user, false);
                     }
-                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), BaseActivity.class);
                     startActivity(intent);
                 } else {
                     try {

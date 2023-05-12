@@ -21,7 +21,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".MyApp" />
+            android:name=".BaseActivity"
+            android:exported="false" />
+
         <activity
             android:name=".AllMyProject"
             android:exported="false" />
@@ -38,9 +40,9 @@
             android:name=".ResetPassword2"
             android:exported="true"
             android:theme="@style/LoginActivityTheme" />
-        <activity
+        <!--<activity
             android:name=".My_Profile"
-            android:exported="false" />
+            android:exported="false" />-->
         <activity
             android:name=".ResetPassword"
             android:exported="true"
@@ -52,7 +54,7 @@
         <activity
             android:name=".RegisterActivity"
             android:exported="true"
-            android:theme="@style/LoginActivityTheme"></activity>
+            android:theme="@style/LoginActivityTheme" />
         <activity
             android:name=".WelcomeActivity"
             android:exported="true">
@@ -65,22 +67,22 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:theme="@style/LoginActivityTheme"></activity>
+            android:theme="@style/LoginActivityTheme" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-        <activity
+        <!--<activity
             android:name=".HomeActivity"
-            android:exported="true">
+            android:exported="false">
 
-            <!--
+            &lt;!&ndash;
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            -->
-        </activity>
+            &ndash;&gt;
+        </activity>-->
     </application>
 
 </manifest>
