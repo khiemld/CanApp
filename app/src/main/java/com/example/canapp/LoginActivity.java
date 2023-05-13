@@ -56,16 +56,12 @@ public class LoginActivity extends AppCompatActivity {
 
     User user = new User();
 
-    Button btn_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
-        Register();
-        Reset();
-        Login();
         // Đặt kích thước cho activity_login bằng với activity_welcome
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
@@ -74,8 +70,21 @@ public class LoginActivity extends AppCompatActivity {
         Mapping();
         btnLogin.setOnClickListener(v->Login());
         SetThongBao();
-        Register();
-        Reset();
+
+        tv_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+        tv_forgest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,ResetPassword.class);
+                startActivity(intent);
+            }
+        });
         // Thêm TouchListener vào giao diện của LoginActivity
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,15 +141,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void Register(){
-        tv_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
+
     public void Login(){
         String email = edt_email.getText().toString();
         String password = edt_password.getText().toString();
@@ -172,7 +173,9 @@ public class LoginActivity extends AppCompatActivity {
                                             if (response.isSuccessful() && !userLogin.isError()){
                                                 user = response.body().getUser();
                                                 if (cb_remember.isChecked()){
-                                                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+                                                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(user, true);
+                                                } else {
+                                                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(user, false);
                                                 }
                                                 Toast.makeText(LoginActivity.this, "Email đã được xác thực, đăng nhập thành công",
                                                         Toast.LENGTH_SHORT).show();
@@ -218,17 +221,8 @@ public class LoginActivity extends AppCompatActivity {
         /* */
 
     }
-    public void Reset(){
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(LoginActivity.this,My_Profile.class);
-                    startActivity(intent);
-                }
-            });
-        }
-        public void SetThongBao(){
+    public void SetThongBao(){
             //Kiem tra cac truong email vaf password da duoc nhap chua
             edt_email.addTextChangedListener(new TextWatcher() {
                 @Override
