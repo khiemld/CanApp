@@ -71,6 +71,29 @@ public class Task implements Serializable {
         this._id = _id;
     }
 
+    public Task(String column, int typeId, int id, String plan, int index, String name,
+                boolean active,
+                List<User> members, int __v, String _id) {
+        this.column = column;
+        this.typeId = typeId;
+        this.id = id;
+        this.plan = plan;
+        this.index = index;
+        this.name = name;
+        this.active = active;
+        this.members = members;
+        this.__v = __v;
+        this._id = _id;
+    }
+
+    public String getColumn() {
+        return column;
+    }
+
+    public void setColumn(String column) {
+        this.column = column;
+    }
+
     public String get_id() {
         return _id;
     }

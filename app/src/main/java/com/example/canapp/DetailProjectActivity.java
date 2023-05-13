@@ -61,7 +61,7 @@ public class DetailProjectActivity extends AppCompatActivity {
     List<Type> types = new ArrayList<>();
     List<Task> tasks = new ArrayList<>();
     List<List<Task>> detailTasks = new ArrayList<>();
-    List<ArrayList<Pair<Long, String>>> dataLists = new ArrayList<>();
+    List<ArrayList<Pair<Long, Task>>> dataLists = new ArrayList<>();
 
     TextView cancelButton;
     TextView projectName, projectOwner;
@@ -94,40 +94,38 @@ public class DetailProjectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_project);
 
-        //Khoi tao apiService
-        planApi = RetrofitClient.getRetrofit().create(PlanApi.class);
-        handleGetPlanDetailInfo();
-
         initialMapping();
-
-        handleMoreInfo();
-
-        // Lấy các type - ĐANG FAKE
-        initialTypes();
-
-        // Lấy các task - ĐANG FAKE
-        initialTask();
-
-        // Sắp xếp các type theo index tăng dần
-        sortType();
-
-        // Tạo list data để đưa vo apdater
-        createDataLists();
 
         // Setting một chút cho cái Board View (cái bảng mà kéo qua kéo lại á)
         initialBoardView();
 
-        // Thêm các cột dữ liệu dô bảng
-        addAllColumn();
+        handleGetPlanDetailInfo();
 
-        // Thêm cái cột cuối cùng (cái cột chỉ có cái chữ thêm thẻ mới á)
-        addFakeColumn();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Thêm các cột dữ liệu dô bảng
+                addAllColumn();
 
-        handleFakeColumn();
-        handleFooter();
+                // Thêm cái cột cuối cùng (cái cột chỉ có cái chữ thêm thẻ mới á)
+                addFakeColumn();
+
+                handleFakeColumn();
+
+                handleFooter();
+            }
+        }, 3000);
+        handleMoreInfo();
+
+
     }
 
     void handleGetPlanDetailInfo() {
+        // Mai mốt thay thế cái này bằng lấy dữ liệu từ intent truyền qua
+
+        //Khoi tao apiService
+        planApi = RetrofitClient.getRetrofit().create(PlanApi.class);
+
         Call<ProjectDetailResponse> call = planApi.getPlanDetail(projectID);
         call.enqueue(new Callback<ProjectDetailResponse>() {
             @Override
@@ -142,6 +140,20 @@ public class DetailProjectActivity extends AppCompatActivity {
                     projectName.setText(mProject.getName());
                     projectOwner.setText(mManager.getName());
 
+                    // Lấy các type - ĐANG FAKE
+                    initialTypes();
+
+                    // Lấy các task - ĐANG FAKE
+                    initialTask();
+
+                    tasks.get(0).getMembers().add(new User());
+
+                    // Sắp xếp các type theo index tăng dần
+                    sortType();
+
+                    // Tạo list data để đưa vo apdater
+                    createDataLists();
+
                 } else {
                     try {
                         Toast.makeText(DetailProjectActivity.this, response.errorBody().string(),
@@ -155,7 +167,7 @@ public class DetailProjectActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ProjectDetailResponse> call, Throwable t) {
                 Log.e(TAG, "onFailure: " + t.getMessage());
-                Toast.makeText(DetailProjectActivity.this, t.getMessage(),
+                Toast.makeText(DetailProjectActivity.this, "Không thể lấy dữ liệu 🥲",
                         Toast.LENGTH_SHORT).show();
             }
         });
@@ -170,10 +182,11 @@ public class DetailProjectActivity extends AppCompatActivity {
         });
     }
 
+    // Thêm cái cột giả (cột có nút tạo cột mới)
     @SuppressLint("ResourceAsColor")
     private void addFakeColumn() {
 
-        final ArrayList<Pair<Long, String>> mItemArray = new ArrayList<>();
+        final ArrayList<Pair<Long, Task>> mItemArray = new ArrayList<>();
 
         final ItemAdapter listAdapter =
                 new ItemAdapter(mItemArray, R.layout.task, R.id.task_item, true);
@@ -241,12 +254,13 @@ public class DetailProjectActivity extends AppCompatActivity {
         sortTaskList();
     }
 
+    // Khởi tạo lại danh sách task cho từng cột
     void sortTaskList() {
         detailTasks.clear();
         for (Type type : types) {
             List<Task> mTask = new ArrayList<>();
             for (Task task : tasks) {
-                if (task.getTypeId() == type.getId()) {
+                if (task.getColumn().equals(type.get_id())) {
                     Task newTask = new Task();
                     newTask = task;
                     mTask.add(newTask);
@@ -259,18 +273,20 @@ public class DetailProjectActivity extends AppCompatActivity {
         }
     }
 
+    // Danh sách map từ task -> item để load lên view
     void createDataLists() {
         dataLists.clear();
         for (List<Task> taskList : detailTasks) {
-            ArrayList<Pair<Long, String>> mItemArray = new ArrayList<>();
+            ArrayList<Pair<Long, Task>> mItemArray = new ArrayList<>();
             for (Task task : taskList) {
                 long id = sCreatedItems++;
-                mItemArray.add(new Pair<>(id, task.getName()));
+                mItemArray.add(new Pair<>(id, task));
             }
             dataLists.add(mItemArray);
         }
     }
 
+    // Thêm một đóng cột mới
     @SuppressLint("ResourceAsColor")
     private void addAllColumn() {
         // Với mỗi type sẽ là một cột nên sẽ chạy hết các type
@@ -279,9 +295,10 @@ public class DetailProjectActivity extends AppCompatActivity {
         }
     }
 
+    // Thêm một cột mới dựa trên cái type truyền vào
     @SuppressLint("ResourceAsColor")
     private void addColumn(Type type) {
-        ArrayList<Pair<Long, String>> mItemArray = dataLists.get(type.getIndex());
+        ArrayList<Pair<Long, Task>> mItemArray = dataLists.get(type.getIndex());
 
         final ItemAdapter listAdapter =
                 new ItemAdapter(mItemArray, R.layout.task, R.id.task_item, true);
@@ -360,6 +377,8 @@ public class DetailProjectActivity extends AppCompatActivity {
             */
             CharSequence text = ((TextView) clickedView.findViewById(R.id.taskName)).getText();
             ((TextView) dragView.findViewById(R.id.taskName)).setText(text);
+            ((LinearLayout) dragView.findViewById(R.id.dateGroup)).setVisibility(View.GONE);
+            ((LinearLayout) dragView.findViewById(R.id.memberCountGroup)).setVisibility(View.GONE);
             ConstraintLayout dragCard = dragView.findViewById(R.id.task_item);
             ConstraintLayout clickedCard = clickedView.findViewById(R.id.task_item);
 
@@ -373,7 +392,7 @@ public class DetailProjectActivity extends AppCompatActivity {
                     clickedView.getResources().getDrawable(R.drawable.card_view_drag_foreground));*/
 
             /*Animation mà nó nghiêng cái item khi move*/
-            dragCard.animate().rotation(5).start();
+            dragCard.animate().rotation(5).scaleX(0.9f).scaleY(0.9f).start();
         }
 
         /*Này chưa hiểu lắm nhưng mà là kiểu tính kích thước của cái item khi move á*/
@@ -434,21 +453,29 @@ public class DetailProjectActivity extends AppCompatActivity {
     }
 
     void initialTypes() {
-        types.add(new Type(1, "todo", 0));
+        /*types.add(new Type(1, "todo", 0));
         types.add(new Type(2, "doing", 1));
         types.add(new Type(3, "done", 2));
-        /*mColumns = types.size();*/
+        *//*mColumns = types.size();*/
+
+        types = mProject.getColumns();
     }
 
     void initialTask() {
-        tasks.add(new Task(1, 1, 0, "Task task task 1"));
+        /*tasks.add(new Task(1, 1, 0, "Task task task 1"));
         tasks.add(new Task(1, 2, 1, "Task task task 2"));
         tasks.add(new Task(1, 3, 2, "Task task task 3"));
         tasks.add(new Task(2, 4, 0, "Task task task 4"));
         tasks.add(new Task(2, 5, 1, "Task task task 5"));
         tasks.add(new Task(3, 6, 0, "Task task task 6"));
         tasks.add(new Task(3, 7, 1, "Task task task 7"));
-        tasks.add(new Task(3, 8, 2, "Task task task 8"));
+        tasks.add(new Task(3, 8, 2, "Task task task 8"));*/
+
+        for (Type iType : types) {
+            tasks.addAll(iType.getTasks());
+        }
+
+        /*tasks.get(0).getMembers().add(new User());*/
     }
 
     void initialBoardView() {
@@ -488,7 +515,7 @@ public class DetailProjectActivity extends AppCompatActivity {
 
                     }
                     for (Task iTask : tasks) {
-                        if (iTask.getId() == currentTask.getId()) {
+                        if (iTask.get_id() == currentTask.get_id()) {
                             iTask.setIndex(toRow);
                             break;
                         }
@@ -519,9 +546,10 @@ public class DetailProjectActivity extends AppCompatActivity {
                             detailTasks.get(fromColumn).get(fromRow);
                     currentTask.setIndex(toRow);
                     currentTask.setTypeId(types.get(toColumn).getId());
+                    currentTask.setColumn(types.get(toColumn).get_id());
                     int removeIndex = -1;
                     for (Task iTask : tasks) {
-                        if (iTask.getId() == currentTask.getId()) {
+                        if (iTask.getColumn() == currentTask.get_id()) {
                             removeIndex = tasks.indexOf(iTask);
                             break;
                         }
@@ -542,14 +570,14 @@ public class DetailProjectActivity extends AppCompatActivity {
                 for (Type iType :
                         types) {
                     Log.e(TAG, "Type: name " + iType.getName() + ", index " + iType.getIndex() +
-                            ", id " + iType.getId());
+                            ", id " + iType.get_id());
                 }
 
                 for (List<Task> iList : detailTasks) {
                     String taskName = "";
                     for (Task iTask :
                             iList) {
-                        taskName = taskName + iTask.getName() + ", ";
+                        taskName = taskName + iTask.getName() + ", id " + iTask.get_id();
                     }
                     Log.e(TAG, "Task: " + taskName);
                 }
@@ -617,7 +645,7 @@ public class DetailProjectActivity extends AppCompatActivity {
                 for (Type iType :
                         types) {
                     Log.e(TAG, "Type: name " + iType.getName() + ", index " + iType.getIndex() +
-                            ", id " + iType.getId());
+                            ", id " + iType.get_id());
                 }
                 for (List<Task> iList : detailTasks) {
                     String taskName = "";
@@ -750,7 +778,7 @@ public class DetailProjectActivity extends AppCompatActivity {
                 // Xử lý khi tạo một Cate mới
                 Type type =
                         new Type(mColumns, editText.getText().toString().trim(), mColumns - 1);
-                Log.e(TAG, "Thêm mới Type: index " + type.getIndex() + ", id " + type.getId());
+                Log.e(TAG, "Thêm mới Type: index " + type.getIndex() + ", id " + type.get_id());
 
                 if (((TextView) alterHeader.findViewById(
                         R.id.tv_cateNameError)).getVisibility() ==
@@ -762,7 +790,7 @@ public class DetailProjectActivity extends AppCompatActivity {
                     for (Type iType :
                             types) {
                         Log.e(TAG, "Type: name " + iType.getName() + ", index " + iType.getIndex() +
-                                ", id " + iType.getId());
+                                ", id " + iType.get_id());
                     }
 
                     createDataLists();
@@ -880,12 +908,13 @@ public class DetailProjectActivity extends AppCompatActivity {
                             "Tạo task ("
                                     + editText.getText().toString().trim()
                                     + ") tại cột id " +
-                                    currentType.getId());
+                                    currentType.get_id());
 
-                    Task newTask = new Task(currentType.getId(),
-                            tasks.size() + 1,
+                    Task newTask = new Task(currentType.get_id(), currentType.getId(),
+                            tasks.size() + 1, mProject.get_id(),
                             detailTasks.get(currentType.getIndex()).size(),
-                            editText.getText().toString().trim());
+                            editText.getText().toString().trim(), true, new ArrayList<User>(), 0,
+                            tasks.size() + 1 + "");
                     tasks.add(newTask);
                     sortTaskList();
                     createDataLists();
