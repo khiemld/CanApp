@@ -35,7 +35,7 @@
             android:name=".ResetPassword2"
             android:exported="true"
             android:theme="@style/LoginActivityTheme"
-            />
+        />
         <activity
             android:name=".My_Profile"
             android:exported="false" />
@@ -43,39 +43,40 @@
             android:name=".ResetPassword"
             android:exported="true"
             android:theme="@style/LoginActivityTheme" />
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="true"
-            android:theme="@style/LoginActivityTheme">
-        </activity>
-        <activity
-            android:name=".WelcomeActivity"
-            android:exported="true">
-           <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <activity
+                android:name=".RegisterActivity"
+                android:exported="true"
+                android:theme="@style/LoginActivityTheme">
+            </activity>
+            <activity
+                android:name=".WelcomeActivity"
+                android:exported="true">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:exported="true"
-            android:theme="@style/LoginActivityTheme"
-            android:windowSoftInputMode="adjustResize"
-            >
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HomeActivity"
-            android:exported="true" >
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+            </activity>
+            <activity
+                android:name=".LoginActivity"
+                android:exported="true"
+                android:theme="@style/LoginActivityTheme"
+                android:windowSoftInputMode="adjustResize"
+                >
+            </activity>
+            <activity
+                android:name=".MainActivity"
+                android:exported="false" />
+            <activity
+                android:name=".HomeActivity"
+                android:exported="true" >
+                <!--<intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-        </activity>
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>-->
+            </activity>
+
     </application>
 
 </manifest>
