@@ -185,7 +185,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String regex = "^([A-Z|a-z|0-9](\\.|_){0,1})+[A-Z|a-z|0-9]\\@([A-Z|a-z|0-9])+((\\.){0,1}[A-Z|a-z|0-9]){2}\\.[a-z]{2,3}$";
                 String string = charSequence.toString();
                     //System.out.println(user.getEmail());
-                   if (string.length() == 0 || !string.matches(regex) ){
+                   if (string.length() == 0  ){
                         tv_noti_email.setVisibility(View.VISIBLE);
                         tv_noti_email.setText("Email không hợp lệ");
 
@@ -370,63 +370,7 @@ public class RegisterActivity extends AppCompatActivity {
                 && tv_noti_address.getVisibility()==View.INVISIBLE && tv_noti_phone.getVisibility()==View.INVISIBLE
                 && tv_noti_major.getVisibility()==View.INVISIBLE
         ) {
-            mAuth.createUserWithEmailAndPassword(email, pass)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
-                                            apiService = RetrofitClient.getRetrofit().create(ApiService.class);
-                                            //Thuc hien API register
-                                            Call<UserRegister> call = apiService.register(username,email,
-                                                    pass,address, major, phone, birthday);
-                                            call.enqueue(new Callback<UserRegister>() {
-                                                @Override
-                                                public void onResponse(Call<UserRegister> call, Response<UserRegister> response) {
-                                                    try {
-                                                        if (response.isSuccessful()) {
-                                                            userRegister = response.body();
-                                                            if (! userRegister.isError()){
-                                                                Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-                                                                finish();
-                                                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                                                startActivity(intent);
-
-                                                            } else {
-                                                                Toast.makeText(RegisterActivity.this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
-                                                            }
-
-                                                        } else {
-                                                            Toast.makeText(RegisterActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    } catch (Exception e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onFailure(Call<UserRegister> call, Throwable t) {
-
-                                                }
-                                            });
-                                        }
-                                        else {
-                                            Toast.makeText(RegisterActivity.this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-
-                        }
-                    });
+            Toast.makeText(this, "thanh cong", Toast.LENGTH_SHORT).show();
         }
         else{
             Toast.makeText(this, "Thông tin nhập vào hợp lệ, vui lòng nhập lại", Toast.LENGTH_SHORT).show();
