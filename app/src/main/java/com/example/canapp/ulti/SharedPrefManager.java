@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.example.canapp.WelcomeActivity;
-import com.example.canapp.model.User;
+import com.example.canapp.model.user.User;
 
 public class SharedPrefManager {
     private static final String SHARED_PREF_NAME = "volleyregisterlogin";

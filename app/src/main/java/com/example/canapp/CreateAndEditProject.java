@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,10 +19,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.canapp.api.PlanApi;
+import com.example.canapp.api.RetrofitClient;
+import com.example.canapp.model.project.ProjectFull;
+import com.example.canapp.model.project.ProjectResponse;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateAndEditProject extends AppCompatActivity {
     EditText edt_fromDate, edt_toDate;
@@ -39,10 +49,14 @@ public class CreateAndEditProject extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener setListenerFrom;
     DatePickerDialog.OnDateSetListener setListenerTo;
 
-    List<String> nameList;
+    List<String> nameList = new ArrayList<>();
 
     static long date1 = 0, date2 = 0;
 
+    PlanApi planApi;
+
+    final String leaderID = "64511d75da6a2ab371790258";
+    final static String TAG = "CreateAndEditProject";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,15 +69,62 @@ public class CreateAndEditProject extends AppCompatActivity {
         params.height = WindowManager.LayoutParams.MATCH_PARENT;
         getWindow().setAttributes(params);
 
+        //Khoi tao apiService
+        planApi = RetrofitClient.getRetrofit().create(PlanApi.class);
+
+        // Lấy tất cả các plan hiện có
+        getAllPlan();
+
         initialMapping();
+
+        // Xử lí cái ô chọn lịch
         handleCalendar();
-        initialAction();
+
+        // Xử lí sự kiện ấn dô cái nút Thêm | Sửa
+        handleAction();
+
+        // Kiểm tra hành động là thêm hay sửa đẻ đánh label
         initialSettingActionLabel();
 
-        fakeList();
-
+        // Xử lí sự kiện nhập chữ vào 2 ô edit text
         hanleNameTyping();
 
+    }
+
+    private void getAllPlan() {
+        Call<List<ProjectFull>> call = planApi.getAll();
+        call.enqueue(new Callback<List<ProjectFull>>() {
+            @Override
+            public void onResponse(Call<List<ProjectFull>> call,
+                                   Response<List<ProjectFull>> response) {
+                if (response.isSuccessful()) {
+                    List<ProjectFull> projectFullList = response.body();
+                    if (projectFullList.size() > 0) {
+                        // Xử lý lấy dữ liệu thành công
+                        Log.e(TAG, String.valueOf(projectFullList.size()));
+                        for (ProjectFull item : projectFullList) {
+                            nameList.add(item.getName());
+                        }
+                    } else {
+                        // Xử lý dữ liệu trả về rỗng
+                        Log.e(TAG, "Rỗng");
+                    }
+                } else {
+                    // Xử lý khi status trả về không phải thành công (đầu khác 2)
+                    try {
+                        Log.e(TAG, response.errorBody().string());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProjectFull>> call, Throwable t) {
+                // Xử lý call API không thành công
+                Log.e(TAG, t.getMessage());
+            }
+        });
     }
 
     void hanleNameTyping() {
@@ -99,14 +160,6 @@ public class CreateAndEditProject extends AppCompatActivity {
         });
     }
 
-    void fakeList() {
-        nameList = new ArrayList<>();
-        nameList.add("Quản lý dự án phần mềm");
-        nameList.add("Lập trình di động");
-        nameList.add("ABC");
-        nameList.add("123");
-    }
-
     private void initialSettingActionLabel() {
         if (isCreat) {
             actionButton.setText("Tạo mới");
@@ -115,11 +168,12 @@ public class CreateAndEditProject extends AppCompatActivity {
         }
     }
 
-    private void initialAction() {
+    private void handleAction() {
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                // Lấy dữ liệu từ giao diện
                 String projectName = edt_projectName.getText().toString().trim();
                 String projectDes = edt_projectDesc.getText().toString().trim();
                 String fromDate = edt_fromDate.getText().toString().trim();
@@ -129,8 +183,64 @@ public class CreateAndEditProject extends AppCompatActivity {
                         projectName + ", " + projectDes + ", from: " + fromDate + ", to: " + toDate;
 
                 if (isCreat) {
-                    Toast.makeText(CreateAndEditProject.this, data, Toast.LENGTH_SHORT)
-                            .show();
+                    // Xử lí tạo plan
+                    if (
+                        // Kiểm tra dữ liệu hợp lệ để tạo chưa
+                            dateError.getVisibility() == View.INVISIBLE
+                                    && projectNameError.getVisibility() == View.INVISIBLE
+                                    && projectName.isEmpty() == false
+                                    && fromDate.isEmpty() == false
+                                    && toDate.isEmpty() == false
+                    ) {
+                        // Dữ liệu chuẩn -> Bắt đầu thêm
+                        Call<ProjectResponse> call =
+                                planApi.createProject(leaderID, projectName, projectDes, fromDate,
+                                        toDate);
+                        call.enqueue(new Callback<ProjectResponse>() {
+                            @Override
+                            public void onResponse(Call<ProjectResponse> call,
+                                                   Response<ProjectResponse> response) {
+                                if (response.isSuccessful()) {
+
+
+                                    // Xử lí thêm thành công 201
+                                    ProjectResponse projectResponse = response.body();
+                                    ProjectFull projectFull = projectResponse.getPlan();
+
+                                    // Thông báo khi thêm thành công
+                                    Toast.makeText(CreateAndEditProject.this,
+                                                    "Thêm thành công " + projectFull.getName(),
+                                                    Toast.LENGTH_SHORT)
+                                            .show();
+
+                                } else {
+                                    // Xử lí khi nhận 409
+                                    Log.e("ADD PLAN", fromDate);
+                                    try {
+                                        Toast.makeText(CreateAndEditProject.this,
+                                                        response.errorBody().string(),
+                                                        Toast.LENGTH_SHORT)
+                                                .show();
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ProjectResponse> call, Throwable t) {
+                                Toast.makeText(CreateAndEditProject.this, "Thêm không thành công!",
+                                                Toast.LENGTH_SHORT)
+                                        .show();
+                            }
+                        });
+                    } else {
+                        Toast.makeText(CreateAndEditProject.this, "Coi lại thông tin kìa!",
+                                        Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                } else {
+                    // Xử lí update plan
                 }
             }
         });
@@ -209,7 +319,7 @@ public class CreateAndEditProject extends AppCompatActivity {
                 } else if (date1 > date2) {
                     dateError.setVisibility(View.VISIBLE);
                 }
-                
+
                 edt_toDate.setText(date);
             }
         };

@@ -1,4 +1,4 @@
-package com.example.canapp.model;
+package com.example.canapp.model.user;
 
 import androidx.annotation.Nullable;
 

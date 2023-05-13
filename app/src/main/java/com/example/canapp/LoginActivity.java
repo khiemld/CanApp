@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -22,8 +21,8 @@ import android.widget.Toast;
 
 import com.example.canapp.api.ApiService;
 import com.example.canapp.api.RetrofitClient;
-import com.example.canapp.model.User;
-import com.example.canapp.model.UserLogin;
+import com.example.canapp.model.user.User;
+import com.example.canapp.model.user.UserLogin;
 import com.example.canapp.ulti.SharedPrefManager;
 
 import retrofit2.Call;

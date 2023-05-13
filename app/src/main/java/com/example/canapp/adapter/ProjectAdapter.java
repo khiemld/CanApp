@@ -10,9 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.canapp.R;
-import com.example.canapp.model.Project;
+import com.example.canapp.model.project.Project;
 
 import java.util.List;
 

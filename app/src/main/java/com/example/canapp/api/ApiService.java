@@ -1,6 +1,6 @@
 package com.example.canapp.api;
 
-import com.example.canapp.model.UserLogin;
+import com.example.canapp.model.user.UserLogin;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

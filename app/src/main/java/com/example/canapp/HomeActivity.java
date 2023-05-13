@@ -1,7 +1,6 @@
 package com.example.canapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.canapp.adapter.ProjectAdapter;
-import com.example.canapp.model.Project;
+import com.example.canapp.model.project.Project;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 
 import java.util.ArrayList;
