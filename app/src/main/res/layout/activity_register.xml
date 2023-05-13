@@ -47,8 +47,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constrain_intro"
         android:layout_width="match_parent"
-        android:layout_height="630dp"
-        android:layout_marginTop="100dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/backgroud_fill"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +97,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="90dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -107,25 +107,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-                <EditText
-                    android:id="@+id/edt_password_register"
-                    android:layout_width="0dp"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="36dp"
-                    android:layout_marginEnd="50dp"
-                    android:backgroundTint="@color/main_blue"
-                    android:drawableStart="@drawable/password"
-                    android:drawablePadding="10dp"
-                    android:ems="10"
-                    android:hint="Mật khẩu"
-                    android:inputType="textWebPassword"
-                    android:textColor="@color/main_blue"
-                    android:textColorHint="#A5A4AD"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edt_email" />
 
                 <EditText
                     android:id="@+id/edt_username_register"
@@ -141,8 +122,10 @@
                     android:inputType="textPersonName"
                     android:textColor="@color/main_blue"
                     android:textColorHint="#A5A4AD"
+                    app:layout_constraintBottom_toTopOf="@id/edt_email"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
@@ -150,7 +133,7 @@
                     android:layout_width="0dp"
                     android:layout_height="46dp"
                     android:layout_marginStart="40dp"
-                    android:layout_marginTop="28dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="50dp"
                     android:backgroundTint="@color/main_blue"
                     android:drawableStart="@drawable/email"
@@ -163,6 +146,25 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edt_username_register" />
+
+                <EditText
+                    android:id="@+id/edt_password_register"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="50dp"
+                    android:backgroundTint="@color/main_blue"
+                    android:drawableStart="@drawable/password"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Mật khẩu"
+                    android:inputType="textWebPassword"
+                    android:textColor="@color/main_blue"
+                    android:textColorHint="#A5A4AD"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edt_email" />
 
                 <EditText
                     android:id="@+id/edt_birthday"
@@ -348,17 +350,17 @@
                     app:layout_constraintTop_toBottomOf="@id/edt_major" />
 
                 <TextView
-                    android:id="@+id/tv_noti_register"
+                    android:id="@+id/tv_noti_login"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="16dp"
                     android:layout_marginStart="65dp"
                     android:layout_marginTop="8dp"
                     android:text="Bạn đã có tài khoản CAN? Đăng nhập ngay"
                     android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_register"
 
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/btn_register" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

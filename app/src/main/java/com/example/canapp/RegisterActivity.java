@@ -7,10 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -18,8 +16,6 @@ import android.view.animation.AccelerateInterpolator;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     ImageView img_back;
     ApiService apiService;
-    TextView tv_noti_register,tv_noti_name,tv_noti_pass,tv_noti_address,tv_noti_major,tv_noti_email,tv_noti_phone,tv_noti_birthday;
+    TextView tv_noti_login,tv_noti_name,tv_noti_pass,tv_noti_address,tv_noti_major,tv_noti_email,tv_noti_phone,tv_noti_birthday;
     EditText edt_username,edt_pass,edt_email,edt_address,edt_phone,edt_major,edt_birthday;
     User user;
     List<User> listUser;
@@ -62,8 +58,16 @@ public class RegisterActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_up_login, R.anim.no_animation);
         String text = "<font color=#001E6C>Bạn đã có tài khoản CAN?</font> <font color=#FFAA4C>Đăng nhập ngay</font>";
         AnhXa();
-        tv_noti_register.setText(Html.fromHtml(text));
+        tv_noti_login.setText(Html.fromHtml(text));
         SetThongBao();
+        tv_noti_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
         tv_noti_major=findViewById(R.id.tv_noti_major);
         tv_noti_name=findViewById(R.id.tv_noti_name);
         tv_noti_address=findViewById(R.id.tv_noti_address);
-        tv_noti_register=findViewById(R.id.tv_noti_register);
+        tv_noti_login=findViewById(R.id.tv_noti_login);
         img_back = findViewById(R.id.img_back);
     }
     public void SetThongBao(){
