@@ -7,7 +7,7 @@
     tools:context=".EditInformation">
 
     <EditText
-        android:id="@+id/edt_username"
+        android:id="@+id/edt_username_edit"
         android:layout_width="300dp"
         android:layout_height="46dp"
         android:layout_marginStart="30dp"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <EditText
-        android:id="@+id/edt_email"
+        android:id="@+id/edt_email_edit"
         android:layout_width="300dp"
         android:layout_height="46dp"
         android:layout_marginStart="30dp"
@@ -47,10 +47,10 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_username" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_username_edit" />
 
     <EditText
-        android:id="@+id/edt_address"
+        android:id="@+id/edt_address_edit"
         android:layout_width="300dp"
         android:layout_height="46dp"
         android:layout_marginStart="30dp"
@@ -68,10 +68,10 @@
         android:textColorHint="#A5A4AD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_email" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_email_edit" />
 
     <EditText
-        android:id="@+id/edt_major"
+        android:id="@+id/edt_major_edit"
         android:layout_width="300dp"
         android:layout_height="46dp"
         android:layout_marginStart="30dp"
@@ -89,10 +89,10 @@
         android:textColorHint="#A5A4AD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_address" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_address_edit" />
 
     <EditText
-        android:id="@+id/edt_phone"
+        android:id="@+id/edt_phone_edit"
         android:layout_width="300dp"
         android:layout_height="46dp"
         android:layout_marginStart="30dp"
@@ -110,10 +110,10 @@
         android:textColorHint="#A5A4AD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_major" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_major_edit" />
 
     <EditText
-        android:id="@+id/edt_birthday"
+        android:id="@+id/edt_birthday_edit"
         android:layout_width="300dp"
         android:layout_height="46dp"
         android:layout_marginStart="30dp"
@@ -131,7 +131,7 @@
         android:textColorHint="#A5A4AD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_phone" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_phone_edit" />
 
     <ImageView
         android:id="@+id/img_back"
@@ -208,7 +208,7 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/btn_register"
         app:layout_constraintStart_toEndOf="@+id/constraintLayout"
-        app:layout_constraintTop_toBottomOf="@+id/edt_birthday">
+        app:layout_constraintTop_toBottomOf="@+id/edt_birthday_edit">
 
         <TextView
             android:id="@+id/textView18"
@@ -233,7 +233,7 @@
 
         android:background="@drawable/background_btnsignin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_birthday">
+        app:layout_constraintTop_toBottomOf="@+id/edt_birthday_edit">
 
         <TextView
             android:id="@+id/textView17"
@@ -247,17 +247,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/third_blue"
-        app:itemIconTint="@drawable/background_items_menu"
-        app:itemTextColor="@drawable/background_items_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_bar">
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

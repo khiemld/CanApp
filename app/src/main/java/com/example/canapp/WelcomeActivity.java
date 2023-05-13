@@ -2,20 +2,13 @@ package com.example.canapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.drawable.ColorDrawable;
+
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
-import android.view.Menu;
+
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
+
 
 import com.example.canapp.ulti.SharedPrefManager;
 
@@ -29,7 +22,7 @@ public class WelcomeActivity extends AppCompatActivity {
         if (SharedPrefManager.getInstance(this).isLoggedIn()){
             finish();
             Log.d("message", "Success");
-            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+            startActivity(new Intent(getApplicationContext(), BaseActivity.class));
         }
 
         findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {

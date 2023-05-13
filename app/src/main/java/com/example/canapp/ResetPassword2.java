@@ -2,7 +2,6 @@ package com.example.canapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -35,8 +34,8 @@ public class ResetPassword2 extends AppCompatActivity {
         });
     }
     public void AnhXa(){
-        edt_pass=findViewById(R.id.edt_password);
-        edt_pass_again=findViewById(R.id.edt_password_again);
+        edt_pass=findViewById(R.id.edt_username_register);
+        edt_pass_again=findViewById(R.id.edt_mssv);
         tv_noti_pass=findViewById(R.id.tv_noti_pass);
         tv_noti_pass_again=findViewById(R.id.tv_noti_pass_again);
         img_back=findViewById(R.id.img_back);

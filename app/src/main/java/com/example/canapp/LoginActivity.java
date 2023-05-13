@@ -3,6 +3,7 @@ package com.example.canapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -42,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
     Button btnLogin;
 
-    private CheckBox cb_remember;
+    public CheckBox cb_remember;
 
     User user = new User();
 
@@ -56,9 +57,10 @@ public class LoginActivity extends AppCompatActivity {
         params.height = WindowManager.LayoutParams.MATCH_PARENT;
         getWindow().setAttributes(params);
         Mapping();
+        btnLogin.setOnClickListener(v->Login());
+        SetThongBao();
         Register();
         Reset();
-        Login();
         // Thêm TouchListener vào giao diện của LoginActivity
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +103,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
     private void Mapping() {
         loginLayout = findViewById(R.id.loginlayout);
         edt_email = findViewById(R.id.edt_emaillogin);
@@ -125,9 +126,54 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     public void Login(){
-        btnLogin.setOnClickListener(v->Login());
         String email = edt_email.getText().toString();
         String password = edt_password.getText().toString();
+        //Khoi tao apiService
+        apiService = RetrofitClient.getRetrofit().create(ApiService.class);
+
+        //Thuc hien API login
+        Call<UserLogin> call = apiService.login(email, password);
+
+        call.enqueue(new Callback<UserLogin>() {
+            @Override
+            public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
+                UserLogin userLogin = response.body();
+                if (response.isSuccessful() && !userLogin.isError()){
+                    user = response.body().getUser();
+                    if (cb_remember.isChecked()){
+                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user, true);
+                    } else {
+                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user, false);
+                    }
+                    Intent intent = new Intent(getApplicationContext(), BaseActivity.class);
+                    startActivity(intent);
+                } else {
+                    try {
+                        Toast.makeText(getApplicationContext(), "Email hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
+
+                    } catch (Exception e){
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserLogin> call, Throwable t) {
+                Log.d("Error:", t.getMessage());
+            }
+        });
+
+    }
+    public void Reset(){
+        tv_forgest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,ResetPassword.class);
+                startActivity(intent);
+            }
+        });
+    }
+    public void SetThongBao(){
         //Kiem tra cac truong email vaf password da duoc nhap chua
         edt_email.addTextChangedListener(new TextWatcher() {
             @Override
@@ -160,7 +206,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String string = charSequence.toString();
-                String regex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?])(?=.*[a-zA-Z]).{8,13}$";
+                String regex = "^.{8,13}$";
                 if (string.length() == 0 || !string.matches(regex)){
                     tv_noti_pass.setVisibility(View.VISIBLE);
                 }
@@ -175,48 +221,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        //Khoi tao apiService
-        apiService = RetrofitClient.getRetrofit().create(ApiService.class);
-
-        //Thuc hien API login
-        Call<UserLogin> call = apiService.login(email, password);
-
-        call.enqueue(new Callback<UserLogin>() {
-            @Override
-            public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
-                UserLogin userLogin = response.body();
-                if (response.isSuccessful() && !userLogin.isError()){
-                    user = response.body().getUser();
-                    if (cb_remember.isChecked()){
-                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
-                    }
-                    finish();
-                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                    startActivity(intent);
-                } else {
-                    try {
-                        Toast.makeText(getApplicationContext(), "Email hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
-
-                    } catch (Exception e){
-
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<UserLogin> call, Throwable t) {
-                Log.d("Error:", t.getMessage());
-            }
-        });
-
     }
-    public void Reset(){
-        tv_forgest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,ResetPassword.class);
-                startActivity(intent);
-            }
-        });
-    }
+
 }
