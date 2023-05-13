@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextWatcher;
+import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -13,6 +15,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,10 +40,10 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    ImageView img_back;
     ApiService apiService;
     TextView tv_noti_register,tv_noti_name,tv_noti_pass,tv_noti_address,tv_noti_major,tv_noti_email,tv_noti_phone,tv_noti_birthday;
     EditText edt_username,edt_pass,edt_email,edt_address,edt_phone,edt_major,edt_birthday;
-    ImageView img_back;
     User user;
     List<User> listUser;
     private View registerLayout;

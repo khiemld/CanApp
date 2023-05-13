@@ -35,6 +35,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import android.widget.TextView;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -54,11 +56,17 @@ public class LoginActivity extends AppCompatActivity {
 
     User user = new User();
 
+    Button btn_login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
+        Register();
+        Reset();
+        Login();
+        // Đặt kích thước cho activity_login bằng với activity_welcome
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         params.height = WindowManager.LayoutParams.MATCH_PARENT;
@@ -110,7 +118,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
     private void Mapping() {
         loginLayout = findViewById(R.id.loginlayout);
         edt_email = findViewById(R.id.edt_emaillogin);
@@ -123,6 +130,7 @@ public class LoginActivity extends AppCompatActivity {
         tv_register= findViewById(R.id.tv_register);
         tv_forgest=findViewById(R.id.tv_forgetpass);
     }
+
 
     public void Register(){
         tv_register.setOnClickListener(new View.OnClickListener() {
@@ -207,66 +215,67 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //Khoi tao apiService
-      /* */
+        /* */
 
     }
     public void Reset(){
-        tv_forgest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,ResetPassword.class);
-                startActivity(intent);
-            }
-        });
+
+        btn_login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(LoginActivity.this,My_Profile.class);
+                    startActivity(intent);
+                }
+            });
+        }
+        public void SetThongBao(){
+            //Kiem tra cac truong email vaf password da duoc nhap chua
+            edt_email.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    String regex = "^([A-Z|a-z|0-9](\\.|_){0,1})+[A-Z|a-z|0-9]\\@([A-Z|a-z|0-9])+((\\.){0,1}[A-Z|a-z|0-9]){2}\\.[a-z]{2,3}$";
+                    String string = charSequence.toString();
+                    if (string.length() == 0 || !string.matches(regex)){
+                        tv_noti_email.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        tv_noti_email.setVisibility(View.INVISIBLE);
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+            edt_password.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    String string = charSequence.toString();
+                    String regex = "^.{8,13}$";
+                    if (string.length() == 0 || !string.matches(regex)){
+                        tv_noti_pass.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        tv_noti_pass.setVisibility(View.INVISIBLE);
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+
+        }
+
     }
-    public void SetThongBao(){
-        //Kiem tra cac truong email vaf password da duoc nhap chua
-        edt_email.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String regex = "^([A-Z|a-z|0-9](\\.|_){0,1})+[A-Z|a-z|0-9]\\@([A-Z|a-z|0-9])+((\\.){0,1}[A-Z|a-z|0-9]){2}\\.[a-z]{2,3}$";
-                String string = charSequence.toString();
-                if (string.length() == 0 || !string.matches(regex)){
-                    tv_noti_email.setVisibility(View.VISIBLE);
-                }
-                else {
-                    tv_noti_email.setVisibility(View.INVISIBLE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-        edt_password.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String string = charSequence.toString();
-                String regex = "^.{8,13}$";
-                if (string.length() == 0 || !string.matches(regex)){
-                    tv_noti_pass.setVisibility(View.VISIBLE);
-                }
-                else {
-                    tv_noti_pass.setVisibility(View.INVISIBLE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-    }
-
-}

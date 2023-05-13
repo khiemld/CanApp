@@ -31,10 +31,10 @@ public class ResetPassword_Login2 extends AppCompatActivity {
         });
     }
     public void AnhXa(){
-        edt_pass = findViewById(R.id.edt_username_register);
-        edt_pass_again = findViewById(R.id.edt_mssv);
+        edt_pass = findViewById(R.id.edt_password);
+        edt_pass_again = findViewById(R.id.edt_password_again);
         tv_noti=findViewById(R.id.tv_noti);
-        btn_reset = findViewById(R.id.btn_register);
+        btn_reset = findViewById(R.id.btn_reset);
         img_back=findViewById(R.id.img_back);
         tv_noti_pass_again=findViewById(R.id.tv_noti_pass_again);
     }
