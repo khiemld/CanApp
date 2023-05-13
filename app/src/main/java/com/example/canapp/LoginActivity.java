@@ -1,5 +1,6 @@
 package com.example.canapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -25,6 +26,11 @@ import com.example.canapp.api.RetrofitClient;
 import com.example.canapp.model.User;
 import com.example.canapp.model.UserLogin;
 import com.example.canapp.ulti.SharedPrefManager;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     ImageView img_back;
 
     Button btnLogin;
+    protected FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     private CheckBox cb_remember;
 
@@ -129,39 +136,78 @@ public class LoginActivity extends AppCompatActivity {
     public void Login(){
         String email = edt_email.getText().toString();
         String password = edt_password.getText().toString();
+
+        if(TextUtils.isEmpty(email)){
+            tv_noti_email.setVisibility(View.VISIBLE);
+            tv_noti_email.setText("Email không được để trống");
+        } else if (TextUtils.isEmpty(password)) {
+            tv_noti_pass.setVisibility(View.VISIBLE);
+            tv_noti_pass.setText("Mật khẩu không được để trống");
+        } else if (tv_noti_email.getVisibility()==View.INVISIBLE && tv_noti_pass.getVisibility()==View.INVISIBLE) {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this,new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                //Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                                //startActivity(intent);
+                                if(mAuth.getCurrentUser().isEmailVerified()){
+                                    apiService = RetrofitClient.getRetrofit().create(ApiService.class);
+
+                                    //Thuc hien API login
+                                    Call<UserLogin> call = apiService.login(email, password);
+
+                                    call.enqueue(new Callback<UserLogin>() {
+                                        @Override
+                                        public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
+                                            UserLogin userLogin = response.body();
+                                            if (response.isSuccessful() && !userLogin.isError()){
+                                                user = response.body().getUser();
+                                                if (cb_remember.isChecked()){
+                                                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+                                                }
+                                                Toast.makeText(LoginActivity.this, "Email đã được xác thực, đăng nhập thành công",
+                                                        Toast.LENGTH_SHORT).show();
+                                                finish();
+                                                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                                                startActivity(intent);
+                                            } else {
+                                                Toast.makeText(LoginActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<UserLogin> call, Throwable t) {
+                                            Log.d("Error:", t.getMessage());
+                                        }
+                                    });
+                                }
+                                else {
+                                    Toast.makeText(LoginActivity.this, "Email chưa được xác thực, vui lòng kiểm tra gmail",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                            else {
+                                Toast.makeText(LoginActivity.this, "Login that bai", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(LoginActivity.this, "Login failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }else {
+            Toast.makeText(this, "Thông tin nhập vào không hợp lệ, vui lòng kiểm tra", Toast.LENGTH_SHORT).show();
+        }
+
+
+
         //Khoi tao apiService
-        apiService = RetrofitClient.getRetrofit().create(ApiService.class);
-
-        //Thuc hien API login
-        Call<UserLogin> call = apiService.login(email, password);
-
-        call.enqueue(new Callback<UserLogin>() {
-            @Override
-            public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
-                UserLogin userLogin = response.body();
-                if (response.isSuccessful() && !userLogin.isError()){
-                    user = response.body().getUser();
-                    if (cb_remember.isChecked()){
-                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
-                    }
-                    finish();
-                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                    startActivity(intent);
-                } else {
-                    try {
-                        Toast.makeText(getApplicationContext(), "Email hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
-
-                    } catch (Exception e){
-
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<UserLogin> call, Throwable t) {
-                Log.d("Error:", t.getMessage());
-            }
-        });
+      /* */
 
     }
     public void Reset(){
@@ -206,7 +252,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String string = charSequence.toString();
-                String regex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?])(?=.*[a-zA-Z]).{8,13}$";
+                String regex = "^.{8,13}$";
                 if (string.length() == 0 || !string.matches(regex)){
                     tv_noti_pass.setVisibility(View.VISIBLE);
                 }

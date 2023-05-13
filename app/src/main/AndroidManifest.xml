@@ -44,10 +44,6 @@
             android:exported="true"
             android:theme="@style/LoginActivityTheme" />
         <activity
-            android:name=".PassworkActivity"
-            android:exported="true"
-            android:theme="@style/LoginActivityTheme" />
-        <activity
             android:name=".RegisterActivity"
             android:exported="true"
             android:theme="@style/LoginActivityTheme">
