@@ -19,11 +19,9 @@ import android.widget.Toast;
 
 import com.example.canapp.api.ApiService;
 import com.example.canapp.api.RetrofitClient;
-import com.example.canapp.model.User;
-import com.example.canapp.model.UserLogin;
-import com.example.canapp.model.UserRegister;
-
-import java.util.List;
+import com.example.canapp.model.user.User;
+import com.example.canapp.model.user.UserLogin;
+import com.example.canapp.model.user.UserRegister;
 
 import retrofit2.Call;
 import retrofit2.Callback;

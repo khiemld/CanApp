@@ -1,8 +1,8 @@
 package com.example.canapp.api;
 
-import com.example.canapp.model.User;
-import com.example.canapp.model.UserLogin;
-import com.example.canapp.model.UserRegister;
+import com.example.canapp.model.user.User;
+import com.example.canapp.model.user.UserLogin;
+import com.example.canapp.model.user.UserRegister;
 
 import java.util.List;
 
