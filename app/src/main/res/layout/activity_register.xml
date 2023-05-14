@@ -111,8 +111,9 @@
                 <EditText
                     android:id="@+id/edt_username_register"
                     android:layout_width="0dp"
-                    android:layout_height="46dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="50dp"
                     android:backgroundTint="@color/main_blue"
                     android:drawableStart="@drawable/user_icon"
@@ -124,14 +125,14 @@
                     android:textColorHint="#A5A4AD"
                     app:layout_constraintBottom_toTopOf="@id/edt_email"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
 
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/edt_email"
                     android:layout_width="0dp"
-                    android:layout_height="46dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="50dp"
@@ -150,7 +151,7 @@
                 <EditText
                     android:id="@+id/edt_password_register"
                     android:layout_width="0dp"
-                    android:layout_height="46dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="50dp"
@@ -169,9 +170,9 @@
                 <EditText
                     android:id="@+id/edt_birthday"
                     android:layout_width="0dp"
-                    android:layout_height="46dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
-                    android:layout_marginTop="28dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="50dp"
                     android:backgroundTint="@color/main_blue"
                     android:drawableStart="@drawable/birthday"
@@ -188,9 +189,9 @@
                 <EditText
                     android:id="@+id/edt_address"
                     android:layout_width="0dp"
-                    android:layout_height="46dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
-                    android:layout_marginTop="28dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="50dp"
                     android:backgroundTint="@color/main_blue"
                     android:drawableStart="@drawable/address"
@@ -207,9 +208,9 @@
                 <EditText
                     android:id="@+id/edt_phone"
                     android:layout_width="0dp"
-                    android:layout_height="46dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
-                    android:layout_marginTop="28dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="50dp"
                     android:backgroundTint="@color/main_blue"
                     android:drawableStart="@drawable/phone"
@@ -226,9 +227,9 @@
                 <EditText
                     android:id="@+id/edt_major"
                     android:layout_width="0dp"
-                    android:layout_height="46dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
-                    android:layout_marginTop="28dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="50dp"
                     android:backgroundTint="@color/main_blue"
                     android:drawableStart="@drawable/major"
@@ -338,7 +339,7 @@
                 <Button
                     android:id="@+id/btn_register"
                     android:layout_width="0dp"
-                    android:layout_height="38dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="52dp"
                     android:layout_marginEnd="50dp"
