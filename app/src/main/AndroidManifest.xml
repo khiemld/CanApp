@@ -40,26 +40,23 @@
             android:name=".ResetPassword2"
             android:exported="true"
             android:theme="@style/LoginActivityTheme" />
-        <!--<activity
+        <activity
             android:name=".My_Profile"
-            android:exported="false" />-->
+            android:exported="false" />
         <activity
             android:name=".ResetPassword"
             android:exported="true"
             android:theme="@style/LoginActivityTheme" />
-        <activity
-            android:name=".PassworkActivity"
-            android:exported="true"
-            android:theme="@style/LoginActivityTheme" />
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="true"
-            android:theme="@style/LoginActivityTheme" />
-        <activity
-            android:name=".WelcomeActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <activity
+                android:name=".RegisterActivity"
+                android:exported="true"
+                android:theme="@style/LoginActivityTheme">
+            </activity>
+            <activity
+                android:name=".WelcomeActivity"
+                android:exported="true">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

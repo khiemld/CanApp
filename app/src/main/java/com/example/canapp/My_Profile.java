@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.canapp.api.ApiService;
 import com.example.canapp.api.RetrofitClient;
 import com.example.canapp.model.User;
@@ -33,6 +34,7 @@ public class My_Profile extends Fragment {
 
     ImageView top_bar;
     ImageView img_menu;
+    ImageView img_avatar;
     ConstraintLayout constrain_project;
     TextView tv_username, tv_email,tv_address,tv_major,tv_phone,tv_birthday;
     User user;
@@ -52,6 +54,7 @@ public class My_Profile extends Fragment {
             tv_major.setText(user.getMajor());
             tv_email.setText(user.getEmail());
             tv_address.setText(user.getAddress());
+            Glide.with(this).load(user.getAvatar()).into(img_avatar);
         }
 
         top_bar.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +69,6 @@ public class My_Profile extends Fragment {
                 popupMenu();
             }
         });
-
         GetEditProfile();
         return view;
     }
@@ -83,6 +85,18 @@ public class My_Profile extends Fragment {
         });
 
         topmenu.show();
+    }
+    public void AnhXa(){
+        top_bar = view.findViewById(R.id.img_topmenu);
+        img_menu = view.findViewById(R.id.img_menu);
+        constrain_project = view.findViewById(R.id.constraint_project);
+        tv_address = view.findViewById(R.id.tv_address);
+        tv_birthday = view.findViewById(R.id.tv_birthday);
+        tv_email = view.findViewById(R.id.tv_email);
+        tv_major = view.findViewById(R.id.tv_major);
+        tv_phone = view.findViewById(R.id.tv_phone);
+        tv_username = view.findViewById(R.id.tv_username);
+        img_avatar=view.findViewById(R.id.img_update);
     }
 
     public void popupMenu(){
@@ -101,49 +115,6 @@ public class My_Profile extends Fragment {
         // Show the PopupMenu.
         popup.show();
     }
-
-    /*@Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-    }*/
-
-    /*@Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_profile);
-        AnhXa();
-        if(SharedPrefManager.getInstance(this).getUser() != null){
-            user = SharedPrefManager.getInstance(this).getUser();
-            tv_username.setText(user.getName());
-            tv_phone.setText(user.getPhone());
-            tv_major.setText(user.getMajor());
-            tv_email.setText(user.getEmail());
-            tv_address.setText(user.getAddress());
-        }
-//        Toast.makeText(this, user.getAddress().toString(), Toast.LENGTH_SHORT).show();
-        setSupportActionBar(top_bar);
-        getSupportActionBar().setTitle("");
-        img_menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popupMenu();
-            }
-        });
-        GetEditProfile();
-    }*/
-
-    public void AnhXa(){
-        top_bar = view.findViewById(R.id.img_topmenu);
-        img_menu = view.findViewById(R.id.img_menu);
-        constrain_project = view.findViewById(R.id.constraint_project);
-        tv_address = view.findViewById(R.id.tv_address);
-        tv_birthday = view.findViewById(R.id.tv_birthday);
-        tv_email = view.findViewById(R.id.tv_email);
-        tv_major = view.findViewById(R.id.tv_major);
-        tv_phone = view.findViewById(R.id.tv_phone);
-        tv_username = view.findViewById(R.id.tv_username);
-    }
-
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.menuReset:
