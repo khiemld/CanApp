@@ -179,6 +179,7 @@
                     android:drawablePadding="10dp"
                     android:ems="10"
                     android:hint="Ngày sinh"
+                    android:text="02/05/2002"
                     android:inputType="date"
                     android:textColor="@color/main_blue"
                     android:textColorHint="#A5A4AD"

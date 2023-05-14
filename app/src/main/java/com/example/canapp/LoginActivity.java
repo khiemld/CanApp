@@ -126,6 +126,55 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void SetThongBao() {
+        //Kiem tra cac truong email vaf password da duoc nhap chua
+        edt_email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String regex = "^([A-Z|a-z|0-9](\\.|_){0,1})+[A-Z|a-z|0-9]\\@([A-Z|a-z|0-9])+((\\.){0,1}[A-Z|a-z|0-9]){2}\\.[a-z]{2,3}$";
+                String string = charSequence.toString();
+                if (string.length() == 0 || !string.matches(regex)){
+                    tv_noti_email.setVisibility(View.VISIBLE);
+                }
+                else {
+                    tv_noti_email.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        edt_password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String string = charSequence.toString();
+                String regex = "^.{8,13}$";
+                if (string.length() == 0 || !string.matches(regex)){
+                    tv_noti_pass.setVisibility(View.VISIBLE);
+                }
+                else {
+                    tv_noti_pass.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
     private void Mapping() {
         loginLayout = findViewById(R.id.loginlayout);
         edt_email = findViewById(R.id.edt_emaillogin);
@@ -139,15 +188,7 @@ public class LoginActivity extends AppCompatActivity {
         tv_forgest=findViewById(R.id.tv_forgetpass);
     }
 
-    public void Register(){
-        tv_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
+
     public void Login(){
         String email = edt_email.getText().toString();
         String password = edt_password.getText().toString();
@@ -159,105 +200,53 @@ public class LoginActivity extends AppCompatActivity {
             tv_noti_pass.setVisibility(View.VISIBLE);
             tv_noti_pass.setText("Mật khẩu không được để trống");
         } else if (tv_noti_email.getVisibility()==View.INVISIBLE && tv_noti_pass.getVisibility()==View.INVISIBLE) {
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this,new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                //Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                                //startActivity(intent);
-                                if(mAuth.getCurrentUser().isEmailVerified()){
-                                    apiService = RetrofitClient.getRetrofit().create(ApiService.class);
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this,new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        //Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                        //startActivity(intent);
+                        if (mAuth.getCurrentUser().isEmailVerified()) {
+                            apiService = RetrofitClient.getRetrofit().create(ApiService.class);
 
-        //Thuc hien API login
-        Call<UserLogin> call = apiService.login(email, password);
+                            //Thuc hien API login
+                            Call<UserLogin> call = apiService.login(email, password);
 
-                                    call.enqueue(new Callback<UserLogin>() {
-                                        @Override
-                                        public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
-                                            UserLogin userLogin = response.body();
-                                            if (response.isSuccessful() && !userLogin.isError()){
-                                                user = response.body().getUser();
-                                                if (cb_remember.isChecked()){
-                                                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(user, true);
-                                                } else {
-                                                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(user, false);
-                                                }
-                                                Toast.makeText(LoginActivity.this, "Email đã được xác thực, đăng nhập thành công",
-                                                        Toast.LENGTH_SHORT).show();
-                                                finish();
-                                                Intent intent = new Intent(getApplicationContext(), BaseActivity.class);
-                                                startActivity(intent);
-                                            } else {
-                                                Toast.makeText(LoginActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
-                                            }
+                            call.enqueue(new Callback<UserLogin>() {
+                                @Override
+                                public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
+                                    UserLogin userLogin = response.body();
+                                    if (response.isSuccessful() && !userLogin.isError()) {
+                                        user = response.body().getUser();
+                                        if (cb_remember.isChecked()) {
+                                            SharedPrefManager.getInstance(getApplicationContext()).userLogin(user, true);
+                                        } else {
+                                            SharedPrefManager.getInstance(getApplicationContext()).userLogin(user, false);
                                         }
+                                        Toast.makeText(LoginActivity.this, "Email đã được xác thực, đăng nhập thành công",
+                                                Toast.LENGTH_SHORT).show();
+                                        finish();
+                                        Intent intent = new Intent(getApplicationContext(), BaseActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
 
-            @Override
-            public void onFailure(Call<UserLogin> call, Throwable t) {
-                Log.d("Error:", t.getMessage());
-            }
-        });
+                                @Override
+                                public void onFailure(Call<UserLogin> call, Throwable t) {
+                                    Log.d("Error:", t.getMessage());
+                                }
+                            });
 
-    }
-    public void Reset(){
-        tv_forgest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,ResetPassword.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    public void SetThongBao(){
-            //Kiem tra cac truong email vaf password da duoc nhap chua
-            edt_email.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    String regex = "^([A-Z|a-z|0-9](\\.|_){0,1})+[A-Z|a-z|0-9]\\@([A-Z|a-z|0-9])+((\\.){0,1}[A-Z|a-z|0-9]){2}\\.[a-z]{2,3}$";
-                    String string = charSequence.toString();
-                    if (string.length() == 0 || !string.matches(regex)){
-                        tv_noti_email.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            Toast.makeText(LoginActivity.this, "Email chưa được xác thực, vui lòng xác thực email", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    else {
-                        tv_noti_email.setVisibility(View.INVISIBLE);
-                    }
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
 
                 }
             });
-            edt_password.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    String string = charSequence.toString();
-                    String regex = "^.{8,13}$";
-                    if (string.length() == 0 || !string.matches(regex)){
-                        tv_noti_pass.setVisibility(View.VISIBLE);
-                    }
-                    else {
-                        tv_noti_pass.setVisibility(View.INVISIBLE);
-                    }
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-
-                }
-            });
-
         }
-
     }
+}
