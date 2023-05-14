@@ -39,5 +39,11 @@ public interface ApiService {
     Call<User> getUserbyID(@Path("_id") int userId);
 
     @PUT("users/{_id}")
-    Call<User> putUser(@Path("_id") int userId);
+    Call<User> putUser(@Field("_id") String userId,
+                       @Field("name") String username,
+                       @Field("email") String email,
+                       @Field("address") String address,
+                       @Field("major") String major,
+                       @Field("phone") String phone,
+                       @Field("birth_date") String birthday);
 }

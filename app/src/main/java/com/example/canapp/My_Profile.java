@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.canapp.api.ApiService;
 import com.example.canapp.api.RetrofitClient;
 import com.example.canapp.model.User;
@@ -28,8 +29,10 @@ public class My_Profile extends AppCompatActivity {
 
     Toolbar top_bar;
     ImageView img_menu;
+    ImageView img_avatar;
     ConstraintLayout constrain_project;
     TextView tv_username, tv_email,tv_address,tv_major,tv_phone,tv_birthday;
+
     User user;
 
     @Override
@@ -44,6 +47,7 @@ public class My_Profile extends AppCompatActivity {
             tv_major.setText(user.getMajor());
             tv_email.setText(user.getEmail());
             tv_address.setText(user.getAddress());
+            Glide.with(this).load(user.getAvatar()).into(img_avatar);
         }
 //        Toast.makeText(this, user.getAddress().toString(), Toast.LENGTH_SHORT).show();
         setSupportActionBar(top_bar);
@@ -66,6 +70,7 @@ public class My_Profile extends AppCompatActivity {
         tv_major=findViewById(R.id.tv_major);
         tv_phone=findViewById(R.id.tv_phone);
         tv_username=findViewById(R.id.tv_username);
+        img_avatar=findViewById(R.id.img_update);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -109,6 +114,7 @@ public class My_Profile extends AppCompatActivity {
         constrain_project.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 Intent intent = new Intent(My_Profile.this,AllMyProject.class);
                 startActivity(intent);
             }

@@ -186,10 +186,10 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String regex = "^([A-Z|a-z|0-9](\\.|_){0,1})+[A-Z|a-z|0-9]\\@([A-Z|a-z|0-9])+((\\.){0,1}[A-Z|a-z|0-9]){2}\\.[a-z]{2,3}$";
+                //String regex = "^([A-Z|a-z|0-9](\\.|_){0,1})+[A-Z|a-z|0-9]\\@([A-Z|a-z|0-9])+((\\.){0,1}[A-Z|a-z|0-9]){2}\\.[a-z]{2,3}$";
                 String string = charSequence.toString();
                     //System.out.println(user.getEmail());
-                   if (string.length() == 0 || !string.matches(regex) ){
+                   if (string.length() == 0 /*|| !string.matches(regex) */){
                         tv_noti_email.setVisibility(View.VISIBLE);
                         tv_noti_email.setText("Email không hợp lệ");
 
