@@ -16,10 +16,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -31,6 +35,8 @@ import com.example.canapp.ulti.SharedPrefManager;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -40,10 +46,13 @@ import retrofit2.Response;
 
 public class EditInformation extends AppCompatActivity {
 
-    ImageView img_upload,img_avatar;
+    ImageView img_upload,img_avatar,img_back;
     EditText edt_username,edt_email,edt_address,edt_major,edt_phone,edt_birthday;
-    ConstraintLayout constraint_update;
+
+    TextView tv_noti_name, tv_noti_address,tv_noti_major,tv_noti_phone;
+    ConstraintLayout constraint_update,constraint_huy;
     User user;
+    List<User> listUser;
     UserLogin userLogin;
     String id;
     Uri uri;
@@ -63,6 +72,7 @@ public class EditInformation extends AppCompatActivity {
             edt_address.setText(user.getAddress());
             Glide.with(this).load(user.getAvatar()).into(img_avatar);
 
+            SetThongBao();
             //Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
             img_upload.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -78,6 +88,18 @@ public class EditInformation extends AppCompatActivity {
                     UploadAll();
                 }
             });
+            constraint_huy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    finish();
+                }
+            });
+            img_back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    finish();
+                }
+            });
         }
     }
     public void AnhXa(){
@@ -91,6 +113,12 @@ public class EditInformation extends AppCompatActivity {
         img_upload=findViewById(R.id.img_upload);
         edt_birthday=findViewById(R.id.edt_birthday_edit);
         constraint_update=findViewById(R.id.constraint_update);
+        constraint_huy=findViewById(R.id.constrain_huy);
+        img_back=findViewById(R.id.img_back);
+        tv_noti_address=findViewById(R.id.tv_noti_address_edit);
+        tv_noti_major=findViewById(R.id.tv_noti_major_edit);
+        tv_noti_name=findViewById(R.id.tv_noti_name_edit);
+        tv_noti_phone = findViewById(R.id.tv_noti_phone_edit);
     }
     public void onClickRequestPermission(){
         if (Build.VERSION.SDK_INT<Build.VERSION_CODES.M){
@@ -229,6 +257,107 @@ public class EditInformation extends AppCompatActivity {
                 }
             });
     }
+    public void SetThongBao(){
+        edt_username.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String string = charSequence.toString();
+                if (string.length() == 0 ){
+                    tv_noti_name.setVisibility(View.VISIBLE);
+                }
+                else {
+                    tv_noti_name.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        edt_address.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String string = charSequence.toString();
+                if (string.length() == 0 ){
+                    tv_noti_address.setVisibility(View.VISIBLE);
+                }
+                else {
+                    tv_noti_address.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        edt_major.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String string = charSequence.toString();
+                if (string.length() == 0 ){
+                    tv_noti_major.setVisibility(View.VISIBLE);
+                }
+                else {
+                    tv_noti_major.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        edt_phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String string = charSequence.toString();
+                String regex="^\\s*(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)\\s*$";
+
+                if (string.length() == 0 || !string.matches(regex)){
+                    tv_noti_phone.setVisibility(View.VISIBLE);
+                    tv_noti_phone.setText("Số điện thoại không hợp lệ");
+                } else {
+                    for(User user: listUser){
+                        if(user.getPhone().toString().equals(string)){
+                            tv_noti_phone.setVisibility(View.VISIBLE);
+                            tv_noti_phone.setText("Số điện thoại đã tồn tại");
+                            break;
+                        }
+                        else {
+                            tv_noti_phone.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
     public void UploadAll(){
         user = SharedPrefManager.getInstance(this).getUser();
         String username = edt_username.getText().toString();
@@ -239,7 +368,15 @@ public class EditInformation extends AppCompatActivity {
         String birthday = edt_birthday.getText().toString();
         User user_update = new User(username,email,address,major,phone,birthday);
         String id = user.get_id();
-        if(!user_update.getName().equals(user.getName()) || !user_update.getAddress().equals(user.getAddress())
+        if(TextUtils.isEmpty(username)){
+            tv_noti_name.setVisibility(View.VISIBLE);
+        } else if (TextUtils.isEmpty(address)) {
+            tv_noti_address.setVisibility(View.VISIBLE);
+        } else if (TextUtils.isEmpty(major)) {
+            tv_noti_major.setVisibility(View.VISIBLE);
+        } else if (TextUtils.isEmpty(phone)) {
+            tv_noti_phone.setVisibility(View.VISIBLE);
+        } else if(!user_update.getName().equals(user.getName()) || !user_update.getAddress().equals(user.getAddress())
         || !user_update.getMajor().equals(user.getMajor()) ||!user_update.getPhone().equals(user.getPhone())
         ){
             //Toast.makeText(this, user.getName().toString() + user_update.getName().toString(), Toast.LENGTH_SHORT).show();
