@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         loginLayout.setOnTouchListener(new View.OnTouchListener() {
-            private float startY; // Tọa độ Y ban đầu của ngón tay
+            private float startY; // Teọa độ Y ban đầu của ngón tay
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
@@ -190,7 +190,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                         @Override
                                         public void onFailure(Call<UserLogin> call, Throwable t) {
-                                            Log.d("Error:", t.getMessage());
+                                            Log.d("Error:", t.toString());
                                         }
                                     });
                                 }
@@ -210,6 +210,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(LoginActivity.this, "Login failed.",
                                     Toast.LENGTH_SHORT).show();
+                            Log.e("login:",e.toString());
                         }
                     });
         }else {

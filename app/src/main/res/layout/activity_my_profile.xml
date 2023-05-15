@@ -22,7 +22,7 @@
 
             <FrameLayout
                 android:id="@+id/frame1"
-                android:layout_width="114dp"
+                android:layout_width="130dp"
                 android:layout_height="114dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="50dp"
@@ -30,33 +30,37 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+
                 >
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView"
-                    android:layout_width="114dp"
-                    android:layout_height="114dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    app:cardCornerRadius="150dp">
 
                     <ImageView
-                        android:id="@+id/img_update"
+                        android:id="@+id/img_avatar_edit"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="fitXY"
                         android:src="@drawable/logo2" />
-
                     <TextView
                         android:id="@+id/textView15"
                         android:layout_width="34dp"
-                        android:layout_height="18dp"
-                        android:layout_marginLeft="84dp"
-                        android:layout_marginTop="78dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_gravity="center|right"
+                        android:background="@color/orange"
                         android:text="4.2"
-                        android:textStyle="bold"
                         android:textAlignment="center"
-                        android:textSize="12sp"
                         android:textColor="#FFFF"
-                        android:background="@color/orange"/>
-
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
                 </androidx.cardview.widget.CardView>
+
+
             </FrameLayout>
 
             <TextView

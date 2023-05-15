@@ -157,28 +157,34 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="114dp"
-            android:layout_height="114dp">
+            android:layout_height="114dp"
+            app:cardCornerRadius="150dp"
+            >
 
             <ImageView
-                android:id="@+id/img_update"
+                android:id="@+id/img_avatar_edit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:src="@drawable/logo2" />
 
             <ImageView
+                android:id="@+id/img_upload"
+                android:padding="10dp"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginLeft="84dp"
-                android:layout_marginTop="78dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="15dp"
+                android:layout_gravity="center|right"
                 android:background="@drawable/background_update" />
 
             <ImageView
                 android:id="@+id/imageView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="90dp"
-                android:layout_marginTop="83dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center|right"
                 app:srcCompat="@drawable/camera" />
 
         </androidx.cardview.widget.CardView>
@@ -200,7 +206,7 @@
         app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/constraint_update"
         android:layout_width="137dp"
 
         android:layout_height="38dp"

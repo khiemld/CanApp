@@ -8,22 +8,15 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.canapp.api.ApiService;
-import com.example.canapp.api.RetrofitClient;
 import com.example.canapp.model.User;
 import com.example.canapp.ulti.SharedPrefManager;
-
-import retrofit2.Call;
 
 public class My_Profile extends AppCompatActivity {
 
@@ -70,7 +63,7 @@ public class My_Profile extends AppCompatActivity {
         tv_major=findViewById(R.id.tv_major);
         tv_phone=findViewById(R.id.tv_phone);
         tv_username=findViewById(R.id.tv_username);
-        img_avatar=findViewById(R.id.img_update);
+        img_avatar=findViewById(R.id.img_avatar_edit);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
