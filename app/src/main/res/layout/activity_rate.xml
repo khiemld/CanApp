@@ -76,6 +76,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintVertical_bias="0">
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_ratememberRate"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="32dp"
