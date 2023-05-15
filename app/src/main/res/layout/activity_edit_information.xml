@@ -43,7 +43,8 @@
         android:text="gianghvt.work@gmail.com"
         android:textColor="@color/main_blue"
         android:textColorHint="#A5A4AD"
-
+        android:editable="false"
+        android:focusable="false"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -129,6 +130,8 @@
         android:text="28/10/2002"
         android:textColor="@color/main_blue"
         android:textColorHint="#A5A4AD"
+        android:editable="false"
+        android:focusable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_phone_edit" />

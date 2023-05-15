@@ -74,7 +74,8 @@ public class EditInformation extends AppCompatActivity {
             constraint_update.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    UploadImage();
+
+                    UploadAll();
                 }
             });
         }
@@ -155,9 +156,11 @@ public class EditInformation extends AppCompatActivity {
                         userLogin = response.body();
                         if (! userLogin.isError()){
                             Toast.makeText(EditInformation.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                            SharedPrefManager.getInstance(getApplicationContext()).clear();
+                            SharedPrefManager.getInstance(getApplicationContext()).userLogin(userLogin.getUser(), true);
                             finish();
-                            //Intent intent = new Intent(EditInformation.this, LoginActivity.class);
-                            //startActivity(intent);
+                            Intent intent = new Intent(EditInformation.this, My_Profile.class);
+                            startActivity(intent);
 
                         } else {
                             Toast.makeText(EditInformation.this, "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
@@ -180,14 +183,10 @@ public class EditInformation extends AppCompatActivity {
 
     }
     public void UploadImage(){
-        if (uri != null) {
             // Do something with the Uri
             String pathFileImg = RealPathUtil.getRealPath(this,uri);
             File file = new File(pathFileImg);
             RequestBody requestBodyImg = RequestBody.create(MediaType.parse("image/*"),file);
-
-            //RequestBody requestBodyId = RequestBody.create(MediaType.parse("multipart/form-data"),id);
-
             MultipartBody.Part multipartBody = MultipartBody.Part.createFormData("avatar",file.getName(),requestBodyImg);
 
             String id = user.get_id();
@@ -202,17 +201,21 @@ public class EditInformation extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             userLogin = response.body();
                             if (! userLogin.isError()){
+
                                 Toast.makeText(EditInformation.this, "Cập nhật ảnh thành công", Toast.LENGTH_SHORT).show();
+                                SharedPrefManager.getInstance(getApplicationContext()).clear();
+                                SharedPrefManager.getInstance(getApplicationContext()).userLogin(userLogin.getUser(), true);
                                 finish();
-                                //Intent intent = new Intent(EditInformation.this, LoginActivity.class);
-                                //startActivity(intent);
+                                Intent intent = new Intent(EditInformation.this, My_Profile.class);
+                                startActivity(intent);
 
                             } else {
                                 Toast.makeText(EditInformation.this, "Cập nhật ảnh thất bại", Toast.LENGTH_SHORT).show();
                             }
 
                         } else {
-                            Toast.makeText(EditInformation.this, "Error", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(EditInformation.this, "Error", Toast.LENGTH_SHORT).show();
+
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -225,10 +228,62 @@ public class EditInformation extends AppCompatActivity {
                     Toast.makeText(EditInformation.this, "Upload ảnh thất bại", Toast.LENGTH_SHORT).show();
                 }
             });
-        } else {
-            // Uri is null, handle the error
-            Toast.makeText(this, "Vui lòng chọn ảnh mới để upload ", Toast.LENGTH_SHORT).show();
-        }
+    }
+    public void UploadAll(){
+        user = SharedPrefManager.getInstance(this).getUser();
+        String username = edt_username.getText().toString();
+        String email = edt_email.getText().toString();
+        String address = edt_address.getText().toString();
+        String major = edt_major.getText().toString();
+        String phone = edt_phone.getText().toString();
+        String birthday = edt_birthday.getText().toString();
+        User user_update = new User(username,email,address,major,phone,birthday);
+        String id = user.get_id();
+        if(!user_update.getName().equals(user.getName()) || !user_update.getAddress().equals(user.getAddress())
+        || !user_update.getMajor().equals(user.getMajor()) ||!user_update.getPhone().equals(user.getPhone())
+        ){
+            //Toast.makeText(this, user.getName().toString() + user_update.getName().toString(), Toast.LENGTH_SHORT).show();
+            if(uri!=null){
+                apiService = RetrofitClient.getRetrofit().create(ApiService.class);
 
+                Call<UserLogin> call = apiService.putUser(id,user_update);
+                call.enqueue(new Callback<UserLogin>() {
+                    @Override
+                    public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
+                        try {
+                            if (response.isSuccessful()) {
+                                userLogin = response.body();
+                                if (! userLogin.isError()){
+                                    UploadImage();
+                                } else {
+                                    Toast.makeText(EditInformation.this, "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+                                }
+
+                            } else {
+                                Toast.makeText(EditInformation.this, "Error", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserLogin> call, Throwable t) {
+                        Log.e("tag",t.toString());
+                        Toast.makeText(EditInformation.this, "Thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                UploadInformation();
+            }
+        } else {
+           //Toast.makeText(EditInformation.this, "Thông tin không bị thay đổi", Toast.LENGTH_SHORT).show();
+            if(uri!=null){
+                UploadImage();
+            }
+            else {
+                Toast.makeText(this, "Thông tin và ảnh không bị thay đổi", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

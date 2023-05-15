@@ -108,6 +108,22 @@ public class SharedPrefManager {
         editor.remove(KEY_REMEMBER);
         editor.apply();
     }
+
+    public void clear() {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(KEY_ID);
+        editor.remove(KEY_NAME);
+        editor.remove(KEY_EMAIL);
+        editor.remove(KEY_PASSWORD);
+        editor.remove(KEY_AVATAR);
+        editor.remove(KEY_ADDRESS);
+        editor.remove(KEY_MAJOR);
+        editor.remove(KEY_PHONE);
+        editor.remove(KEY_ACTIVE);
+
+        editor.apply();
+    }
     //Dang xuat
     public void logout() {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
