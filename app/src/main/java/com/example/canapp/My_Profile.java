@@ -25,7 +25,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.canapp.api.ApiService;
 import com.example.canapp.api.RetrofitClient;
-import com.example.canapp.model.User;
+import com.example.canapp.model.user.User;
 import com.example.canapp.ulti.SharedPrefManager;
 
 import retrofit2.Call;

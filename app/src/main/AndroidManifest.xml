@@ -38,6 +38,22 @@
         <activity
             android:name=".BaseActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".DetailProjectActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CreateAndEditProject"
+            android:exported="true"
+            android:theme="@style/LoginActivityTheme">
+
+        </activity>
         <activity
             android:name=".AllMyProject"
             android:exported="false" />
@@ -64,23 +80,36 @@
         <activity
             android:name=".RegisterActivity"
             android:exported="true"
-            android:theme="@style/LoginActivityTheme" />
+            android:theme="@style/LoginActivityTheme">
+        </activity>
         <activity
             android:name=".WelcomeActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:theme="@style/LoginActivityTheme"
+            android:windowSoftInputMode="adjustResize"
+            >
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="true" >
             <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>-->
         </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:exported="true"
-            android:theme="@style/LoginActivityTheme" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
     </application>
 
 </manifest>

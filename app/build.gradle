@@ -72,4 +72,8 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:8.0.1'
     implementation 'com.google.firebase:firebase-auth:9.0.2'
     implementation 'com.google.firebase:firebase-dynamic-links:20.1.0'
+
+    // Board view - swipe item
+    implementation 'com.github.woxthebox:draglistview:1.7.3'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 }

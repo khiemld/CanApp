@@ -20,7 +20,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.example.canapp.adapter.ProjectAdapter;
-import com.example.canapp.model.Project;
+import com.example.canapp.model.project.Project;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

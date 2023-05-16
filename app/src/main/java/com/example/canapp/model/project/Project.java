@@ -1,4 +1,4 @@
-package com.example.canapp.model;
+package com.example.canapp.model.project;
 
 public class Project {
     private String nameOwner;

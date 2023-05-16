@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20sp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_memberList_circleBound"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:elevation="0sp"
+        app:cardBackgroundColor="@color/third_blue"
+        app:cardCornerRadius="50sp"
+        app:cardElevation="0sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_memberList_replace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Tên"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+        <ImageView
+            android:id="@+id/imv_memberList_avt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_memberList_memberName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12sp"
+        android:text="Tên thành viên"
+        android:textColor="@color/second_blue"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/cv_memberList_circleBound"
+        app:layout_constraintTop_toTopOf="@id/cv_memberList_circleBound" />
+
+    <TextView
+        android:id="@+id/tv_memberList_memberMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12sp"
+        android:text="email thành viên"
+        android:textColor="@color/hint"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@id/cv_memberList_circleBound"
+        app:layout_constraintTop_toBottomOf="@id/tv_memberList_memberName" />
+
+    <TextView
+        android:id="@+id/tv_memberList_memberRole"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="Vai trò"
+        android:textColor="@color/third_blue"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

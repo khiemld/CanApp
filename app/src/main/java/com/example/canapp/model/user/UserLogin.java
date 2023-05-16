@@ -1,5 +1,6 @@
-package com.example.canapp.model;
+package com.example.canapp.model.user;
 
+import com.example.canapp.model.user.User;
 import com.google.gson.annotations.SerializedName;
 
 public class UserLogin{
