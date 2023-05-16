@@ -3,9 +3,10 @@ package com.example.canapp.model.project;
 import com.example.canapp.model.type.Type;
 import com.example.canapp.model.user.User;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ProjectInProjectDetail {
+public class ProjectInProjectDetail implements Serializable {
     String _id;
     String name;
     String description;

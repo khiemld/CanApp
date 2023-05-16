@@ -75,9 +75,11 @@
             android:id="@+id/tv_cancelCreateCate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4sp"
+            android:paddingTop="4sp"
+            android:paddingEnd="12sp"
             android:text="Huỷ"
             android:textColor="@color/orange"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_cateNameError" />
 
@@ -86,8 +88,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4sp"
+            android:paddingStart="16sp"
             android:text="Tạo mới"
             android:textColor="@color/third_blue"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_cateNameError" />
     </androidx.constraintlayout.widget.ConstraintLayout>

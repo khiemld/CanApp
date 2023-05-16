@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20sp"
+    android:layout_marginTop="6sp"
+    android:layout_marginEnd="20sp"
+    android:layout_marginBottom="6sp"
+    android:background="@color/white"
+    app:cardCornerRadius="5sp"
+    app:cardElevation="5sp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imv_searchResult_imageGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18sp"
+            android:background="@color/third_blue"
+            app:cardBackgroundColor="@color/third_blue"
+            app:cardCornerRadius="100sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_searchResult_replace"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Tên"
+                android:textColor="@color/white"
+                android:textSize="35sp" />
+
+            <ImageView
+                android:id="@+id/imv_searchResult_image"
+                android:layout_width="60sp"
+                android:layout_height="60sp"
+                android:scaleType="fitCenter" />
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/tv_searchResult_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="20sp"
+            android:text="Họ tên kết quả tìm kiếm"
+            android:textColor="@color/second_blue"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@id/imv_searchResult_imageGroup"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_searchResult_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="4sp"
+            android:text="Email kết quả tìm kiếm"
+            android:textColor="@color/hint"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/imv_searchResult_imageGroup"
+            app:layout_constraintTop_toBottomOf="@id/tv_searchResult_name" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_searchResult_infoGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="12sp"
+            android:background="@color/fade_hint"
+            android:elevation="0sp"
+            app:cardBackgroundColor="@color/fade_hint"
+            app:cardCornerRadius="4sp"
+            app:cardElevation="0sp"
+            app:layout_constraintStart_toEndOf="@id/imv_searchResult_imageGroup"
+            app:layout_constraintTop_toBottomOf="@id/tv_searchResult_email">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/fade_hint"
+                android:paddingStart="12sp"
+                android:paddingTop="4sp"
+                android:paddingEnd="12sp"
+                android:paddingBottom="8sp">
+
+                <TableLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:shrinkColumns="*"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:gravity="center"
+                        android:paddingStart="-20sp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="20sp"
+                            android:layout_marginTop="4sp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Đã tham gia"
+                            android:textColor="@color/hint"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20sp"
+                            android:layout_marginTop="4sp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Đang tham gia"
+                            android:textColor="@color/hint"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20sp"
+                            android:layout_marginTop="4sp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Điểm"
+                            android:textColor="@color/hint"
+                            android:textSize="11sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_marginTop="4sp"
+                        android:gravity="center"
+                        android:paddingStart="-20sp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="20sp"
+                            android:layout_marginTop="4sp"
+                            android:gravity="center"
+                            android:text="Số dự án"
+                            android:textColor="@color/second_blue"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20sp"
+                            android:layout_marginTop="4sp"
+                            android:gravity="center"
+                            android:text="Sô dự án"
+                            android:textColor="@color/second_blue"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20sp"
+                            android:layout_marginTop="4sp"
+                            android:gravity="center"
+                            android:text="Điểm"
+                            android:textColor="@color/orange"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </TableRow>
+                </TableLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12sp"
+            android:layout_marginBottom="12sp"
+            app:cardCornerRadius="4sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/card_searchResult_infoGroup"
+            app:layout_constraintTop_toBottomOf="@id/card_searchResult_infoGroup">
+
+            <TextView
+                android:id="@+id/tv_searchResult_addButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/second_blue"
+                android:paddingStart="28sp"
+                android:paddingTop="4sp"
+                android:paddingEnd="28sp"
+                android:paddingBottom="4sp"
+                android:text="Mời"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

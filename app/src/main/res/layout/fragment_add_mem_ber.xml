@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000"
+    android:backgroundTintMode="src_in"
+    android:theme="@style/LoginActivityTheme"
+    tools:context=".AddMemBer">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_addMember_mainContaniner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/backgroud_fill"
+        android:elevation="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lyaout_projectAddMember_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginEnd="12sp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_projectAddMember_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="24sp"
+                android:src="@drawable/vector_register"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_projectAddMemberLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Thêm thành viên"
+                android:textColor="@color/second_blue"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_actionProject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Tạo mới"
+                android:textColor="@color/orange"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+            android:id="@+id/edt_addMember_memberEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="40sp"
+            android:layout_marginEnd="20sp"
+            android:background="@color/fade_hint"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="example@abc.com"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:paddingStart="8sp"
+            android:paddingTop="5sp"
+            android:paddingEnd="8sp"
+            android:paddingBottom="5sp"
+            android:selectAllOnFocus="true"
+            android:textColor="@color/second_blue"
+            android:textColorHint="@color/hint"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lyaout_projectAddMember_header" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8sp"
+            android:gravity="center"
+            android:text="Sẽ thêm với tư cách thành viên dự án"
+            android:textColor="@color/hint"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edt_addMember_memberEmail" />
+
+        <ProgressBar
+            android:id="@+id/pb_searchResult_progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:progressTintMode="src_in"
+            android:progressDrawable="@color/third_blue"
+            android:progressTint="@color/third_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_seachResultLabel" />
+
+        <TextView
+            android:id="@+id/tv_seachResultLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="62sp"
+            android:text="Kết quả tìm kiếm"
+            android:textColor="@color/second_blue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edt_addMember_memberEmail" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_addMember_searchResult"
+            android:layout_width="match_parent"
+            android:layout_height="500sp"
+            android:layout_marginTop="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_seachResultLabel" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

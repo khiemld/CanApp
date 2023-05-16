@@ -11,6 +11,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface PlanApi {
@@ -30,4 +31,10 @@ public interface PlanApi {
 
     @GET("plan/{id}")
     Call<ProjectDetailResponse> getPlanDetail(@Path("id") String planID);
+
+    @FormUrlEncoded
+    @PUT("plan/members/{uid}/{planid}")
+    Call<ProjectFull> addMember(@Path("uid") String uID,
+                                @Path("planid") String planID,
+                                @Field("email") String email);
 }

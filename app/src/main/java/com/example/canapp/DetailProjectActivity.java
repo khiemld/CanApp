@@ -3,13 +3,17 @@ package com.example.canapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.util.Pair;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.BlendMode;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +22,8 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.ScaleAnimation;
@@ -33,10 +39,14 @@ import android.widget.Toast;
 import com.example.canapp.adapter.ItemAdapter;
 import com.example.canapp.api.PlanApi;
 import com.example.canapp.api.RetrofitClient;
+import com.example.canapp.api.TaskApi;
+import com.example.canapp.api.TypeApi;
 import com.example.canapp.model.project.ProjectDetailResponse;
 import com.example.canapp.model.project.ProjectInProjectDetail;
 import com.example.canapp.model.project.ProjectResponse;
+import com.example.canapp.model.task.AddTaskResponse;
 import com.example.canapp.model.task.Task;
+import com.example.canapp.model.type.AddTypeResponse;
 import com.example.canapp.model.type.Type;
 import com.example.canapp.model.user.User;
 import com.woxthebox.draglistview.BoardView;
@@ -85,7 +95,7 @@ public class DetailProjectActivity extends AppCompatActivity {
 
     User mManager;
 
-    final String projectID = "645e6570c566c344b3605790";
+    final String projectID = "645f230b52ff4efc156f94d7";
 
     PlanApi planApi;
 
@@ -94,6 +104,7 @@ public class DetailProjectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_project);
 
+        mColumns = 0;
         initialMapping();
 
         // Setting một chút cho cái Board View (cái bảng mà kéo qua kéo lại á)
@@ -101,27 +112,16 @@ public class DetailProjectActivity extends AppCompatActivity {
 
         handleGetPlanDetailInfo();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // Thêm các cột dữ liệu dô bảng
-                addAllColumn();
-
-                // Thêm cái cột cuối cùng (cái cột chỉ có cái chữ thêm thẻ mới á)
-                addFakeColumn();
-
-                handleFakeColumn();
-
-                handleFooter();
-            }
-        }, 3000);
         handleMoreInfo();
 
 
     }
 
     void handleGetPlanDetailInfo() {
-        // Mai mốt thay thế cái này bằng lấy dữ liệu từ intent truyền qua
+
+        final Dialog dialog = createDialogFrom(R.layout.layout_progress_dialop);
+
+        dialog.show();
 
         //Khoi tao apiService
         planApi = RetrofitClient.getRetrofit().create(PlanApi.class);
@@ -146,7 +146,7 @@ public class DetailProjectActivity extends AppCompatActivity {
                     // Lấy các task - ĐANG FAKE
                     initialTask();
 
-                    tasks.get(0).getMembers().add(new User());
+                    /* tasks.get(0).getMembers().add(new User());*/
 
                     // Sắp xếp các type theo index tăng dần
                     sortType();
@@ -154,7 +154,20 @@ public class DetailProjectActivity extends AppCompatActivity {
                     // Tạo list data để đưa vo apdater
                     createDataLists();
 
+                    // Thêm các cột dữ liệu dô bảng
+                    addAllColumn();
+
+                    // Thêm cái cột cuối cùng (cái cột chỉ có cái chữ thêm thẻ mới á)
+                    addFakeColumn();
+
+                    handleFakeColumn();
+
+                    handleFooter();
+
+                    dialog.dismiss();
+
                 } else {
+                    dialog.dismiss();
                     try {
                         Toast.makeText(DetailProjectActivity.this, response.errorBody().string(),
                                 Toast.LENGTH_SHORT).show();
@@ -166,6 +179,7 @@ public class DetailProjectActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ProjectDetailResponse> call, Throwable t) {
+                dialog.dismiss();
                 Log.e(TAG, "onFailure: " + t.getMessage());
                 Toast.makeText(DetailProjectActivity.this, "Không thể lấy dữ liệu 🥲",
                         Toast.LENGTH_SHORT).show();
@@ -178,6 +192,12 @@ public class DetailProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Xử lý nhấn dô cái nút ba chấm nè
+                FragmentTransaction fragmentTransaction =
+                        getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container,
+                        ProjectInfo.newInstance(mProject));
+                fragmentTransaction.addToBackStack(ProjectInfo.TAG);
+                fragmentTransaction.commit();
             }
         });
     }
@@ -515,7 +535,7 @@ public class DetailProjectActivity extends AppCompatActivity {
 
                     }
                     for (Task iTask : tasks) {
-                        if (iTask.get_id() == currentTask.get_id()) {
+                        if (iTask.get_id().equals(currentTask.get_id())) {
                             iTask.setIndex(toRow);
                             break;
                         }
@@ -545,21 +565,53 @@ public class DetailProjectActivity extends AppCompatActivity {
                     Task currentTask =
                             detailTasks.get(fromColumn).get(fromRow);
                     currentTask.setIndex(toRow);
-                    currentTask.setTypeId(types.get(toColumn).getId());
+                    /*currentTask.setTypeId(types.get(toColumn).getId());*/
                     currentTask.setColumn(types.get(toColumn).get_id());
                     int removeIndex = -1;
                     for (Task iTask : tasks) {
-                        if (iTask.getColumn() == currentTask.get_id()) {
+                        if (iTask.get_id().equals(currentTask.get_id())) {
                             removeIndex = tasks.indexOf(iTask);
                             break;
                         }
                     }
                     tasks.remove(removeIndex);
                     tasks.add(currentTask);
+
                 }
-/*                detailTasks.get(toColumn).sort((t1, t2) -> -t2.getIndex() + t1.getIndex());
-                detailTasks.get(fromColumn)
-                        .sort((t1, t2) -> -t2.getIndex() + t1.getIndex());*/
+
+                Task currentTask =
+                        detailTasks.get(fromColumn).get(fromRow);
+                TaskApi taskApi = RetrofitClient.getRetrofit().create(TaskApi.class);
+                Call<AddTaskResponse> call =
+                        taskApi.moveTask(
+                                toRow,
+                                types.get(fromColumn).get_id(),
+                                types.get(toColumn).get_id(),
+                                currentTask.get_id()
+                        );
+
+                call.enqueue(new Callback<AddTaskResponse>() {
+                    @Override
+                    public void onResponse(Call<AddTaskResponse> call,
+                                           Response<AddTaskResponse> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(DetailProjectActivity.this, "Di chuyển thành công",
+                                            Toast.LENGTH_SHORT)
+                                    .show();
+                        } else {
+                            Toast.makeText(DetailProjectActivity.this, "Di chuyển thất bại",
+                                            Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AddTaskResponse> call, Throwable t) {
+                        Toast.makeText(DetailProjectActivity.this, "Không thể thao tác",
+                                        Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                });
 
                 sortTaskList();
                 createDataLists();
@@ -567,7 +619,7 @@ public class DetailProjectActivity extends AppCompatActivity {
                     mBoardView.getAdapter(i).setItemList(dataLists.get(i));
                     mBoardView.getAdapter(i).notifyDataSetChanged();
                 }
-                for (Type iType :
+/*                for (Type iType :
                         types) {
                     Log.e(TAG, "Type: name " + iType.getName() + ", index " + iType.getIndex() +
                             ", id " + iType.get_id());
@@ -582,7 +634,7 @@ public class DetailProjectActivity extends AppCompatActivity {
                     Log.e(TAG, "Task: " + taskName);
                 }
                 Log.e(TAG, String.valueOf("Di chuyển từ cột " + fromColumn + ", hàng " + fromRow +
-                        " tới cột " + toColumn + ", hàng " + toRow));
+                        " tới cột " + toColumn + ", hàng " + toRow));*/
             }
 
             @Override
@@ -776,60 +828,84 @@ public class DetailProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Xử lý khi tạo một Cate mới
-                Type type =
-                        new Type(mColumns, editText.getText().toString().trim(), mColumns - 1);
-                Log.e(TAG, "Thêm mới Type: index " + type.getIndex() + ", id " + type.get_id());
 
                 if (((TextView) alterHeader.findViewById(
                         R.id.tv_cateNameError)).getVisibility() ==
                         View.INVISIBLE && !editText.getText().toString().trim().isEmpty()) {
+
+                    imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(header.getWindowToken(),
+                            0);
+
+                    final Dialog dialog = createDialogFrom(R.layout.layout_progress_dialop);
+
+                    dialog.show();
+
                     // Thêm một loại mới
-                    types.add(type);
-                    sortType();
 
-                    for (Type iType :
-                            types) {
-                        Log.e(TAG, "Type: name " + iType.getName() + ", index " + iType.getIndex() +
-                                ", id " + iType.get_id());
-                    }
+                    TypeApi typeApi = RetrofitClient.getRetrofit().create(TypeApi.class);
+                    Call<AddTypeResponse> call =
+                            typeApi.addType(mManager.get_id(), mProject.get_id(),
+                                    editText.getText().toString().trim());
+                    call.enqueue(new Callback<AddTypeResponse>() {
+                        @Override
+                        public void onResponse(Call<AddTypeResponse> call,
+                                               Response<AddTypeResponse> response) {
+                            if (response.isSuccessful()) {
 
-                    createDataLists();
-                    for (List<Task> iList : detailTasks) {
-                        String taskName = "";
-                        for (Task iTask :
-                                iList) {
-                            taskName = taskName + iTask.getName() + ", ";
+                                Type type = response.body().getList();
+                                type.setId(mColumns);
+
+                                types.add(type);
+
+                                sortType();
+
+                                createDataLists();
+
+                                // Thêm cột mới nhập
+                                addColumn(type);
+
+                                // Thêm fake column cữ
+                                addFakeColumn();
+
+                                isLastColumnOrigin = true;
+                                isLastColumnChanged = ADDED;
+
+                                // Focus dô cái list mới tạo
+                                View newHeader = mBoardView.getHeaderView(mColumns - 2);
+                                ((View) newHeader.getParent()).requestFocus();
+
+                                // Xoá fake column cũ
+                                mBoardView.removeColumn(mColumns - 3);
+
+                                // Giảm số đếm số cột
+                                mColumns--;
+
+                                // Thiết lập footer cho cột mới
+                                setAlterFooter(mColumns - 2);
+
+                                // Thiết lập fake column
+                                handleFakeColumn();
+
+                                dialog.dismiss();
+                            } else {
+                                try {
+                                    Log.e(TAG, "onResponse is not successfull" +
+                                            response.errorBody().string().toString());
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
                         }
-                        Log.e(TAG, "Task: " + taskName);
-                    }
 
-                    /*header.setVisibility(View.VISIBLE);
-                    alterHeader.setVisibility(View.GONE);*/
-
-                    // Thêm cột mới nhập
-                    addColumn(type);
-
-                    // Thêm fake column cữ
-                    addFakeColumn();
-
-                    isLastColumnOrigin = true;
-                    isLastColumnChanged = ADDED;
-
-                    // Focus dô cái list mới tạo
-                    View newHeader = mBoardView.getHeaderView(mColumns - 2);
-                    ((View) newHeader.getParent()).requestFocus();
-
-                    // Xoá fake column cũ
-                    mBoardView.removeColumn(mColumns - 3);
-
-                    // Giảm số đếm số cột
-                    mColumns--;
-
-                    // Thiết lập footer cho cột mới
-                    setAlterFooter(mColumns - 2);
-
-                    // Thiết lập fake column
-                    handleFakeColumn();
+                        @Override
+                        public void onFailure(Call<AddTypeResponse> call, Throwable t) {
+                            dialog.dismiss();
+                            Toast.makeText(DetailProjectActivity.this, "Thêm không thành công!",
+                                    Toast.LENGTH_SHORT).show();
+                            Log.e(TAG, "onFailure of add Type: " + t.getMessage());
+                        }
+                    });
                 } else {
                     Toast.makeText(DetailProjectActivity.this, "Tên hông được trùng hoặc trống!",
                             Toast.LENGTH_SHORT).show();
@@ -903,42 +979,78 @@ public class DetailProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!editText.getText().toString().trim().isEmpty()) {
+
+                    imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(footer.getWindowToken(),
+                            0);
+
+                    final Dialog dialog = createDialogFrom(R.layout.layout_progress_dialop);
+                    dialog.show();
+
                     Type currentType = types.get(mBoardView.getColumnOfFooter(footer));
-                    Log.e(TAG,
-                            "Tạo task ("
-                                    + editText.getText().toString().trim()
-                                    + ") tại cột id " +
-                                    currentType.get_id());
+
+                    TaskApi taskApi = RetrofitClient.getRetrofit().create(TaskApi.class);
+                    Call<AddTaskResponse> call =
+                            taskApi.addTask(mManager.get_id(), mProject.get_id(),
+                                    currentType.get_id(),
+                                    editText.getText().toString().trim());
+                    call.enqueue(new Callback<AddTaskResponse>() {
+                        @Override
+                        public void onResponse(Call<AddTaskResponse> call,
+                                               Response<AddTaskResponse> response) {
+                            dialog.dismiss();
+                            if (response.isSuccessful()) {
+
+                                Task newTask = response.body().getTask();
+
+                                tasks.add(newTask);
+
+                                sortTaskList();
+
+                                createDataLists();
+
+                                Pair<Long, String> newItem =
+                                        new Pair<>((long) sCreatedItems++, newTask.getName());
+
+                                mBoardView.getAdapter(currentType.getIndex())
+                                        .setItemList(dataLists.get(finalIndex));
+
+                                /*mBoardView.getAdapter(currentType.getIndex()).notifyDataSetChanged();*/
+
+                                for (int i = 0; i < detailTasks.size(); i++) {
+                                    mBoardView.getAdapter(i).notifyDataSetChanged();
+                                }
+
+                                editText.setText("");
+
+                                imm.hideSoftInputFromWindow(editText.getWindowToken(),
+                                        0);
+
+                                alterFooter.setVisibility(View.GONE);
+
+                                footer.setVisibility(View.VISIBLE);
+
+                            } else {
+                                try {
+                                    Log.e(TAG, "onResponse: add Task" +
+                                            response.errorBody().string().toString());
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<AddTaskResponse> call, Throwable t) {
+                            Log.e(TAG, "onFailure: add Task" + t.getMessage());
+                        }
+                    });
 
                     Task newTask = new Task(currentType.get_id(), currentType.getId(),
                             tasks.size() + 1, mProject.get_id(),
                             detailTasks.get(currentType.getIndex()).size(),
                             editText.getText().toString().trim(), true, new ArrayList<User>(), 0,
                             tasks.size() + 1 + "");
-                    tasks.add(newTask);
-                    sortTaskList();
-                    createDataLists();
-                    Pair<Long, String> newItem =
-                            new Pair<>((long) sCreatedItems++, newTask.getName());
-                    mBoardView.getAdapter(currentType.getIndex())
-                            .setItemList(dataLists.get(finalIndex));
-                    /*mBoardView.getAdapter(currentType.getIndex()).notifyDataSetChanged();*/
-                    for (int i = 0; i < detailTasks.size(); i++) {
-                        mBoardView.getAdapter(i).notifyDataSetChanged();
-                    }
-                    editText.setText("");
-                    imm.hideSoftInputFromWindow(editText.getWindowToken(),
-                            0);
-                    alterFooter.setVisibility(View.GONE);
-                    footer.setVisibility(View.VISIBLE);
-
-
-                    String taskName = "";
-                    for (Task iTask :
-                            detailTasks.get(currentType.getIndex())) {
-                        taskName = taskName + iTask.getName() + ", ";
-                    }
-                    Log.e(TAG, "Task: " + taskName);
 
 
                 } else {
@@ -999,6 +1111,24 @@ public class DetailProjectActivity extends AppCompatActivity {
         for (int index = 0; index < mColumns - 1; index++) {
             setAlterFooter(index);
         }
+    }
+
+    Dialog createDialogFrom(int layout) {
+        Dialog dialog = new Dialog(DetailProjectActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(layout);
+        dialog.setCancelable(false);
+
+        Window window = dialog.getWindow();
+        if (window == null) {
+            return null;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        return dialog;
     }
 }
 
