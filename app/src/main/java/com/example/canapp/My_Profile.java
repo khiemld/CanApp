@@ -1,40 +1,31 @@
 package com.example.canapp;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.canapp.api.ApiService;
-import com.example.canapp.api.RetrofitClient;
+import com.bumptech.glide.Glide;
 import com.example.canapp.model.User;
 import com.example.canapp.ulti.SharedPrefManager;
 
-import retrofit2.Call;
+public class My_Profile extends AppCompatActivity {
 
-public class My_Profile extends Fragment {
-
-    ImageView top_bar;
+    Toolbar top_bar;
     ImageView img_menu;
+    ImageView img_avatar;
     ConstraintLayout constrain_project;
     TextView tv_username, tv_email,tv_address,tv_major,tv_phone,tv_birthday;
+
     User user;
 
     View view;
@@ -165,7 +156,7 @@ public class My_Profile extends Fragment {
         constrain_project.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(),AllMyProject.class);
+                Intent intent = new Intent(My_Profile.this,AllMyProject.class);
                 startActivity(intent);
             }
         });

@@ -1,0 +1,62 @@
+[33m7f04a8a[m[33m ([m[1;36mHEAD -> [m[1;32mregister_pass[m[33m)[m HEAD@{0}: reset: moving to 7f04a8a50d9dca8b872674f92e54e7b7aa845d04
+[33m7f04a8a[m[33m ([m[1;36mHEAD -> [m[1;32mregister_pass[m[33m)[m HEAD@{1}: reset: moving to 7f04a8a50d9dca8b872674f92e54e7b7aa845d04
+[33m40c6dd7[m HEAD@{2}: reset: moving to 40c6dd7b20e9377e2cdd04b28d112252a76e039c
+[33m7b4abda[m[33m ([m[1;31morigin/register_pass[m[33m)[m HEAD@{3}: checkout: moving from register_pass to register_pass
+[33m7b4abda[m[33m ([m[1;31morigin/register_pass[m[33m)[m HEAD@{4}: branch: Reset to origin/register_pass
+[33m40c6dd7[m HEAD@{5}: reset: moving to 40c6dd7b20e9377e2cdd04b28d112252a76e039c
+[33m7b4abda[m[33m ([m[1;31morigin/register_pass[m[33m)[m HEAD@{6}: checkout: moving from 40c6dd7b20e9377e2cdd04b28d112252a76e039c to register_pass
+[33m40c6dd7[m HEAD@{7}: reset: moving to 40c6dd7b20e9377e2cdd04b28d112252a76e039c
+[33m9c83b43[m HEAD@{8}: rebase (start): checkout origin/login
+[33m7b4abda[m[33m ([m[1;31morigin/register_pass[m[33m)[m HEAD@{9}: commit: "profile"
+[33m40c6dd7[m HEAD@{10}: commit: "profile"
+[33m7f04a8a[m[33m ([m[1;36mHEAD -> [m[1;32mregister_pass[m[33m)[m HEAD@{11}: commit: "half_layout4"
+[33ma3ca3fa[m HEAD@{12}: checkout: moving from register_pass to register_pass
+[33ma3ca3fa[m HEAD@{13}: branch: Reset to origin/register_pass
+[33ma3ca3fa[m HEAD@{14}: commit: "half_layout3"
+[33mdf89245[m[33m ([m[1;32mlogin[m[33m)[m HEAD@{15}: checkout: moving from register_pass to register_pass
+[33mdf89245[m[33m ([m[1;32mlogin[m[33m)[m HEAD@{16}: branch: Reset to origin/register_pass
+[33mdf89245[m[33m ([m[1;32mlogin[m[33m)[m HEAD@{17}: checkout: moving from login to register_pass
+[33mdf89245[m[33m ([m[1;32mlogin[m[33m)[m HEAD@{18}: rebase (finish): returning to refs/heads/login
+[33mdf89245[m[33m ([m[1;32mlogin[m[33m)[m HEAD@{19}: rebase (start): checkout HEAD
+[33mdf89245[m[33m ([m[1;32mlogin[m[33m)[m HEAD@{20}: commit (merge): "half_layout2"
+[33mdd750cd[m HEAD@{21}: checkout: moving from login to register_pass
+[33m9c83b43[m HEAD@{22}: pull --no-stat -v --progress origin login: Fast-forward
+[33mc5fb98e[m HEAD@{23}: checkout: moving from login to login
+[33mc5fb98e[m HEAD@{24}: branch: Reset to origin/login
+[33mc5fb98e[m HEAD@{25}: checkout: moving from register_pass to login
+[33mdd750cd[m HEAD@{26}: checkout: moving from register_pass to register_pass
+[33mdd750cd[m HEAD@{27}: branch: Reset to origin/register_pass
+[33mdd750cd[m HEAD@{28}: commit: "update_profile"
+[33m4a145e9[m HEAD@{29}: checkout: moving from login to register_pass
+[33mc5fb98e[m HEAD@{30}: checkout: moving from register_pass to login
+[33m4a145e9[m HEAD@{31}: checkout: moving from login to register_pass
+[33mc5fb98e[m HEAD@{32}: checkout: moving from register_pass to login
+[33m4a145e9[m HEAD@{33}: commit (merge): Merge branch 'login' into register_pass
+[33mb23adcf[m HEAD@{34}: checkout: moving from login to register_pass
+[33mc5fb98e[m HEAD@{35}: commit: "update_4"
+[33mc3b0ac8[m HEAD@{36}: commit: "update_3"
+[33m2560654[m HEAD@{37}: pull --no-stat -v --progress origin login: Fast-forward
+[33m55ec41e[m HEAD@{38}: checkout: moving from register_pass to login
+[33mb23adcf[m HEAD@{39}: commit: "update_2"
+[33md582c7c[m HEAD@{40}: checkout: moving from register_pass to register_pass
+[33md582c7c[m HEAD@{41}: branch: Reset to origin/register_pass
+[33md582c7c[m HEAD@{42}: checkout: moving from login to register_pass
+[33m55ec41e[m HEAD@{43}: checkout: moving from register_pass to login
+[33md582c7c[m HEAD@{44}: checkout: moving from login to register_pass
+[33m55ec41e[m HEAD@{45}: checkout: moving from register_pass to login
+[33md582c7c[m HEAD@{46}: checkout: moving from register_pass to register_pass
+[33md582c7c[m HEAD@{47}: branch: Reset to origin/register_pass
+[33md582c7c[m HEAD@{48}: checkout: moving from main to register_pass
+[33m0bf9da9[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{49}: checkout: moving from register_pass to main
+[33md582c7c[m HEAD@{50}: commit: "update_1"
+[33m7906f71[m HEAD@{51}: commit: "logo"
+[33m0bf9da9[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{52}: checkout: moving from main to register_pass
+[33m0bf9da9[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{53}: checkout: moving from 0bf9da93be1ff9b21c0728d5a148a50561498bc0 to main
+[33m0bf9da9[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{54}: checkout: moving from register_pass to register_pass^0
+[33m0bf9da9[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{55}: checkout: moving from c082b1ade5c9b52bff1fba5e252f5beaca1f70d6 to register_pass
+[33mc082b1a[m HEAD@{56}: commit: "logo"
+[33m0bf9da9[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{57}: checkout: moving from register_pass to register_pass^0
+[33m0bf9da9[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{58}: checkout: moving from register_pass to register_pass
+[33m0bf9da9[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{59}: checkout: moving from main to register_pass
+[33m0bf9da9[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{60}: merge origin/main: Fast-forward
+[33m10ca22d[m HEAD@{61}: clone: from https://github.com/khiemld/CanApp

@@ -31,7 +31,7 @@ public class ResetPassword_Login extends AppCompatActivity {
         });
     }
     public void AnhXa(){
-        edt_email=findViewById(R.id.edt_email);
+        edt_email=findViewById(R.id.edt_old_password);
         tv_next=findViewById(R.id.tv_next);
         img_back=findViewById(R.id.img_back);
         tv_noti_email=findViewById(R.id.tv_noti_email);

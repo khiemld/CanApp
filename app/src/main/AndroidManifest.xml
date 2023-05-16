@@ -21,9 +21,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".BaseActivity"
-            android:exported="false" />
-
+            android:name=".MyApp" />
         <activity
             android:name=".AllMyProject"
             android:exported="false" />
@@ -40,26 +38,23 @@
             android:name=".ResetPassword2"
             android:exported="true"
             android:theme="@style/LoginActivityTheme" />
-        <!--<activity
+        <activity
             android:name=".My_Profile"
-            android:exported="false" />-->
+            android:exported="false" />
         <activity
             android:name=".ResetPassword"
             android:exported="true"
             android:theme="@style/LoginActivityTheme" />
-        <activity
-            android:name=".PassworkActivity"
-            android:exported="true"
-            android:theme="@style/LoginActivityTheme" />
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="true"
-            android:theme="@style/LoginActivityTheme" />
-        <activity
-            android:name=".WelcomeActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <activity
+                android:name=".RegisterActivity"
+                android:exported="true"
+                android:theme="@style/LoginActivityTheme">
+            </activity>
+            <activity
+                android:name=".WelcomeActivity"
+                android:exported="true">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -67,22 +62,22 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:theme="@style/LoginActivityTheme" />
+            android:theme="@style/LoginActivityTheme"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-        <!--<activity
+        <activity
             android:name=".HomeActivity"
-            android:exported="false">
+            android:exported="true">
 
-            &lt;!&ndash;
+            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            &ndash;&gt;
-        </activity>-->
+            -->
+        </activity>
     </application>
 
 </manifest>

@@ -1,21 +1,32 @@
 package com.example.canapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.auth.User;
 
 public class ResetPassword2 extends AppCompatActivity {
 
     EditText edt_pass,edt_pass_again;
     TextView tv_noti_pass,tv_noti_pass_again;
     ImageView img_back;
+    Button btn_reset;
+    protected FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,13 +43,21 @@ public class ResetPassword2 extends AppCompatActivity {
                 finish();
             }
         });
+        btn_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Reset_Pass();
+            }
+        });
     }
     public void AnhXa(){
-        edt_pass=findViewById(R.id.edt_username_register);
-        edt_pass_again=findViewById(R.id.edt_mssv);
+        edt_pass=findViewById(R.id.edt_password);
+        edt_pass_again=findViewById(R.id.edt_password_again);
         tv_noti_pass=findViewById(R.id.tv_noti_pass);
         tv_noti_pass_again=findViewById(R.id.tv_noti_pass_again);
         img_back=findViewById(R.id.img_back);
+
+        btn_reset=findViewById(R.id.btn_reset);
     }
     public void SetThongBao(){
         edt_pass.addTextChangedListener(new TextWatcher() {
@@ -86,5 +105,8 @@ public class ResetPassword2 extends AppCompatActivity {
 
             }
         });
+    }
+    public void Reset_Pass(){
+
     }
 }

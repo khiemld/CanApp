@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "32211744333",
+    "project_id": "canapp-69c9d",
+    "storage_bucket": "canapp-69c9d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32211744333:android:b74272667fd30dbb694e04",
+        "android_client_info": {
+          "package_name": "com.example.canapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "32211744333-4sfqrtet32ip311pn8q72nabn6jmsd6m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVGH8F28sqEbHLl0JA9YK7xwQh8gRBVks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32211744333-4sfqrtet32ip311pn8q72nabn6jmsd6m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

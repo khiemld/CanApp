@@ -1,5 +1,6 @@
 package com.example.canapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -10,6 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ResetPassword_Login2 extends AppCompatActivity {
 
@@ -17,6 +23,7 @@ public class ResetPassword_Login2 extends AppCompatActivity {
     TextView tv_noti,tv_noti_pass_again;
     Button btn_reset;
     ImageView img_back;
+    protected FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +36,18 @@ public class ResetPassword_Login2 extends AppCompatActivity {
                 finish();
             }
         });
+        btn_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Reset_Pass();
+            }
+        });
     }
     public void AnhXa(){
-        edt_pass = findViewById(R.id.edt_username_register);
-        edt_pass_again = findViewById(R.id.edt_mssv);
+        edt_pass = findViewById(R.id.edt_password);
+        edt_pass_again = findViewById(R.id.edt_password_again);
         tv_noti=findViewById(R.id.tv_noti);
-        btn_reset = findViewById(R.id.btn_register);
+        btn_reset = findViewById(R.id.btn_reset);
         img_back=findViewById(R.id.img_back);
         tv_noti_pass_again=findViewById(R.id.tv_noti_pass_again);
     }
@@ -50,7 +63,7 @@ public class ResetPassword_Login2 extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String string = charSequence.toString();
-                String regex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?])(?=.*[a-zA-Z]).{8,13}$";
+                String regex = "^.{8,13}$";
                 if (string.length() == 0 || !string.matches(regex)){
                     tv_noti.setVisibility(View.VISIBLE);
                     edt_pass.setY(300);
@@ -92,5 +105,8 @@ public class ResetPassword_Login2 extends AppCompatActivity {
 
             }
         });
+    }
+    public void Reset_Pass(){
+
     }
 }
