@@ -41,6 +41,9 @@ public class User implements Serializable {
     public User() {
     }
 
+    public User(String _id) {
+        this._id = _id;
+    }
 
     public User(String _id, String name, String email, String password, String avatar, String address, String major, String phone, boolean active) {
         this._id = _id;
