@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import com.example.canapp.adapter.UserAdapter;
-import com.example.canapp.model.User;
+import com.example.canapp.model.user.User;
 
 import java.util.ArrayList;
 import java.util.List;

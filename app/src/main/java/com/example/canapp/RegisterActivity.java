@@ -21,8 +21,8 @@ import android.widget.Toast;
 
 import com.example.canapp.api.ApiService;
 import com.example.canapp.api.RetrofitClient;
-import com.example.canapp.model.User;
-import com.example.canapp.model.UserRegister;
+import com.example.canapp.model.user.User;
+import com.example.canapp.model.user.UserRegister;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
