@@ -36,7 +36,7 @@ public class ResetPassword2 extends AppCompatActivity {
         params.height = WindowManager.LayoutParams.MATCH_PARENT;
         getWindow().setAttributes(params);
         AnhXa();
-        SetThongBao();
+        //SetThongBao();
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +69,7 @@ public class ResetPassword2 extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String string = charSequence.toString();
-                String regex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?])(?=.*[a-zA-Z]).{8,13}$";
+                String regex = "";
                 if (string.length() == 0 || !string.matches(regex)){
                     tv_noti_pass.setVisibility(View.VISIBLE);
                 }

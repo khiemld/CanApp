@@ -21,7 +21,31 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".MyApp" />
+            android:name=".RatingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailRateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RateActivity"
+            android:exported="true" >
+
+        </activity>
+        <activity
+            android:name=".BaseActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".DetailProjectActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".CreateAndEditProject"
+            android:exported="true"
+            android:theme="@style/LoginActivityTheme">
+
+        </activity>
         <activity
             android:name=".AllMyProject"
             android:exported="false" />
@@ -45,16 +69,16 @@
             android:name=".ResetPassword"
             android:exported="true"
             android:theme="@style/LoginActivityTheme" />
-            <activity
-                android:name=".RegisterActivity"
-                android:exported="true"
-                android:theme="@style/LoginActivityTheme">
-            </activity>
-            <activity
-                android:name=".WelcomeActivity"
-                android:exported="true">
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="true"
+            android:theme="@style/LoginActivityTheme">
+        </activity>
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -62,21 +86,21 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:theme="@style/LoginActivityTheme"></activity>
+            android:theme="@style/LoginActivityTheme"
+            android:windowSoftInputMode="adjustResize"
+            >
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
-            android:exported="true">
-
-            <!--
-            <intent-filter>
+            android:exported="true" >
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
+            </intent-filter>-->
         </activity>
     </application>
 

@@ -186,7 +186,6 @@ public class EditInformation extends AppCompatActivity {
                             Toast.makeText(EditInformation.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                             SharedPrefManager.getInstance(getApplicationContext()).clear();
                             SharedPrefManager.getInstance(getApplicationContext()).userLogin(userLogin.getUser(), true);
-                            finish();
                             Intent intent = new Intent(EditInformation.this, My_Profile.class);
                             startActivity(intent);
 
@@ -233,7 +232,6 @@ public class EditInformation extends AppCompatActivity {
                                 Toast.makeText(EditInformation.this, "Cập nhật ảnh thành công", Toast.LENGTH_SHORT).show();
                                 SharedPrefManager.getInstance(getApplicationContext()).clear();
                                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(userLogin.getUser(), true);
-                                finish();
                                 Intent intent = new Intent(EditInformation.this, My_Profile.class);
                                 startActivity(intent);
 
@@ -339,15 +337,20 @@ public class EditInformation extends AppCompatActivity {
                     tv_noti_phone.setVisibility(View.VISIBLE);
                     tv_noti_phone.setText("Số điện thoại không hợp lệ");
                 } else {
-                    for(User user: listUser){
-                        if(user.getPhone().toString().equals(string)){
-                            tv_noti_phone.setVisibility(View.VISIBLE);
-                            tv_noti_phone.setText("Số điện thoại đã tồn tại");
-                            break;
+                    try{
+                        for(User user: listUser){
+                            if(user.getPhone().toString().equals(string)){
+                                tv_noti_phone.setVisibility(View.VISIBLE);
+                                tv_noti_phone.setText("Số điện thoại đã tồn tại");
+                                break;
+                            }
+                            else {
+                                tv_noti_phone.setVisibility(View.INVISIBLE);
+                            }
                         }
-                        else {
-                            tv_noti_phone.setVisibility(View.INVISIBLE);
-                        }
+                    }
+                    catch (Exception e){
+                        Toast.makeText(EditInformation.this, "Mạng lỗi", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

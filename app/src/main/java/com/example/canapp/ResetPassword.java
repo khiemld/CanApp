@@ -56,7 +56,7 @@ public class ResetPassword extends AppCompatActivity {
         tv_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               XacThucEmail();
+                XacThucEmail();
 
             }
         });
@@ -104,25 +104,25 @@ public class ResetPassword extends AppCompatActivity {
                     tv_noti_email.setText("Email không được để trống");
 
                 } else {
-                   try{
-                       for(User user: listUser)
-                       {
-                           if(user.getEmail().toString().equals(string)){
-                               tv_noti_email.setVisibility(View.INVISIBLE);
-                              // Toast.makeText(ResetPassword.this, user.get_id().toString(), Toast.LENGTH_SHORT).show();
-                               User user1= new User(user.get_id().toString());
-                               Bundle bundle = new Bundle();
-                               bundle.putSerializable("id1",user1);
-                               break;
-                           }
-                           else {
-                               tv_noti_email.setVisibility(View.VISIBLE);
-                               tv_noti_email.setText("Email không tồn tại trong cơ sở dữ liệu");
-                           }
-                       }
-                   }catch (Exception e){
-                       Toast.makeText(ResetPassword.this, "Lỗi mạng", Toast.LENGTH_SHORT).show();
-                   }
+                    try{
+                        for(User user: listUser)
+                        {
+                            if(user.getEmail().toString().equals(string)){
+                                tv_noti_email.setVisibility(View.INVISIBLE);
+                                // Toast.makeText(ResetPassword.this, user.get_id().toString(), Toast.LENGTH_SHORT).show();
+                                User user1= new User(user.get_id().toString());
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("id1",user1);
+                                break;
+                            }
+                            else {
+                                tv_noti_email.setVisibility(View.VISIBLE);
+                                tv_noti_email.setText("Email không tồn tại trong cơ sở dữ liệu");
+                            }
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(ResetPassword.this, "Lỗi mạng", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
@@ -146,7 +146,6 @@ public class ResetPassword extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
                         Toast.makeText(ResetPassword.this, "Email reset password đã được gửi đến gmail của bạn, vui lòng truy cập và đặt lại mật khẩu", Toast.LENGTH_SHORT).show();
-
                         finish();
                         Intent intent = new Intent(ResetPassword.this,ResetPassword2.class);
                         startActivity(intent);

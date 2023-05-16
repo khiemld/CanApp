@@ -178,7 +178,6 @@ public class LoginActivity extends AppCompatActivity {
                                                 }
                                                 Toast.makeText(LoginActivity.this, "Email đã được xác thực, đăng nhập thành công",
                                                         Toast.LENGTH_SHORT).show();
-                                                finish();
                                                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                                                 startActivity(intent);
                                             } else {
@@ -215,11 +214,6 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Thông tin nhập vào không hợp lệ, vui lòng kiểm tra", Toast.LENGTH_SHORT).show();
         }
 
-
-
-        //Khoi tao apiService
-        /* */
-
     }
 
     public void SetThongBao(){
@@ -231,9 +225,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    String regex = "^([A-Z|a-z|0-9](\\.|_){0,1})+[A-Z|a-z|0-9]\\@([A-Z|a-z|0-9])+((\\.){0,1}[A-Z|a-z|0-9]){2}\\.[a-z]{2,3}$";
-                    String string = charSequence.toString();
-                    if (string.length() == 0 || !string.matches(regex)){
+                   /* String regex = "^([A-Z|a-z|0-9](\\.|_){0,1})+[A-Z|a-z|0-9]\\@([A-Z|a-z|0-9])+((\\.){0,1}[A-Z|a-z|0-9]){2}\\.[a-z]{2,3}$";
+                */    String string = charSequence.toString();
+                    if (string.length() == 0 /*|| !string.matches(regex)*/){
                         tv_noti_email.setVisibility(View.VISIBLE);
                     }
                     else {
