@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -46,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText edt_email, edt_password;
     TextView tv_noti_email,tv_noti_pass,tv_register,tv_forgest;
-    ImageView img_back;
+    ImageView img_back,img_hide;
 
     Button btnLogin;
     protected FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -70,6 +71,20 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(v->Login());
         SetThongBao();
 
+        img_hide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(edt_password.getTransformationMethod() == null){
+                    edt_password.setTransformationMethod(new PasswordTransformationMethod());
+                    img_hide.setImageResource(R.drawable.eye_off_outline);
+
+                }else{
+                    edt_password.setTransformationMethod(null);
+                    img_hide.setImageResource(R.drawable.eye_outline);
+
+                }
+            }
+        });
         tv_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,12 +147,13 @@ public class LoginActivity extends AppCompatActivity {
         edt_email = findViewById(R.id.edt_emaillogin);
         edt_password = findViewById(R.id.edt_passwordlogin);
         cb_remember = findViewById(R.id.cb_rememberlogin);
-        tv_noti_email=findViewById(R.id.tv_noti_pass_reset);
+        tv_noti_email=findViewById(R.id.tv_noti_email);
         tv_noti_pass=findViewById(R.id.tv_noti_pass);
         img_back=findViewById(R.id.img_loginback);
         btnLogin = findViewById(R.id.btn_login2);
         tv_register= findViewById(R.id.tv_register);
         tv_forgest=findViewById(R.id.tv_forgetpass);
+        img_hide=findViewById(R.id.image_hide_login);
     }
 
 
@@ -200,7 +216,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             }
                             else {
-                                Toast.makeText(LoginActivity.this, "Login that bai", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Login thất bại", Toast.LENGTH_SHORT).show();
                             }
                         }
                     })

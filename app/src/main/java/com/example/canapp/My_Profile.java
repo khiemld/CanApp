@@ -36,7 +36,7 @@ public class My_Profile extends Fragment {
     ImageView img_menu;
     ImageView img_avatar;
     ConstraintLayout constrain_project;
-    TextView tv_username, tv_email,tv_address,tv_major,tv_phone,tv_birthday;
+    TextView tv_username, tv_email,tv_address,tv_major,tv_phone;
     User user;
 
     View view;
@@ -133,7 +133,6 @@ public class My_Profile extends Fragment {
         img_menu = view.findViewById(R.id.img_menu);
         constrain_project = view.findViewById(R.id.constraint_project);
         tv_address = view.findViewById(R.id.tv_address);
-        tv_birthday = view.findViewById(R.id.tv_birthday);
         tv_email = view.findViewById(R.id.tv_email);
         tv_major = view.findViewById(R.id.tv_major);
         tv_phone = view.findViewById(R.id.tv_phone);

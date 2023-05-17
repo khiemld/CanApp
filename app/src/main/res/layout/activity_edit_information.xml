@@ -166,30 +166,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_major_edit" />
 
-    <EditText
-        android:id="@+id/edt_birthday_edit"
-        android:layout_width="0dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="50dp"
-        android:backgroundTint="@color/main_blue"
-        android:drawableStart="@drawable/birthday2"
-        android:drawablePadding="10dp"
-        android:editable="false"
-        android:ems="10"
-        android:focusable="false"
-        android:gravity="end"
-        android:inputType="date"
-        android:text="28/10/2002"
-        android:hint="Ngày sinh"
-        android:textColor="@color/main_blue"
-        android:textColorHint="#A5A4AD"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_phone_edit" />
-
     <ImageView
         android:id="@+id/img_back"
         android:layout_width="wrap_content"
@@ -271,7 +247,7 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/btn_register"
         app:layout_constraintStart_toEndOf="@+id/constrain_huy"
-        app:layout_constraintTop_toBottomOf="@+id/edt_birthday_edit">
+        app:layout_constraintTop_toBottomOf="@id/tv_noti_phone_edit">
 
         <TextView
             android:id="@+id/textView18"
@@ -296,7 +272,7 @@
 
         android:background="@drawable/background_btnsignin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_birthday_edit">
+        app:layout_constraintTop_toBottomOf="@id/tv_noti_phone_edit">
 
         <TextView
             android:id="@+id/textView17"

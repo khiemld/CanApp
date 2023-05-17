@@ -6,6 +6,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
 import android.app.Activity;
@@ -46,8 +47,10 @@ import retrofit2.Response;
 
 public class EditInformation extends AppCompatActivity {
 
+    private ViewPager viewPager;
+
     ImageView img_upload,img_avatar,img_back;
-    EditText edt_username,edt_email,edt_address,edt_major,edt_phone,edt_birthday;
+    EditText edt_username,edt_email,edt_address,edt_major,edt_phone;
 
     TextView tv_noti_name, tv_noti_address,tv_noti_major,tv_noti_phone;
     ConstraintLayout constraint_update,constraint_huy;
@@ -111,7 +114,6 @@ public class EditInformation extends AppCompatActivity {
         edt_phone=findViewById(R.id.edt_phone_edit);
         img_avatar=findViewById(R.id.img_avatar_edit);
         img_upload=findViewById(R.id.img_upload);
-        edt_birthday=findViewById(R.id.edt_birthday_edit);
         constraint_update=findViewById(R.id.constraint_update);
         constraint_huy=findViewById(R.id.constrain_huy);
         img_back=findViewById(R.id.img_back);
@@ -119,6 +121,7 @@ public class EditInformation extends AppCompatActivity {
         tv_noti_major=findViewById(R.id.tv_noti_major_edit);
         tv_noti_name=findViewById(R.id.tv_noti_name_edit);
         tv_noti_phone = findViewById(R.id.tv_noti_phone_edit);
+
     }
     public void onClickRequestPermission(){
         if (Build.VERSION.SDK_INT<Build.VERSION_CODES.M){
@@ -170,8 +173,7 @@ public class EditInformation extends AppCompatActivity {
         String address = edt_address.getText().toString();
         String major = edt_major.getText().toString();
         String phone = edt_phone.getText().toString();
-        String birthday = edt_birthday.getText().toString();
-        User user_new = new User(username,email,address,major,phone,birthday);
+        User user_new = new User(username,email,address,major,phone);
 
         apiService = RetrofitClient.getRetrofit().create(ApiService.class);
 
@@ -186,7 +188,8 @@ public class EditInformation extends AppCompatActivity {
                             Toast.makeText(EditInformation.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                             SharedPrefManager.getInstance(getApplicationContext()).clear();
                             SharedPrefManager.getInstance(getApplicationContext()).userLogin(userLogin.getUser(), true);
-                            Intent intent = new Intent(EditInformation.this, My_Profile.class);
+
+                            Intent intent = new Intent(EditInformation.this, BaseActivity.class);
                             startActivity(intent);
 
                         } else {
@@ -232,7 +235,7 @@ public class EditInformation extends AppCompatActivity {
                                 Toast.makeText(EditInformation.this, "Cập nhật ảnh thành công", Toast.LENGTH_SHORT).show();
                                 SharedPrefManager.getInstance(getApplicationContext()).clear();
                                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(userLogin.getUser(), true);
-                                Intent intent = new Intent(EditInformation.this, My_Profile.class);
+                                Intent intent = new Intent(EditInformation.this, BaseActivity.class);
                                 startActivity(intent);
 
                             } else {
@@ -368,8 +371,7 @@ public class EditInformation extends AppCompatActivity {
         String address = edt_address.getText().toString();
         String major = edt_major.getText().toString();
         String phone = edt_phone.getText().toString();
-        String birthday = edt_birthday.getText().toString();
-        User user_update = new User(username,email,address,major,phone,birthday);
+        User user_update = new User(username,email,address,major,phone);
         String id = user.get_id();
         if(TextUtils.isEmpty(username)){
             tv_noti_name.setVisibility(View.VISIBLE);
