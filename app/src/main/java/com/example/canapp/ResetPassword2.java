@@ -88,28 +88,6 @@ public class ResetPassword2 extends AppCompatActivity {
 
             }
         });
-       /* edt_pass_again.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String string = charSequence.toString();
-                if (string.length() == 0 || !string.equals(edt_pass)){
-                    tv_noti_pass_again.setVisibility(View.VISIBLE);
-                }
-                else {
-                    tv_noti_pass_again.setVisibility(View.INVISIBLE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });*/
     }
     public void Reset_Pass() {
         String idValue = getIntent().getStringExtra("id_reset");
