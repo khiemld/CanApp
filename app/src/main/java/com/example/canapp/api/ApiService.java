@@ -33,8 +33,7 @@ public interface ApiService {
                                 @Field("password") String password,
                                 @Field("address") String address,
                                 @Field("major") String major,
-                                @Field("phone") String phone,
-                                @Field("birth_date") String birthday
+                                @Field("phone") String phone
                                 );
 
 

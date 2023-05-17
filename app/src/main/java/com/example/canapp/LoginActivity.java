@@ -200,7 +200,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             }
                             else {
-                                Toast.makeText(LoginActivity.this, "Login that bai", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Login thất bại", Toast.LENGTH_SHORT).show();
                             }
                         }
                     })

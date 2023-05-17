@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
@@ -21,6 +22,7 @@ import com.example.canapp.model.user.UserLogin;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.auth.User;
 
 import retrofit2.Call;
@@ -92,29 +94,38 @@ public class ResetPassword2 extends AppCompatActivity {
     public void Reset_Pass() {
         String idValue = getIntent().getStringExtra("id_reset");
         String newPass = edt_new_pass.getText().toString();
-        apiService = RetrofitClient.getRetrofit().create(ApiService.class);
-        //Toast.makeText(this, idValue, Toast.LENGTH_SHORT).show();
-       Call<UserLogin> call = apiService.forgotPass(idValue, newPass);
-        call.enqueue(new Callback<UserLogin>() {
-            @Override
-            public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
-                try{
-                    if(response.isSuccessful()){
-                        Toast.makeText(ResetPassword2.this, "Thành công", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        Toast.makeText(ResetPassword2.this, "Sai thông tin", Toast.LENGTH_SHORT).show();
-                    }
 
-                }catch (Exception e){
-                    Toast.makeText(ResetPassword2.this, "Lỗi mạng", Toast.LENGTH_SHORT).show();
+       if(!TextUtils.isEmpty(idValue) && !TextUtils.isEmpty(newPass)){
+            //Toast.makeText(this, idValue, Toast.LENGTH_SHORT).show();
+          apiService = RetrofitClient.getRetrofit().create(ApiService.class);
+            Call<UserLogin> call = apiService.forgotPass(idValue, newPass);
+            call.enqueue(new Callback<UserLogin>() {
+                @Override
+                public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
+                    try{
+                        if(response.isSuccessful()){
+                            Toast.makeText(ResetPassword2.this, "Thành công đặt lại mật khẩu", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ResetPassword2.this,LoginActivity.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            Toast.makeText(ResetPassword2.this, "Sai thông tin", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }catch (Exception e){
+                        Toast.makeText(ResetPassword2.this, "Lỗi mạng", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<UserLogin> call, Throwable t) {
-                Toast.makeText(ResetPassword2.this, "Thất bại", Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<UserLogin> call, Throwable t) {
+                    Toast.makeText(ResetPassword2.this, "Thất bại", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else{
+            Toast.makeText(this, "Vui lòng nhập mật khẩu mới", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

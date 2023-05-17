@@ -62,9 +62,9 @@
             android:name=".ResetPassword2"
             android:exported="true"
             android:theme="@style/LoginActivityTheme" />
-        <activity
+       <!-- <activity
             android:name=".My_Profile"
-            android:exported="false" />
+            android:exported="false" />-->
         <activity
             android:name=".ResetPassword"
             android:exported="true"

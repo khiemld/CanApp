@@ -38,8 +38,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     ImageView img_back;
     ApiService apiService;
-    TextView tv_noti_login,tv_noti_name,tv_noti_pass,tv_noti_address,tv_noti_major,tv_noti_email,tv_noti_phone,tv_noti_birthday;
-    EditText edt_username,edt_pass,edt_email,edt_address,edt_phone,edt_major,edt_birthday;
+    TextView tv_noti_login,tv_noti_name,tv_noti_pass,tv_noti_address,tv_noti_major,tv_noti_email,tv_noti_phone;
+    EditText edt_username,edt_pass,edt_email,edt_address,edt_phone,edt_major;
     User user;
     List<User> listUser;
     private View registerLayout;
@@ -120,10 +120,8 @@ public class RegisterActivity extends AppCompatActivity {
         edt_major=findViewById(R.id.edt_major);
         edt_address=findViewById(R.id.edt_address);
         edt_pass=findViewById(R.id.edt_password_register);
-        edt_birthday=findViewById(R.id.edt_birthday);
         tv_noti_email=findViewById(R.id.tv_noti_pass_reset);
         tv_noti_phone=findViewById(R.id.tv_noti_phone_register);
-        tv_noti_birthday=findViewById(R.id.tv_noti_birthday);
         tv_noti_pass=findViewById(R.id.tv_noti_pass);
         tv_noti_major=findViewById(R.id.tv_noti_major);
         tv_noti_name=findViewById(R.id.tv_noti_name);
@@ -153,31 +151,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
-        edt_birthday.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String string = charSequence.toString();
-                String regex="\\b(0?[1-9]|[12]\\d|3[01])[\\/\\-.](0?[1-9]|[12]\\d|3[01])[\\/\\-.](\\d{2}|\\d{4})\\b";
-                if (string.length() == 0 || !string.matches(regex)){
-                    tv_noti_birthday.setVisibility(View.VISIBLE);
-                }
-                else {
-                    tv_noti_birthday.setVisibility(View.INVISIBLE);
-                    /*SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                    Date date = dateFormat.parse(string);*/
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
         edt_email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -355,7 +329,6 @@ public class RegisterActivity extends AppCompatActivity {
         String address=edt_address.getText().toString();
         String phone = edt_phone.getText().toString();
         String major = edt_major.getText().toString();
-        String birthday=edt_birthday.getText().toString();
         String pass = edt_pass.getText().toString();
 
         if(TextUtils.isEmpty(username))
@@ -366,10 +339,7 @@ public class RegisterActivity extends AppCompatActivity {
             tv_noti_email.setText("Email không được để trống");
         } else if (TextUtils.isEmpty(pass)) {
             tv_noti_pass.setVisibility(View.VISIBLE);
-        } else if (TextUtils.isEmpty(birthday)) {
-            tv_noti_birthday.setVisibility(View.VISIBLE);
-            tv_noti_birthday.setText("Ngày tháng năm sinh không được để trống");
-        } else if (TextUtils.isEmpty(address)) {
+        }else if (TextUtils.isEmpty(address)) {
             tv_noti_address.setVisibility(View.VISIBLE);
         } else if (TextUtils.isEmpty(phone)) {
             tv_noti_phone.setVisibility(View.VISIBLE);
@@ -378,7 +348,7 @@ public class RegisterActivity extends AppCompatActivity {
             tv_noti_major.setVisibility(View.VISIBLE);
             tv_noti_major.setText("Chuyên ngành không được để trống");
         } else if (tv_noti_name.getVisibility()==View.INVISIBLE && tv_noti_email.getVisibility() == View.INVISIBLE
-                && tv_noti_pass.getVisibility()==View.INVISIBLE && tv_noti_birthday.getVisibility()==View.INVISIBLE
+                && tv_noti_pass.getVisibility()==View.INVISIBLE
                 && tv_noti_address.getVisibility()==View.INVISIBLE && tv_noti_phone.getVisibility()==View.INVISIBLE
                 && tv_noti_major.getVisibility()==View.INVISIBLE
         ) {
@@ -394,7 +364,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             apiService = RetrofitClient.getRetrofit().create(ApiService.class);
                                             //Thuc hien API register
                                             Call<UserRegister> call = apiService.register(username,email,
-                                                    pass,address, major, phone, birthday);
+                                                    pass,address, major, phone);
                                             call.enqueue(new Callback<UserRegister>() {
                                                 @Override
                                                 public void onResponse(Call<UserRegister> call, Response<UserRegister> response) {

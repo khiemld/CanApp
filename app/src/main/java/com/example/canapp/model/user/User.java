@@ -57,13 +57,12 @@ public class User implements Serializable {
         this.active = active;
     }
 
-    public User(String name, String email, String address, String major, String phone, String birthday) {
+    public User(String name, String email, String address, String major, String phone) {
         this.name = name;
         this.email = email;
         this.address = address;
         this.major = major;
         this.phone = phone;
-        this.birthday=birthday;
     }
 
     public String get_id() {

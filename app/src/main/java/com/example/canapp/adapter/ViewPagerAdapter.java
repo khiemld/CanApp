@@ -10,7 +10,6 @@ import com.example.canapp.My_Profile;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-
     public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }

@@ -35,6 +35,8 @@ public class ResetPassword extends AppCompatActivity {
     ImageView img_back;
     ApiService apiService;
     List<User> listUser;
+    String user_id;
+    String user_email;
     protected FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @Override
@@ -109,13 +111,8 @@ public class ResetPassword extends AppCompatActivity {
                         {
                             if(user.getEmail().toString().equals(string)){
                                 tv_noti_email.setVisibility(View.INVISIBLE);
-                                // Toast.makeText(ResetPassword.this, user.get_id().toString(), Toast.LENGTH_SHORT).show();
-                               /* String email = user.getEmail().toString();
-                                String id = user.get_id().toString();
-                                Intent intent = new Intent(ResetPassword.this,ResetPassword2.class);
-                                intent.putExtra("id_reset", id);
-                                intent.putExtra("email_reset",email);
-                                startActivity(intent);*/
+                                user_email=string;
+                                user_id=user.get_id();
                                 break;
                             }
                             else {
@@ -140,48 +137,30 @@ public class ResetPassword extends AppCompatActivity {
         String email = edt_email.getText().toString();
         if(TextUtils.isEmpty(email)){
             tv_noti_email.setVisibility(View.VISIBLE);
+            tv_noti_email.setText("Email không được để trống");
         }
-        else if(tv_noti_email.getVisibility()==View.INVISIBLE){
-            /*Intent intent = new Intent(ResetPassword.this,ResetPassword2.class);
-            startActivity(intent);*/
-            try{
-                for(User user: listUser)
-                {
-                    if(user.getEmail().toString().equals(email)){
-                        Toast.makeText(ResetPassword.this, "Thành công", Toast.LENGTH_SHORT).show();
-                        GuiEmail(email);
-                        String id = user.get_id().toString();
+        else if(tv_noti_email.getVisibility()==View.INVISIBLE && !user_email.isEmpty()){
+            //Toast.makeText(ResetPassword.this, "Thành công", Toast.LENGTH_SHORT).show();
+            mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(ResetPassword.this, "Email reset password đã được gửi đến gmail của bạn, vui lòng truy cập và đặt lại mật khẩu", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ResetPassword.this,ResetPassword2.class);
-                        intent.putExtra("id_reset", id);
+                        intent.putExtra("id_reset", user_id);
                         startActivity(intent);
-                        break;
-                    }
-                    else {
-                        tv_noti_email.setVisibility(View.VISIBLE);
-                        tv_noti_email.setText("Email không tồn tại trong cơ sở dữ liệu");
+                    } else {
+                        // Gửi email reset password thất bại.
+                        Toast.makeText(ResetPassword.this,
+                                "Gửi email reset password thất bại", Toast.LENGTH_SHORT).show();
                     }
                 }
-            }catch (Exception e){
-                Toast.makeText(ResetPassword.this, "Lỗi mạng", Toast.LENGTH_SHORT).show();
-            }
+            });
+            //GuiEmail(email);
         }
         else {
             Toast.makeText(this, "Thông tin không hợp lệ, vui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
         }
-    }
-    public void GuiEmail(String email){
-        mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(ResetPassword.this, "Email reset password đã được gửi đến gmail của bạn, vui lòng truy cập và đặt lại mật khẩu", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Gửi email reset password thất bại.
-                    Toast.makeText(ResetPassword.this,
-                            "Gửi email reset password thất bại", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
 }
