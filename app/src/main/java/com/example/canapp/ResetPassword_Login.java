@@ -11,63 +11,50 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.canapp.model.user.User;
+import com.example.canapp.ulti.SharedPrefManager;
+
 public class ResetPassword_Login extends AppCompatActivity {
 
-    EditText edt_email;
-    TextView tv_noti_email,tv_next;
+    EditText edt_old_pass;
+    TextView tv_next;
     ImageView img_back;
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password_login);
         AnhXa();
-        GoiResetPasswordNext();
-        SetThongBao();
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-    }
-    public void AnhXa(){
-        edt_email=findViewById(R.id.edt_old_password);
-        tv_next=findViewById(R.id.tv_next);
-        img_back=findViewById(R.id.img_back);
-        tv_noti_email=findViewById(R.id.tv_noti_email);
-    }
-    public void GoiResetPasswordNext(){
         tv_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ResetPassword_Login.this,ResetPassword_Login2.class);
-                startActivity(intent);
+                GoiResetPasswordNext();
             }
         });
     }
-    public void SetThongBao(){
-        edt_email.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    public void AnhXa(){
+        edt_old_pass=findViewById(R.id.edt_old_password);
+        tv_next=findViewById(R.id.tv_next);
+        img_back=findViewById(R.id.img_back);
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String regex = "^([A-Z|a-z|0-9](\\.|_){0,1})+[A-Z|a-z|0-9]\\@([A-Z|a-z|0-9])+((\\.){0,1}[A-Z|a-z|0-9]){2}\\.[a-z]{2,3}$";
-                String string = charSequence.toString();
-                if (string.length() == 0 || !string.matches(regex)){
-                    tv_noti_email.setVisibility(View.VISIBLE);
-                }
-                else {
-                    tv_noti_email.setVisibility(View.INVISIBLE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
+    }
+    public void GoiResetPasswordNext(){
+        if(SharedPrefManager.getInstance(this).getUser() != null){
+            user = SharedPrefManager.getInstance(this).getUser();
+            String id = user.get_id().toString();
+            String oldpass = edt_old_pass.getText().toString();
+            String email = user.getEmail().toString();
+            Intent intent = new Intent(this,ResetPassword_Login2.class);
+            intent.putExtra("id_key", id);
+            intent.putExtra("old_pass",oldpass);
+            intent.putExtra("email",email);
+            startActivity(intent);
+        }
     }
 }

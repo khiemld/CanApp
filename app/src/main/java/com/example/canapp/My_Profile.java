@@ -45,7 +45,6 @@ public class My_Profile extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_my_profile, container, false);
-
         AnhXa();
         if(SharedPrefManager.getInstance(getContext()).getUser() != null){
             user = SharedPrefManager.getInstance(getContext()).getUser();
@@ -129,6 +128,16 @@ public class My_Profile extends Fragment {
             }
         });
     }
-
-
+    public void AnhXa(){
+        top_bar = view.findViewById(R.id.img_topmenu);
+        img_menu = view.findViewById(R.id.img_menu);
+        constrain_project = view.findViewById(R.id.constraint_project);
+        tv_address = view.findViewById(R.id.tv_address);
+        tv_birthday = view.findViewById(R.id.tv_birthday);
+        tv_email = view.findViewById(R.id.tv_email);
+        tv_major = view.findViewById(R.id.tv_major);
+        tv_phone = view.findViewById(R.id.tv_phone);
+        tv_username = view.findViewById(R.id.tv_username);
+        img_avatar=view.findViewById(R.id.img_avatar_edit);
+    }
 }

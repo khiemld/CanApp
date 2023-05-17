@@ -41,8 +41,6 @@ public interface ApiService {
     @GET("users")
     Call<List<User>> getAllUser();
 
-    @GET("users/{_id}")
-    Call<User> getUserbyID(@Path("_id") int userId);
 
     @PUT("users/{id}")
     Call<UserLogin> putUser(@Path("id") String userId,
@@ -52,4 +50,9 @@ public interface ApiService {
     Call<UserLogin> upload_image(@Path("id") String id,
                             @Part MultipartBody.Part avatar);
 
+    @FormUrlEncoded
+    @PUT("users/reset/{id}")
+    Call<UserLogin> resetPass(@Path("id") String userId,
+                              @Field("oldPass") String oldPass,
+                              @Field("newPass") String newPass);
 }

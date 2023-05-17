@@ -123,14 +123,14 @@
                     android:inputType="textPersonName"
                     android:textColor="@color/main_blue"
                     android:textColorHint="#A5A4AD"
-                    app:layout_constraintBottom_toTopOf="@id/edt_old_password"
+                    app:layout_constraintBottom_toTopOf="@id/edt_email_reset"
                     app:layout_constraintEnd_toEndOf="parent"
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/edt_old_password"
+                    android:id="@+id/edt_email_reset"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
@@ -165,7 +165,7 @@
                     android:textColorHint="#A5A4AD"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edt_old_password" />
+                    app:layout_constraintTop_toBottomOf="@id/edt_email_reset" />
 
                 <EditText
                     android:id="@+id/edt_birthday"
@@ -179,7 +179,7 @@
                     android:drawablePadding="10dp"
                     android:ems="10"
                     android:hint="Ngày sinh"
-                    android:text="02/05/2002"
+                    android:text="dd/mm/yyyy"
                     android:inputType="date"
                     android:textColor="@color/main_blue"
                     android:textColorHint="#A5A4AD"
@@ -266,7 +266,7 @@
                     android:textSize="12sp"
                     android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edt_old_password" />
+                    app:layout_constraintTop_toBottomOf="@+id/edt_email_reset" />
 
                 <TextView
                     android:id="@+id/tv_noti_pass"
