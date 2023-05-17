@@ -159,7 +159,7 @@
             android:layout_height="114dp">
 
             <ImageView
-                android:id="@+id/img_update"
+                android:id="@+id/img_avatar_edit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"

@@ -35,7 +35,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import android.widget.TextView;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -56,11 +55,13 @@ public class LoginActivity extends AppCompatActivity {
 
     User user = new User();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
+        // Đặt kích thước cho activity_login bằng với activity_welcome
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         params.height = WindowManager.LayoutParams.MATCH_PARENT;
@@ -126,67 +127,19 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void SetThongBao() {
-        //Kiem tra cac truong email vaf password da duoc nhap chua
-        edt_email.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String regex = "^([A-Z|a-z|0-9](\\.|_){0,1})+[A-Z|a-z|0-9]\\@([A-Z|a-z|0-9])+((\\.){0,1}[A-Z|a-z|0-9]){2}\\.[a-z]{2,3}$";
-                String string = charSequence.toString();
-                if (string.length() == 0 || !string.matches(regex)){
-                    tv_noti_email.setVisibility(View.VISIBLE);
-                }
-                else {
-                    tv_noti_email.setVisibility(View.INVISIBLE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-        edt_password.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String string = charSequence.toString();
-                String regex = "^.{8,13}$";
-                if (string.length() == 0 || !string.matches(regex)){
-                    tv_noti_pass.setVisibility(View.VISIBLE);
-                }
-                else {
-                    tv_noti_pass.setVisibility(View.INVISIBLE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-    }
-
     private void Mapping() {
         loginLayout = findViewById(R.id.loginlayout);
         edt_email = findViewById(R.id.edt_emaillogin);
         edt_password = findViewById(R.id.edt_passwordlogin);
         cb_remember = findViewById(R.id.cb_rememberlogin);
-        tv_noti_email=findViewById(R.id.tv_noti_email);
+        tv_noti_email=findViewById(R.id.tv_noti_pass_reset);
         tv_noti_pass=findViewById(R.id.tv_noti_pass);
         img_back=findViewById(R.id.img_loginback);
         btnLogin = findViewById(R.id.btn_login2);
         tv_register= findViewById(R.id.tv_register);
         tv_forgest=findViewById(R.id.tv_forgetpass);
     }
+
 
 
     public void Login(){
@@ -200,53 +153,118 @@ public class LoginActivity extends AppCompatActivity {
             tv_noti_pass.setVisibility(View.VISIBLE);
             tv_noti_pass.setText("Mật khẩu không được để trống");
         } else if (tv_noti_email.getVisibility()==View.INVISIBLE && tv_noti_pass.getVisibility()==View.INVISIBLE) {
-            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this,new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        //Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                        //startActivity(intent);
-                        if (mAuth.getCurrentUser().isEmailVerified()) {
-                            apiService = RetrofitClient.getRetrofit().create(ApiService.class);
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this,new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                //Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                                //startActivity(intent);
+                                if(mAuth.getCurrentUser().isEmailVerified()){
+                                    apiService = RetrofitClient.getRetrofit().create(ApiService.class);
 
-                            //Thuc hien API login
-                            Call<UserLogin> call = apiService.login(email, password);
+                                    //Thuc hien API login
+                                    Call<UserLogin> call = apiService.login(email, password);
 
-                            call.enqueue(new Callback<UserLogin>() {
-                                @Override
-                                public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
-                                    UserLogin userLogin = response.body();
-                                    if (response.isSuccessful() && !userLogin.isError()) {
-                                        user = response.body().getUser();
-                                        if (cb_remember.isChecked()) {
-                                            SharedPrefManager.getInstance(getApplicationContext()).userLogin(user, true);
-                                        } else {
-                                            SharedPrefManager.getInstance(getApplicationContext()).userLogin(user, false);
+                                    call.enqueue(new Callback<UserLogin>() {
+                                        @Override
+                                        public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
+                                            UserLogin userLogin = response.body();
+                                            if (response.isSuccessful() && !userLogin.isError()){
+                                                user = response.body().getUser();
+                                                if (cb_remember.isChecked()){
+                                                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(user, true);
+                                                } else {
+                                                    SharedPrefManager.getInstance(getApplicationContext()).userLogin(user, false);
+                                                }
+                                                Toast.makeText(LoginActivity.this, "Email đã được xác thực, đăng nhập thành công",
+                                                        Toast.LENGTH_SHORT).show();
+                                                finish();
+                                                Intent intent = new Intent(getApplicationContext(), BaseActivity.class);
+                                                startActivity(intent);
+                                            } else {
+                                                Toast.makeText(LoginActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
-                                        Toast.makeText(LoginActivity.this, "Email đã được xác thực, đăng nhập thành công",
-                                                Toast.LENGTH_SHORT).show();
-                                        finish();
-                                        Intent intent = new Intent(getApplicationContext(), BaseActivity.class);
-                                        startActivity(intent);
-                                    } else {
-                                        Toast.makeText(LoginActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
-                                    }
+
+                                        @Override
+                                        public void onFailure(Call<UserLogin> call, Throwable t) {
+                                            Log.d("Error:", t.getMessage());
+                                        }
+                                    });
+                                }
+                                else {
+                                    Toast.makeText(LoginActivity.this, "Email chưa được xác thực, vui lòng kiểm tra gmail",
+                                            Toast.LENGTH_SHORT).show();
                                 }
 
-                                @Override
-                                public void onFailure(Call<UserLogin> call, Throwable t) {
-                                    Log.d("Error:", t.getMessage());
-                                }
-                            });
+                            }
+                            else {
+                                Toast.makeText(LoginActivity.this, "Login that bai", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(LoginActivity.this, "Login failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }else {
+            Toast.makeText(this, "Thông tin nhập vào không hợp lệ, vui lòng kiểm tra", Toast.LENGTH_SHORT).show();
+        }
 
-                        }
-                        else {
-                            Toast.makeText(LoginActivity.this, "Email chưa được xác thực, vui lòng xác thực email", Toast.LENGTH_SHORT).show();
-                        }
+    }
+
+    public void SetThongBao(){
+            //Kiem tra cac truong email vaf password da duoc nhap chua
+            edt_email.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    String regex = "^([A-Z|a-z|0-9](\\.|_){0,1})+[A-Z|a-z|0-9]\\@([A-Z|a-z|0-9])+((\\.){0,1}[A-Z|a-z|0-9]){2}\\.[a-z]{2,3}$";
+                    String string = charSequence.toString();
+                    if (string.length() == 0 || !string.matches(regex)){
+                        tv_noti_email.setVisibility(View.VISIBLE);
                     }
+                    else {
+                        tv_noti_email.setVisibility(View.INVISIBLE);
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
 
                 }
             });
+            edt_password.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    String string = charSequence.toString();
+                    String regex = "^.{8,13}$";
+                    if (string.length() == 0 || !string.matches(regex)){
+                        tv_noti_pass.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        tv_noti_pass.setVisibility(View.INVISIBLE);
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+
         }
+
     }
-}

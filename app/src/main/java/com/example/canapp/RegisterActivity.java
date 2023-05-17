@@ -115,13 +115,13 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister=findViewById(R.id.btn_register);
         registerLayout=findViewById(R.id.registerLayout);
         edt_username=findViewById(R.id.edt_username_register);
-        edt_email=findViewById(R.id.edt_email);
+        edt_email=findViewById(R.id.edt_newpass_reset);
         edt_phone=findViewById(R.id.edt_phone);
         edt_major=findViewById(R.id.edt_major);
         edt_address=findViewById(R.id.edt_address);
         edt_pass=findViewById(R.id.edt_password_register);
         edt_birthday=findViewById(R.id.edt_birthday);
-        tv_noti_email=findViewById(R.id.tv_noti_email);
+        tv_noti_email=findViewById(R.id.tv_noti_pass_reset);
         tv_noti_phone=findViewById(R.id.tv_noti_phone_register);
         tv_noti_birthday=findViewById(R.id.tv_noti_birthday);
         tv_noti_pass=findViewById(R.id.tv_noti_pass);
@@ -194,17 +194,21 @@ public class RegisterActivity extends AppCompatActivity {
                         tv_noti_email.setText("Email không hợp lệ");
 
                     } else {
-                       for(User user: listUser)
-                       {
-                           if(user.getEmail().toString().equals(string)){
-                               tv_noti_email.setVisibility(View.VISIBLE);
-                               tv_noti_email.setText("Email đã tồn tại");
-                               break;
-                           }
-                           else {
-                               tv_noti_email.setVisibility(View.INVISIBLE);
-                           }
-                       }
+                      try {
+                          for(User user: listUser)
+                          {
+                              if(user.getEmail().toString().equals(string)){
+                                  tv_noti_email.setVisibility(View.VISIBLE);
+                                  tv_noti_email.setText("Email đã tồn tại");
+                                  break;
+                              }
+                              else {
+                                  tv_noti_email.setVisibility(View.INVISIBLE);
+                              }
+                          }
+                      }catch (Exception e){
+                          Toast.makeText(RegisterActivity.this, "Lỗi mạng", Toast.LENGTH_SHORT).show();
+                      }
 
 
                     }
@@ -231,16 +235,20 @@ public class RegisterActivity extends AppCompatActivity {
                         tv_noti_phone.setVisibility(View.VISIBLE);
                         tv_noti_phone.setText("Số điện thoại không hợp lệ");
                     } else {
-                        for(User user: listUser){
-                            if(user.getPhone().toString().equals(string)){
-                                tv_noti_phone.setVisibility(View.VISIBLE);
-                                tv_noti_phone.setText("Số điện thoại đã tồn tại");
-                                break;
-                            }
-                            else {
-                                tv_noti_phone.setVisibility(View.INVISIBLE);
-                            }
-                        }
+                       try {
+                           for(User user: listUser){
+                               if(user.getPhone().toString().equals(string)){
+                                   tv_noti_phone.setVisibility(View.VISIBLE);
+                                   tv_noti_phone.setText("Số điện thoại đã tồn tại");
+                                   break;
+                               }
+                               else {
+                                   tv_noti_phone.setVisibility(View.INVISIBLE);
+                               }
+                           }
+                       }catch (Exception e){
+                           Toast.makeText(RegisterActivity.this, "Lỗi mạng", Toast.LENGTH_SHORT).show();
+                       }
                     }
 
             }
