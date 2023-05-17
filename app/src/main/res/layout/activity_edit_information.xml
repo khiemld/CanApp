@@ -153,6 +153,7 @@
         android:backgroundTint="@color/main_blue"
         android:drawableStart="@drawable/phone2"
         android:drawablePadding="10dp"
+        android:focusable="false"
         android:ems="10"
         android:gravity="end"
         android:inputType="phone"

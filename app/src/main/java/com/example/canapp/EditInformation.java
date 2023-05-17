@@ -171,11 +171,11 @@ public class EditInformation extends AppCompatActivity {
         String major = edt_major.getText().toString();
         String phone = edt_phone.getText().toString();
         String birthday = edt_birthday.getText().toString();
-        User user = new User(username,email,address,major,phone,birthday);
+        User user_new = new User(username,email,address,major,phone,birthday);
 
         apiService = RetrofitClient.getRetrofit().create(ApiService.class);
 
-        Call<UserLogin> call = apiService.putUser(id,user);
+        Call<UserLogin> call = apiService.putUser(id,user_new);
         call.enqueue(new Callback<UserLogin>() {
             @Override
             public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
@@ -338,8 +338,8 @@ public class EditInformation extends AppCompatActivity {
                     tv_noti_phone.setText("Số điện thoại không hợp lệ");
                 } else {
                     try{
-                        for(User user: listUser){
-                            if(user.getPhone().toString().equals(string)){
+                        for(User user_phone: listUser){
+                            if(user_phone.getPhone().toString().equals(string)){
                                 tv_noti_phone.setVisibility(View.VISIBLE);
                                 tv_noti_phone.setText("Số điện thoại đã tồn tại");
                                 break;
