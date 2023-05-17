@@ -1,11 +1,13 @@
 package com.example.canapp.api;
 
+import com.example.canapp.model.project.ListProjectofUser;
 import com.example.canapp.model.task.AddTaskResponse;
 import com.example.canapp.model.type.AddTypeResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -29,4 +31,8 @@ public interface TaskApi {
             @Field("toId") String toColumnID,
             @Field("idTask") String taskID
     );
+
+
+    @GET("plan/user-plan/{id}")
+    Call<ListProjectofUser> getAllPlanofUser(@Path("id") String id);
 }

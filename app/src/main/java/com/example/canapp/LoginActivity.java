@@ -31,6 +31,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,6 +59,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private CheckBox cb_remember;
 
+    private String pass;
+
     User user = new User();
 
     @Override
@@ -68,6 +75,8 @@ public class LoginActivity extends AppCompatActivity {
         Mapping();
         btnLogin.setOnClickListener(v->Login());
         SetThongBao();
+
+
 
         tv_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,6 +225,7 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
                                     UserLogin userLogin = response.body();
+
                                     if (response.isSuccessful() && !userLogin.isError()) {
                                         user = response.body().getUser();
                                         if (cb_remember.isChecked()) {
