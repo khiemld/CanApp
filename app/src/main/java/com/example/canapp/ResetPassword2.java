@@ -113,7 +113,7 @@ public class ResetPassword2 extends AppCompatActivity {
         String email = getIntent().getStringExtra("email_reset");
         String newPass = edt_new_pass.getText().toString();
 
-       if(!TextUtils.isEmpty(idValue) && !TextUtils.isEmpty(newPass) && edt_new_pass.getVisibility()==View.INVISIBLE){
+       if(!TextUtils.isEmpty(idValue) && !TextUtils.isEmpty(newPass) && tv_noti_pass.getVisibility()==View.INVISIBLE){
             //Toast.makeText(this, idValue, Toast.LENGTH_SHORT).show();
           apiService = RetrofitClient.getRetrofit().create(ApiService.class);
             Call<UserLogin> call = apiService.forgotPass(idValue, newPass);
