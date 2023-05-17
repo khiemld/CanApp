@@ -101,7 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="50dp"
             android:backgroundTint="@color/main_blue"
             android:drawableLeft="@drawable/email"
             android:drawablePadding="8dp"
@@ -119,10 +119,10 @@
             app:layout_constraintVertical_bias="0.08" />
 
         <TextView
-            android:id="@+id/tv_noti_pass_reset"
+            android:id="@+id/tv_noti_email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="50dp"
             android:text="Email không hợp lệ"
             android:textColor="@color/orange"
             android:textSize="12sp"
@@ -136,7 +136,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="50dp"
             android:backgroundTint="@color/main_blue"
             android:drawableLeft="@drawable/password"
             android:drawablePadding="8dp"
@@ -149,13 +149,13 @@
             android:textColorHint="#A5A4AD"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_noti_pass_reset" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_noti_email" />
 
         <TextView
             android:id="@+id/tv_noti_pass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="50dp"
             android:text="Mật khẩu không hợp lệ"
             android:textColor="@color/orange"
             android:textSize="12sp"
@@ -185,7 +185,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="50dp"
             android:text="Quên mật khẩu"
             android:textAlignment="textEnd"
             android:textColor="#FFAA4C"
@@ -240,6 +240,17 @@
             app:layout_constraintStart_toEndOf="@+id/tv_confirmquestion"
             app:layout_constraintTop_toBottomOf="@+id/btn_login2"
             app:layout_constraintVertical_bias="0" />
+
+        <ImageView
+            android:id="@+id/image_hide_login"
+            android:layout_width="28dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="50dp"
+            android:backgroundTint="@color/main_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_noti_email"
+            app:srcCompat="@drawable/eye_off_outline" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

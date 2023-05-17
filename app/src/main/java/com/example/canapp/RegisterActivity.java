@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.Html;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -36,11 +37,10 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    ImageView img_back;
+    ImageView img_back,img_hide;
     ApiService apiService;
     TextView tv_noti_login,tv_noti_name,tv_noti_pass,tv_noti_address,tv_noti_major,tv_noti_email,tv_noti_phone;
     EditText edt_username,edt_pass,edt_email,edt_address,edt_phone,edt_major;
-    User user;
     List<User> listUser;
     private View registerLayout;
     private float deltaY;
@@ -60,6 +60,22 @@ public class RegisterActivity extends AppCompatActivity {
         AnhXa();
         tv_noti_login.setText(Html.fromHtml(text));
         SetThongBao();
+
+        img_hide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(edt_pass.getTransformationMethod() == null){
+                    edt_pass.setTransformationMethod(new PasswordTransformationMethod());
+                    img_hide.setImageResource(R.drawable.eye_off_outline);
+
+                }else{
+                    edt_pass.setTransformationMethod(null);
+                    img_hide.setImageResource(R.drawable.eye_outline);
+
+                }
+            }
+        });
+
         tv_noti_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,6 +144,7 @@ public class RegisterActivity extends AppCompatActivity {
         tv_noti_address=findViewById(R.id.tv_noti_address);
         tv_noti_login=findViewById(R.id.tv_noti_login);
         img_back = findViewById(R.id.img_back);
+        img_hide=findViewById(R.id.image_hide);
     }
     public void SetThongBao(){
 

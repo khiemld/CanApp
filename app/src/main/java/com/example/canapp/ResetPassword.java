@@ -140,23 +140,10 @@ public class ResetPassword extends AppCompatActivity {
             tv_noti_email.setText("Email không được để trống");
         }
         else if(tv_noti_email.getVisibility()==View.INVISIBLE && !user_email.isEmpty()){
-            //Toast.makeText(ResetPassword.this, "Thành công", Toast.LENGTH_SHORT).show();
-            mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(ResetPassword.this, "Email reset password đã được gửi đến gmail của bạn, vui lòng truy cập và đặt lại mật khẩu", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(ResetPassword.this,ResetPassword2.class);
-                        intent.putExtra("id_reset", user_id);
-                        startActivity(intent);
-                    } else {
-                        // Gửi email reset password thất bại.
-                        Toast.makeText(ResetPassword.this,
-                                "Gửi email reset password thất bại", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-            //GuiEmail(email);
+            Intent intent = new Intent(ResetPassword.this,ResetPassword2.class);
+            intent.putExtra("id_reset", user_id);
+            intent.putExtra("email_reset",email);
+            startActivity(intent);
         }
         else {
             Toast.makeText(this, "Thông tin không hợp lệ, vui lòng kiểm tra lại", Toast.LENGTH_SHORT).show();
