@@ -123,14 +123,14 @@
                     android:inputType="textPersonName"
                     android:textColor="@color/main_blue"
                     android:textColorHint="#A5A4AD"
-                    app:layout_constraintBottom_toTopOf="@id/edt_email"
+                    app:layout_constraintBottom_toTopOf="@id/edt_old_password"
                     app:layout_constraintEnd_toEndOf="parent"
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/edt_email"
+                    android:id="@+id/edt_old_password"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
@@ -165,7 +165,7 @@
                     android:textColorHint="#A5A4AD"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edt_email" />
+                    app:layout_constraintTop_toBottomOf="@id/edt_old_password" />
 
                 <EditText
                     android:id="@+id/edt_birthday"
@@ -266,7 +266,7 @@
                     android:textSize="12sp"
                     android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edt_email" />
+                    app:layout_constraintTop_toBottomOf="@+id/edt_old_password" />
 
                 <TextView
                     android:id="@+id/tv_noti_pass"

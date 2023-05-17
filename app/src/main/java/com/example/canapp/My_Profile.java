@@ -86,18 +86,6 @@ public class My_Profile extends Fragment {
 
         topmenu.show();
     }
-    public void AnhXa(){
-        top_bar = view.findViewById(R.id.img_topmenu);
-        img_menu = view.findViewById(R.id.img_menu);
-        constrain_project = view.findViewById(R.id.constraint_project);
-        tv_address = view.findViewById(R.id.tv_address);
-        tv_birthday = view.findViewById(R.id.tv_birthday);
-        tv_email = view.findViewById(R.id.tv_email);
-        tv_major = view.findViewById(R.id.tv_major);
-        tv_phone = view.findViewById(R.id.tv_phone);
-        tv_username = view.findViewById(R.id.tv_username);
-        img_avatar=view.findViewById(R.id.img_update);
-    }
 
     public void popupMenu(){
         PopupMenu popup = new PopupMenu(getContext(), this.img_menu);
