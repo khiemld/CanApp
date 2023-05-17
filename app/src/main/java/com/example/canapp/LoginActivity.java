@@ -35,7 +35,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import android.widget.TextView;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -133,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
         edt_email = findViewById(R.id.edt_emaillogin);
         edt_password = findViewById(R.id.edt_passwordlogin);
         cb_remember = findViewById(R.id.cb_rememberlogin);
-        tv_noti_email=findViewById(R.id.tv_noti_email);
+        tv_noti_email=findViewById(R.id.tv_noti_pass_reset);
         tv_noti_pass=findViewById(R.id.tv_noti_pass);
         img_back=findViewById(R.id.img_loginback);
         btnLogin = findViewById(R.id.btn_login2);
@@ -181,7 +180,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 Toast.makeText(LoginActivity.this, "Email đã được xác thực, đăng nhập thành công",
                                                         Toast.LENGTH_SHORT).show();
                                                 finish();
-                                                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                                                Intent intent = new Intent(getApplicationContext(), BaseActivity.class);
                                                 startActivity(intent);
                                             } else {
                                                 Toast.makeText(LoginActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();

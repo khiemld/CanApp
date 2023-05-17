@@ -15,17 +15,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.canapp.api.ApiService;
+import com.example.canapp.api.RetrofitClient;
+import com.example.canapp.model.user.UserLogin;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.auth.User;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ResetPassword2 extends AppCompatActivity {
 
-    EditText edt_pass,edt_pass_again;
-    TextView tv_noti_pass,tv_noti_pass_again;
+    EditText edt_new_pass;
+    TextView tv_noti_pass;
     ImageView img_back;
     Button btn_reset;
+    ApiService apiService;
     protected FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +59,13 @@ public class ResetPassword2 extends AppCompatActivity {
         });
     }
     public void AnhXa(){
-        edt_pass=findViewById(R.id.edt_password);
-        edt_pass_again=findViewById(R.id.edt_password_again);
-        tv_noti_pass=findViewById(R.id.tv_noti_pass);
-        tv_noti_pass_again=findViewById(R.id.tv_noti_pass_again);
         img_back=findViewById(R.id.img_back);
-
-        btn_reset=findViewById(R.id.btn_reset);
+        btn_reset=findViewById(R.id.btn_forget_reset);
+        edt_new_pass=findViewById(R.id.edt_newpass_reset);
+        tv_noti_pass=findViewById(R.id.tv_noti_pass_reset);
     }
     public void SetThongBao(){
-        edt_pass.addTextChangedListener(new TextWatcher() {
+        edt_new_pass.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -83,7 +88,7 @@ public class ResetPassword2 extends AppCompatActivity {
 
             }
         });
-        edt_pass_again.addTextChangedListener(new TextWatcher() {
+       /* edt_pass_again.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -104,9 +109,34 @@ public class ResetPassword2 extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
 
             }
-        });
+        });*/
     }
-    public void Reset_Pass(){
+    public void Reset_Pass() {
+        String idValue = getIntent().getStringExtra("id_reset");
+        String newPass = edt_new_pass.getText().toString();
+        apiService = RetrofitClient.getRetrofit().create(ApiService.class);
+        //Toast.makeText(this, idValue, Toast.LENGTH_SHORT).show();
+       Call<UserLogin> call = apiService.forgotPass(idValue, newPass);
+        call.enqueue(new Callback<UserLogin>() {
+            @Override
+            public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
+                try{
+                    if(response.isSuccessful()){
+                        Toast.makeText(ResetPassword2.this, "Thành công", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(ResetPassword2.this, "Sai thông tin", Toast.LENGTH_SHORT).show();
+                    }
 
+                }catch (Exception e){
+                    Toast.makeText(ResetPassword2.this, "Lỗi mạng", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserLogin> call, Throwable t) {
+                Toast.makeText(ResetPassword2.this, "Thất bại", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

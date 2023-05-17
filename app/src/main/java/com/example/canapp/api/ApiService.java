@@ -55,4 +55,9 @@ public interface ApiService {
     Call<UserLogin> resetPass(@Path("id") String userId,
                               @Field("oldPass") String oldPass,
                               @Field("newPass") String newPass);
+
+    @FormUrlEncoded
+    @PUT("users/forgot/{id}")
+    Call<UserLogin> forgotPass(@Path("id") String userId,
+                              @Field("newPass") String newPass);
 }

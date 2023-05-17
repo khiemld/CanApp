@@ -115,13 +115,13 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister=findViewById(R.id.btn_register);
         registerLayout=findViewById(R.id.registerLayout);
         edt_username=findViewById(R.id.edt_username_register);
-        edt_email=findViewById(R.id.edt_email_reset);
+        edt_email=findViewById(R.id.edt_newpass_reset);
         edt_phone=findViewById(R.id.edt_phone);
         edt_major=findViewById(R.id.edt_major);
         edt_address=findViewById(R.id.edt_address);
         edt_pass=findViewById(R.id.edt_password_register);
         edt_birthday=findViewById(R.id.edt_birthday);
-        tv_noti_email=findViewById(R.id.tv_noti_email);
+        tv_noti_email=findViewById(R.id.tv_noti_pass_reset);
         tv_noti_phone=findViewById(R.id.tv_noti_phone_register);
         tv_noti_birthday=findViewById(R.id.tv_noti_birthday);
         tv_noti_pass=findViewById(R.id.tv_noti_pass);
