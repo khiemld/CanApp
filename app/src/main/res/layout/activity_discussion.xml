@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DiscussionActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contraint_topDiscussion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        android:background="@drawable/background_top_discussion">
+
+        <ImageView
+            android:id="@+id/img_backDiscussion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back_white"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginBottom="23dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintHorizontal_bias="0"/>
+
+        <TextView
+            android:id="@+id/tv_titleDiscussion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Diễn đàn thảo luận"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_backDiscussion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="0"/>
+
+        <TextView
+            android:id="@+id/tv_nameprojectDiscussion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xây dựng website bán tình yêu"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_titleDiscussion"
+            app:layout_constraintStart_toEndOf="@+id/img_backDiscussion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintHorizontal_bias="0"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_titlepersonalDiscussion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cá nhân"
+        android:textColor="@color/third_blue"
+        android:textSize="14sp"
+        android:layout_marginTop="66dp"
+        android:layout_marginStart="28dp"
+        app:layout_constraintTop_toBottomOf="@+id/contraint_topDiscussion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/third_blue"
+        app:layout_constraintTop_toBottomOf="@+id/contraint_topDiscussion"
+        app:layout_constraintStart_toEndOf="@+id/tv_titlepersonalDiscussion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_personalDiscussion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="63dp"
+        android:layout_marginStart="27dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titlepersonalDiscussion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintHorizontal_bias="0">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/tv_titlememberDiscussion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thành viên"
+        android:textColor="@color/third_blue"
+        android:textSize="14sp"
+        android:layout_marginTop="105dp"
+        android:layout_marginStart="28dp"
+        app:layout_constraintTop_toBottomOf="@+id/rcv_personalDiscussion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="118dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/third_blue"
+        app:layout_constraintTop_toBottomOf="@+id/rcv_personalDiscussion"
+        app:layout_constraintStart_toEndOf="@+id/tv_titlememberDiscussion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_memberDiscussion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="63dp"
+        android:layout_marginStart="27dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titlememberDiscussion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintHorizontal_bias="0">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_floatingaddDiscussion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/addnew"
+        android:backgroundTint="@color/third_blue"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.9">
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
