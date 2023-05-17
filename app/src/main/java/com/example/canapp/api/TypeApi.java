@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface TypeApi {
@@ -17,5 +18,13 @@ public interface TypeApi {
             @Path("uid") String managerID,
             @Path("planID") String planID,
             @Field("name") String name
+    );
+
+    @FormUrlEncoded
+    @PUT("plan/move")
+    Call<AddTypeResponse> moveColumn(
+            @Field("idCol") String columnID,
+            @Field("idPlan") String projectID,
+            @Field("indexMove") int toColumn
     );
 }

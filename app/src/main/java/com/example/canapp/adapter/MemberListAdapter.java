@@ -54,14 +54,14 @@ public class MemberListAdapter extends RecyclerView.Adapter<MemberListAdapter.My
                 ((TextView) holder.itemView.findViewById(R.id.tv_memberList_replace)).setText(
                         String.valueOf(iUser.getName().toUpperCase().charAt(0)));
             }
+            if (mProject.getManager().get(0).get_id().equals(iUser.get_id())) {
+                holder.memberRole.setText("Trưởng nhóm");
+            } else {
+                holder.memberRole.setText("Thành viên");
+            }
+            holder.memberEmail.setText(iUser.getEmail());
+            holder.memberName.setText(iUser.getName());
         }
-        if (mProject.getManager().get(0).get_id().equals(iUser.get_id())) {
-            holder.memberRole.setText("Trưởng nhóm");
-        } else {
-            holder.memberRole.setText("Thành viên");
-        }
-        holder.memberEmail.setText(iUser.getEmail());
-        holder.memberName.setText(iUser.getName());
     }
 
     @Override

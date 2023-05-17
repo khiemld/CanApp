@@ -26,6 +26,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.canapp.adapter.AvtarAdapter;
+import com.example.canapp.api.PlanApi;
+import com.example.canapp.api.RetrofitClient;
+import com.example.canapp.model.project.ProjectDetailResponse;
 import com.example.canapp.model.project.ProjectInProjectDetail;
 import com.example.canapp.model.task.Task;
 import com.example.canapp.model.type.Type;
@@ -35,12 +38,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ProjectInfo#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProjectInfo extends Fragment {
+public class ProjectInfo extends Fragment implements AddMemBer.ISendProjFromAddMem {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -83,7 +90,6 @@ public class ProjectInfo extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-
     }
 
     @Override
@@ -91,7 +97,12 @@ public class ProjectInfo extends Fragment {
         super.onStart();
         handleParentView();
         loadAvatar();
-        handleBackButton();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                handleBackButton();
+            }
+        }, 300);
         handleAddMemberClick();
         handleMemberListClick();
     }
@@ -161,6 +172,7 @@ public class ProjectInfo extends Fragment {
                             @Override
                             public void run() {
                                 getParentFragmentManager().popBackStack();
+                                getChildFragmentManager().popBackStack();
                             }
                         }, 300);
                     }
@@ -168,13 +180,18 @@ public class ProjectInfo extends Fragment {
     }
 
     void handleAddMemberClick() {
+        if (!getUserID().equals(mProject.getManager().get(0).get_id())) {
+            ((TextView) mView.findViewById(R.id.tv_addMember_addButton)).setVisibility(View.GONE);
+            return;
+        }
+
         ((TextView) mView.findViewById(R.id.tv_addMember_addButton)).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         FragmentTransaction fragmentTransaction =
                                 getActivity().getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container,
+                        fragmentTransaction.add(R.id.fragment_container2,
                                 AddMemBer.newInstance(mProject));
                         fragmentTransaction.addToBackStack(AddMemBer.TAG);
                         fragmentTransaction.commit();
@@ -200,7 +217,7 @@ public class ProjectInfo extends Fragment {
                     public void onClick(View view) {
                         FragmentTransaction fragmentTransaction =
                                 getActivity().getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container,
+                        fragmentTransaction.add(R.id.fragment_container,
                                 MemberList.newInstance(mProject));
                         fragmentTransaction.addToBackStack(MemberList.TAG);
                         fragmentTransaction.commit();
@@ -208,4 +225,23 @@ public class ProjectInfo extends Fragment {
                 });
     }
 
+    @Override
+    public void sendProject(ProjectInProjectDetail project) {
+
+    }
+
+    public void receiveProject(ProjectInProjectDetail project) {
+        mProject = project;
+        mLists = mProject.getColumns();
+        mManager = mProject.getManager().get(0);
+        mMembers = mProject.getMembers();
+        mUsers = new ArrayList<>();
+        mUsers.addAll(mMembers);
+        mUsers.add(mManager);
+        loadAvatar();
+    }
+
+    String getUserID() {
+        return "64511d75da6a2ab371790258a";
+    }
 }

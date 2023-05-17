@@ -29,4 +29,25 @@ public interface TaskApi {
             @Field("toId") String toColumnID,
             @Field("idTask") String taskID
     );
+
+    @FormUrlEncoded
+    @PUT("task/members/{uid}/{planid}/{taskid}")
+    Call<AddTaskResponse> addMemberToTask(
+            @Path("uid") String userID,
+            @Path("planid") String planID,
+            @Path("taskid") String taskID,
+            @Field("email") String userEmail
+    );
+
+    @FormUrlEncoded
+    @PUT("task/update/{uid}/{planid}/{taskid}")
+    Call<AddTaskResponse> updateTask(
+            @Path("uid") String userID,
+            @Path("planid") String planID,
+            @Path("taskid") String taskID,
+            @Field("description") String description,
+            @Field("beginTime") String fromDate,
+            @Field("endTime") String toDate
+    );
+
 }

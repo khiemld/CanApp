@@ -36,6 +36,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.canapp.adapter.ItemAdapter;
 import com.example.canapp.api.PlanApi;
 import com.example.canapp.api.RetrofitClient;
@@ -49,6 +50,7 @@ import com.example.canapp.model.task.Task;
 import com.example.canapp.model.type.AddTypeResponse;
 import com.example.canapp.model.type.Type;
 import com.example.canapp.model.user.User;
+import com.example.canapp.ulti.SharedPrefManager;
 import com.woxthebox.draglistview.BoardView;
 import com.woxthebox.draglistview.ColumnProperties;
 import com.woxthebox.draglistview.DragItem;
@@ -63,7 +65,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailProjectActivity extends AppCompatActivity {
+public class DetailProjectActivity extends AppCompatActivity
+        implements AddMemBer.ISendProjFromAddMem, AddMemberToTaskFragment.IAddMemberToTaskListener,
+        DetailTaskFragment.IOnTaskUpdateListener {
 
     static InputMethodManager imm;
     BoardView mBoardView;
@@ -94,8 +98,9 @@ public class DetailProjectActivity extends AppCompatActivity {
     ProjectInProjectDetail mProject;
 
     User mManager;
-
-    final String projectID = "645f230b52ff4efc156f94d7";
+    User user;
+    final String projectID = "64653c0e6da61827dc5bdfb9";
+    String userID = "64511d75da6a2ab371790258";
 
     PlanApi planApi;
 
@@ -205,11 +210,17 @@ public class DetailProjectActivity extends AppCompatActivity {
     // Thêm cái cột giả (cột có nút tạo cột mới)
     @SuppressLint("ResourceAsColor")
     private void addFakeColumn() {
+        if (!getUserID().equals(mProject.getManager().get(0).get_id())) {
+            return;
+        }
 
         final ArrayList<Pair<Long, Task>> mItemArray = new ArrayList<>();
 
         final ItemAdapter listAdapter =
                 new ItemAdapter(mItemArray, R.layout.task, R.id.task_item, true);
+
+        listAdapter.setmContext(DetailProjectActivity.this);
+        listAdapter.setmProject(mProject);
 
         final View header = View.inflate(getApplicationContext(), R.layout.column_fake, null);
 
@@ -323,6 +334,9 @@ public class DetailProjectActivity extends AppCompatActivity {
         final ItemAdapter listAdapter =
                 new ItemAdapter(mItemArray, R.layout.task, R.id.task_item, true);
 
+        listAdapter.setmContext(DetailProjectActivity.this);
+        listAdapter.setmProject(mProject);
+
         final View header = View.inflate(getApplicationContext(), R.layout.column_header, null);
         ((TextView) header.findViewById(R.id.text)).setText(type.getName());
 
@@ -380,6 +394,58 @@ public class DetailProjectActivity extends AppCompatActivity {
 
         // Tăng biến đếm số cột
         mColumns++;
+    }
+
+    // Xử lý khi nhận được project từ fragment AddMember
+    @Override
+    public void sendProject(ProjectInProjectDetail project) {
+        mProject = project;
+        for (int i = 0; i < detailTasks.size(); i++) {
+
+            ((ItemAdapter) mBoardView.getAdapter(i)).setmProject(mProject);
+
+        }
+        ProjectInfo projectInfo =
+                (ProjectInfo) getSupportFragmentManager().findFragmentById(
+                        R.id.fragment_container);
+        projectInfo.receiveProject(project);
+
+    }
+
+    @Override
+    public void addMemberToTask(User user, Task task) {
+        DetailTaskFragment fragment =
+                (DetailTaskFragment) getSupportFragmentManager().findFragmentById(
+                        R.id.fragment_container);
+        fragment.addMemberToTask(user);
+
+        int focusedColumn = mBoardView.getFocusedColumn();
+/*
+        List<Task> alterList = ((ItemAdapter) mBoardView.getAdapter(focusedColumn)).getTaskLists();
+        for (Task iTask : alterList
+        ) {
+            if (task.get_id().equals(iTask.get_id())) {
+                iTask.getMembers().add(user);
+            }
+        }*/
+        /*((ItemAdapter) mBoardView.getAdapter(focusedColumn)).setTaskLists(alterList);*/
+        ((ItemAdapter) mBoardView.getAdapter(focusedColumn)).notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void onTaskUpdate(Task task, ProjectInProjectDetail project) {
+
+        mProject = project;
+        int focusedColumn = mBoardView.getFocusedColumn();
+        DetailTaskFragment fragment =
+                (DetailTaskFragment) getSupportFragmentManager().findFragmentById(
+                        R.id.fragment_container);
+        fragment.setmProject(mProject);
+        fragment.setmTask(task);
+
+        /*reloadData();*/
+
     }
 
     private static class MyDragItem extends DragItem {
@@ -478,6 +544,7 @@ public class DetailProjectActivity extends AppCompatActivity {
         types.add(new Type(3, "done", 2));
         *//*mColumns = types.size();*/
 
+        types.clear();
         types = mProject.getColumns();
     }
 
@@ -490,6 +557,8 @@ public class DetailProjectActivity extends AppCompatActivity {
         tasks.add(new Task(3, 6, 0, "Task task task 6"));
         tasks.add(new Task(3, 7, 1, "Task task task 7"));
         tasks.add(new Task(3, 8, 2, "Task task task 8"));*/
+
+        tasks.clear();
 
         for (Type iType : types) {
             tasks.addAll(iType.getTasks());
@@ -602,6 +671,12 @@ public class DetailProjectActivity extends AppCompatActivity {
                             Toast.makeText(DetailProjectActivity.this, "Di chuyển thất bại",
                                             Toast.LENGTH_SHORT)
                                     .show();
+                            try {
+                                Log.e(TAG, "Di chuyển item thất bại " +
+                                        response.errorBody().string().toString());
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                     }
 
@@ -616,25 +691,13 @@ public class DetailProjectActivity extends AppCompatActivity {
                 sortTaskList();
                 createDataLists();
                 for (int i = 0; i < detailTasks.size(); i++) {
+
+                    ((ItemAdapter) mBoardView.getAdapter(i)).setmProject(mProject);
+                    ((ItemAdapter) mBoardView.getAdapter(i)).setTaskLists(detailTasks.get(i));
                     mBoardView.getAdapter(i).setItemList(dataLists.get(i));
                     mBoardView.getAdapter(i).notifyDataSetChanged();
-                }
-/*                for (Type iType :
-                        types) {
-                    Log.e(TAG, "Type: name " + iType.getName() + ", index " + iType.getIndex() +
-                            ", id " + iType.get_id());
-                }
 
-                for (List<Task> iList : detailTasks) {
-                    String taskName = "";
-                    for (Task iTask :
-                            iList) {
-                        taskName = taskName + iTask.getName() + ", id " + iTask.get_id();
-                    }
-                    Log.e(TAG, "Task: " + taskName);
                 }
-                Log.e(TAG, String.valueOf("Di chuyển từ cột " + fromColumn + ", hàng " + fromRow +
-                        " tới cột " + toColumn + ", hàng " + toRow));*/
             }
 
             @Override
@@ -646,12 +709,6 @@ public class DetailProjectActivity extends AppCompatActivity {
 
             @Override
             public void onItemChangedColumn(int oldColumn, int newColumn) {
-               /* TextView itemCount1 =
-                        mBoardView.getHeaderView(oldColumn).findViewById(R.id.item_count);
-                itemCount1.setText(String.valueOf(mBoardView.getAdapter(oldColumn).getItemCount()));
-                TextView itemCount2 =
-                        mBoardView.getHeaderView(newColumn).findViewById(R.id.item_count);
-                itemCount2.setText(String.valueOf(mBoardView.getAdapter(newColumn).getItemCount()));*/
             }
 
             @Override
@@ -688,24 +745,41 @@ public class DetailProjectActivity extends AppCompatActivity {
                         type.setIndex(type.getIndex() - 1);
                     }
                 }
+                TypeApi typeApi = RetrofitClient.getRetrofit().create(TypeApi.class);
+                Call<AddTypeResponse> call =
+                        typeApi.moveColumn(types.get(fromPosition).get_id(), mProject.get_id(),
+                                toPosition);
+                call.enqueue(new Callback<AddTypeResponse>() {
+                    @Override
+                    public void onResponse(Call<AddTypeResponse> call,
+                                           Response<AddTypeResponse> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(DetailProjectActivity.this, "Di chuyển thành công",
+                                            Toast.LENGTH_SHORT)
+                                    .show();
+                        } else {
+                            Toast.makeText(DetailProjectActivity.this, "Di chuyển thất bại",
+                                            Toast.LENGTH_SHORT)
+                                    .show();
+                            try {
+                                Log.e(TAG, "Di chuyển cột thất bại " +
+                                        response.errorBody().string().toString());
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AddTypeResponse> call, Throwable t) {
+
+                    }
+                });
+
                 types.get(fromPosition).setIndex(toPosition);
                 sortType();
                 for (int i = 0; i < mColumns - 1; i++) {
                     setAlterFooter(i);
-                }
-
-                for (Type iType :
-                        types) {
-                    Log.e(TAG, "Type: name " + iType.getName() + ", index " + iType.getIndex() +
-                            ", id " + iType.get_id());
-                }
-                for (List<Task> iList : detailTasks) {
-                    String taskName = "";
-                    for (Task iTask :
-                            iList) {
-                        taskName = taskName + iTask.getName() + ", ";
-                    }
-                    Log.e(TAG, "Task: " + taskName);
                 }
             }
         });
@@ -713,30 +787,44 @@ public class DetailProjectActivity extends AppCompatActivity {
             // Xử lý không cho move cột cuối cùng - cột ảo
             @Override
             public boolean canDragItemAtPosition(int column, int dragPosition) {
+
                 // Add logic here to prevent an item to be dragged
-                if (column == mColumns - 1) {
-                    return false;
+
+                if (getUserID().equals(mProject.getManager().get(0).get_id())) {
+                    if (column == mColumns - 1) {
+                        return false;
+                    }
+                    return true;
+                } else {
+                    return true;
                 }
-                return true;
             }
 
             @Override
             public boolean canDropItemAtPosition(int oldColumn, int oldRow, int newColumn,
                                                  int newRow) {
                 // Add logic here to prevent an item to be dropped
-                if (newColumn == mColumns - 1) {
-                    return false;
+                if (getUserID().equals(mProject.getManager().get(0).get_id())) {
+                    if (newColumn == mColumns - 1) {
+                        return false;
+                    }
+                    return true;
+                } else {
+                    return true;
                 }
-                return true;
             }
 
             @Override
             public boolean canDragColumnAtPosition(int index) {
                 // Add logic here to prevent a column to be dragged
-                if (index == mColumns - 1) {
+                if (getUserID().equals(mProject.getManager().get(0).get_id())) {
+                    if (index == mColumns - 1) {
+                        return false;
+                    }
+                    return true;
+                } else {
                     return false;
                 }
-                return true;
             }
 
             @Override
@@ -753,6 +841,9 @@ public class DetailProjectActivity extends AppCompatActivity {
 
     void handleFakeColumn() {
 
+        if (!getUserID().equals(mProject.getManager().get(0).get_id())) {
+            return;
+        }
         View header = mBoardView.getHeaderView(mColumns - 1);
 
         final View alterHeader =
@@ -865,7 +956,7 @@ public class DetailProjectActivity extends AppCompatActivity {
                                 // Thêm cột mới nhập
                                 addColumn(type);
 
-                                // Thêm fake column cữ
+                                // Thêm fake column
                                 addFakeColumn();
 
                                 isLastColumnOrigin = true;
@@ -886,6 +977,7 @@ public class DetailProjectActivity extends AppCompatActivity {
 
                                 // Thiết lập fake column
                                 handleFakeColumn();
+
 
                                 dialog.dismiss();
                             } else {
@@ -1015,6 +1107,10 @@ public class DetailProjectActivity extends AppCompatActivity {
                                 mBoardView.getAdapter(currentType.getIndex())
                                         .setItemList(dataLists.get(finalIndex));
 
+                                ((ItemAdapter) mBoardView.getAdapter(
+                                        currentType.getIndex())).setTaskLists(
+                                        detailTasks.get(currentType.getIndex()));
+
                                 /*mBoardView.getAdapter(currentType.getIndex()).notifyDataSetChanged();*/
 
                                 for (int i = 0; i < detailTasks.size(); i++) {
@@ -1108,9 +1204,16 @@ public class DetailProjectActivity extends AppCompatActivity {
     }
 
     void handleFooter() {
-        for (int index = 0; index < mColumns - 1; index++) {
-            setAlterFooter(index);
+        if (getUserID().equals(mProject.getManager().get(0).get_id())) {
+            for (int index = 0; index < mColumns - 1; index++) {
+                setAlterFooter(index);
+            }
+        } else {
+            for (int index = 0; index < mColumns; index++) {
+                setAlterFooter(index);
+            }
         }
+
     }
 
     Dialog createDialogFrom(int layout) {
@@ -1129,6 +1232,32 @@ public class DetailProjectActivity extends AppCompatActivity {
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         return dialog;
+    }
+
+    void getUserFromSharedRef() {
+        user = new User();
+        if (SharedPrefManager.getInstance(getApplicationContext()).getUser() != null) {
+            user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+        }
+    }
+
+    String getUserID() {
+        return "64640b2c7387efac4b4ab391";
+    }
+
+    void reloadData() {
+        initialTypes();
+        initialTask();
+        sortType();
+        createDataLists();
+        for (int i = 0; i < detailTasks.size(); i++) {
+
+            ((ItemAdapter) mBoardView.getAdapter(i)).setmProject(mProject);
+            ((ItemAdapter) mBoardView.getAdapter(i)).setTaskLists(detailTasks.get(i));
+            ((ItemAdapter) mBoardView.getAdapter(i)).notifyDataSetChanged();
+            /*mBoardView.getAdapter(i).setItemList(dataLists.get(i));
+            mBoardView.getAdapter(i).notifyDataSetChanged();*/
+        }
     }
 }
 

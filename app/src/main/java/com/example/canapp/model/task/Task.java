@@ -30,6 +30,10 @@ public class Task implements Serializable {
 
     String _id;
 
+    String beginTime;
+    String description;
+    String endTime;
+
     public Task() {
     }
 
@@ -84,6 +88,30 @@ public class Task implements Serializable {
         this.members = members;
         this.__v = __v;
         this._id = _id;
+    }
+
+    public String getBeginTime() {
+        return beginTime;
+    }
+
+    public void setBeginTime(String beginTime) {
+        this.beginTime = beginTime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public String getColumn() {

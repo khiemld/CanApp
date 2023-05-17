@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_taskDetail_mainContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".DetailTaskFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_taskDetail_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="150sp"
+                android:background="@color/third_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imv_taskDetail_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12sp"
+                android:src="@drawable/vector_register"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_taskDetail_taskName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16sp"
+                android:paddingTop="12sp"
+                android:paddingBottom="4sp"
+                android:text="Tên công việc"
+                android:textColor="@color/main_blue"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/layout_taskDetail_thumbnail" />
+
+            <LinearLayout
+                android:id="@+id/layout_taskDetail_nameGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16sp"
+                android:paddingBottom="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_taskDetail_taskName">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trong danh sách: "
+                    android:textColor="@color/hint"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_taskDetail_columnName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tên cột"
+                    android:textColor="@color/hint"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:divider="?android:dividerVertical"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:showDividers="middle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_taskDetail_nameGroup" />
+
+            <TextView
+                android:id="@+id/tv_taskDetail_descLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="12sp"
+                android:drawableStart="@drawable/outline_info_24"
+                android:drawablePadding="6sp"
+                android:paddingStart="16sp"
+                android:paddingTop="12sp"
+                android:paddingBottom="8sp"
+                android:text="Mô tả"
+                android:textColor="@color/second_blue"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_taskDetail_nameGroup" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_taskDetail_descZone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginEnd="20sp"
+                android:elevation="0sp"
+                app:cardBackgroundColor="@color/fade_hint"
+                app:cardCornerRadius="7sp"
+                app:cardElevation="0sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_taskDetail_descLabel">
+
+                <EditText
+                    android:id="@+id/edt_taskDetail_descText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/fade_hint"
+                    android:paddingStart="16sp"
+                    android:paddingTop="12sp"
+                    android:paddingEnd="16sp"
+                    android:paddingBottom="12sp"
+                    android:text="Mô tả của cái công việc sẽ nằm ở đây nè"
+                    android:textColor="@color/black" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_taskDetail_timeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="16sp"
+                android:drawableStart="@drawable/outline_access_time_24"
+                android:drawablePadding="6sp"
+                android:paddingStart="12sp"
+                android:paddingTop="12sp"
+                android:paddingBottom="4sp"
+                android:text="Thời gian thực hiện"
+                android:textColor="@color/second_blue"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_taskDetail_descZone" />
+
+            <LinearLayout
+                android:id="@+id/layout_taskDetail_timeGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4sp"
+                android:paddingStart="20sp"
+                android:paddingEnd="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_taskDetail_timeLabel">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Từ"
+                    android:textColor="@color/hint"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/edt_taskDetail_fromDate"
+                    android:layout_width="118sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12sp"
+                    android:layout_marginTop="4sp"
+                    android:backgroundTint="@color/main_blue"
+                    android:cursorVisible="false"
+                    android:drawableEnd="@drawable/birthday2"
+                    android:drawablePadding="8dp"
+                    android:focusable="false"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:textColor="@color/second_blue"
+                    android:textColorHint="#A5A4AD"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16sp"
+                    android:text="đến"
+                    android:textColor="@color/hint"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/edt_taskDetail_toDate"
+                    android:layout_width="118sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12sp"
+                    android:layout_marginTop="4sp"
+                    android:backgroundTint="@color/main_blue"
+                    android:drawableEnd="@drawable/birthday2"
+                    android:drawablePadding="8dp"
+                    android:enabled="true"
+                    android:focusable="false"
+                    android:inputType="datetime"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:textColor="@color/second_blue"
+                    android:textColorHint="#A5A4AD"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_taskDetail_memberLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8sp"
+                android:layout_marginTop="16sp"
+                android:drawableStart="@drawable/person_blue"
+                android:drawablePadding="6sp"
+                android:paddingStart="12sp"
+                android:paddingTop="12sp"
+                android:paddingBottom="4sp"
+                android:text="Thành viên"
+                android:textColor="@color/second_blue"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_taskDetail_timeGroup" />
+
+            <TextView
+                android:id="@+id/tv_taskDetail_memberEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="18sp"
+                android:text="Chỉnh sửa"
+                android:textColor="@color/orange"
+                android:textSize="14sp"
+                app:layout_constraintTop_toTopOf="@id/tv_taskDetail_memberLabel"
+                app:layout_constraintBottom_toBottomOf="@id/tv_taskDetail_memberLabel"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_taskDetail_members"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="4sp"
+                android:layout_marginEnd="20sp"
+                android:maxWidth="150sp"
+                app:layout_constraintStart_toStartOf="@id/tv_taskDetail_memberLabel"
+                app:layout_constraintTop_toBottomOf="@id/tv_taskDetail_memberLabel" />
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18sp"
+                android:layout_marginTop="20sp"
+                android:layout_marginEnd="18sp"
+                app:cardCornerRadius="5sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rcv_taskDetail_members">
+
+                <TextView
+                    android:id="@+id/tv_taskDetail_saveChange"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/orange"
+                    android:gravity="center"
+                    android:padding="12sp"
+                    android:text="Lưu"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+
+</ScrollView>

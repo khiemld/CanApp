@@ -1,5 +1,6 @@
 package com.example.canapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -7,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,6 +49,7 @@ public class AddMemBer extends Fragment {
 
     private View mView;
     private RecyclerView mSearchResult;
+    SearchItemAdapter adapter;
 
     EditText inputEditText;
     public static final String TAG = AddMemBer.class.getName();
@@ -62,6 +65,12 @@ public class AddMemBer extends Fragment {
     List<User> allUserList;
 
     ProjectInProjectDetail mProject;
+
+    private ISendProjFromAddMem mISendProjFromAddMem;
+
+    public interface ISendProjFromAddMem {
+        void sendProject(ProjectInProjectDetail project);
+    }
 
     public AddMemBer() {
         // Required empty public constructor
@@ -87,6 +96,8 @@ public class AddMemBer extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+
+        mISendProjFromAddMem = (ISendProjFromAddMem) getActivity();
         allUserList = new ArrayList<>();
         UserApi userApi = RetrofitClient.getRetrofit().create(UserApi.class);
         Call<List<User>> call = userApi.getAll();
@@ -132,6 +143,8 @@ public class AddMemBer extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mProject = (ProjectInProjectDetail) getArguments().getSerializable(ARG_PARAM1);
+            adapter = new SearchItemAdapter(getContext());
+            adapter.setmProject(mProject);
         }
 
     }
@@ -161,17 +174,29 @@ public class AddMemBer extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                        mProject = adapter.getmProject();
+                        mISendProjFromAddMem.sendProject(mProject);
+
                         View container = mView.findViewById(R.id.layout_addMember_mainContaniner);
                         Animation animation =
                                 AnimationUtils.loadAnimation(getContext(), R.anim.slide_down);
                         animation.setInterpolator(new DecelerateInterpolator());
                         animation.setDuration(300);
                         container.startAnimation(animation);
+
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
                                 getParentFragmentManager().popBackStack();
                                 getChildFragmentManager().popBackStack();
+                                /*FragmentTransaction fragmentTransaction =
+                                        getActivity().getSupportFragmentManager()
+                                                .beginTransaction();
+                                fragmentTransaction.replace(R.id.fragment_container,
+                                        ProjectInfo.newInstance(mProject));
+                                fragmentTransaction.addToBackStack(ProjectInfo.TAG);
+                                fragmentTransaction.commit();*/
                             }
                         }, 300);
                     }
@@ -194,8 +219,6 @@ public class AddMemBer extends Fragment {
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         mSearchResult.setLayoutManager(layoutManager);
-        SearchItemAdapter adapter = new SearchItemAdapter(getContext());
-
 
         inputEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -225,4 +248,6 @@ public class AddMemBer extends Fragment {
             }
         });
     }
+
+
 }

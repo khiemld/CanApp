@@ -19,6 +19,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    app:cardBackgroundColor="@color/white"
     app:cardElevation="0dp"
     card_view:cardPreventCornerOverlap="true"
     card_view:cardUseCompatPadding="true">
@@ -26,6 +27,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="14dp"
@@ -38,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/white"
             android:gravity="center_horizontal"
             android:text="+ Thêm thẻ mới"
             android:textColor="@color/hint"

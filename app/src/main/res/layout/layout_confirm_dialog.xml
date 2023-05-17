@@ -32,11 +32,12 @@
 
         <TextView
             android:id="@+id/tv_confim_describe"
-            android:layout_width="700px"
-            android:textAlignment="center"
+            android:layout_width="250sp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24sp"
+            android:maxWidth="250sp"
             android:text="Bạn đồng ý thêm thành viên này chứ?"
+            android:textAlignment="center"
             android:textColor="@color/third_blue"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"

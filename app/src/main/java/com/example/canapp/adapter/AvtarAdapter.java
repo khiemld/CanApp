@@ -12,17 +12,50 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.canapp.R;
+import com.example.canapp.api.RetrofitClient;
+import com.example.canapp.api.UserApi;
 import com.example.canapp.model.user.User;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AvtarAdapter extends RecyclerView.Adapter<AvtarAdapter.MyViewHolder> {
     List<User> mUserList;
     Context mContext;
 
+    List<User> allUser;
+
     public AvtarAdapter(List<User> mUserList, Context mContext) {
         this.mUserList = mUserList;
         this.mContext = mContext;
+    }
+
+    public List<User> getmUserList() {
+        return mUserList;
+    }
+
+    public void setmUserList(List<User> mUserList) {
+        this.mUserList = mUserList;
+    }
+
+    public Context getmContext() {
+        return mContext;
+    }
+
+    public void setmContext(Context mContext) {
+        this.mContext = mContext;
+    }
+
+    public List<User> getAllUser() {
+        return allUser;
+    }
+
+    public void setAllUser(List<User> allUser) {
+        this.allUser = allUser;
     }
 
     @NonNull
@@ -35,17 +68,31 @@ public class AvtarAdapter extends RecyclerView.Adapter<AvtarAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull AvtarAdapter.MyViewHolder holder, int position) {
-        if (!(mUserList.get(position) == null)) {
+        if (mUserList.get(position) != null) {
             User iUser = mUserList.get(position);
-            if (!iUser.getAvatar().equals("null")) {
+            User alterUser = iUser;
+
+            /**
+             * Bởi vì adapter này sẽ sủ dụng cho 2 list input khác nhau
+             * - Nếu list user đầy đủ thì chỉ cần đổ data vào
+             * - Nếu list user chỉ chứa id thì phải lấy user khác thay thế để lấy avatar
+             * */
+            if (iUser.getAvatar() == null) {
+                for (User user : allUser) {
+                    if (user.get_id().equals(iUser.get_id())) {
+                        alterUser = user;
+                    }
+                }
+            }
+            if (!alterUser.getAvatar().equals("null")) {
                 ((TextView) holder.itemView.findViewById(
                         R.id.tv_avatar_replace)).setVisibility(View.GONE);
-                Glide.with(mContext).load(iUser.getAvatar())
+                Glide.with(mContext).load(alterUser.getAvatar())
                         .into(holder.imageView);
             } else {
                 ((TextView) holder.itemView.findViewById(
                         R.id.tv_avatar_replace)).setText(
-                        String.valueOf(iUser.getName().toUpperCase().charAt(0)));
+                        String.valueOf(alterUser.getName().toUpperCase().charAt(0)));
             }
         }
     }

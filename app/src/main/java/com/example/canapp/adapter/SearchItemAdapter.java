@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +21,12 @@ import com.bumptech.glide.Glide;
 import com.example.canapp.R;
 import com.example.canapp.api.PlanApi;
 import com.example.canapp.api.RetrofitClient;
+import com.example.canapp.model.project.ProjectDetailResponse;
 import com.example.canapp.model.project.ProjectFull;
 import com.example.canapp.model.project.ProjectInProjectDetail;
 import com.example.canapp.model.user.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +41,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.My
     List<User> mUsers;
 
     ProjectInProjectDetail mProject;
+    private Call<ProjectDetailResponse> planDetail;
 
     public SearchItemAdapter(Context mContext, List<User> mDatas) {
         this.mContext = mContext;
@@ -61,7 +65,10 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.My
 
     public void setmProject(ProjectInProjectDetail mProject) {
         this.mProject = mProject;
+    }
 
+    public ProjectInProjectDetail getmProject() {
+        return mProject;
     }
 
     @NonNull
@@ -141,9 +148,12 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.My
                                                            Response<ProjectFull> response) {
                                         progressDialog.dismiss();
                                         if (response.isSuccessful()) {
+
+                                            holder.addButton.setVisibility(View.GONE);
                                             Toast.makeText(mContext, "Thêm thành công!",
                                                             Toast.LENGTH_SHORT)
                                                     .show();
+                                            resetProject(mProject.get_id());
                                         } else {
                                             Toast.makeText(mContext, "Thêm thất bại!",
                                                             Toast.LENGTH_SHORT)
@@ -172,6 +182,32 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.My
                 }
             });
         }
+    }
+
+    private void resetProject(String projectID) {
+        PlanApi planApi = RetrofitClient.getRetrofit().create(PlanApi.class);
+        planDetail = planApi.getPlanDetail(projectID);
+        planDetail.enqueue(new Callback<ProjectDetailResponse>() {
+            @Override
+            public void onResponse(Call<ProjectDetailResponse> call,
+                                   Response<ProjectDetailResponse> response) {
+                if (response.isSuccessful()) {
+                    mProject = response.body().getPlan();
+                } else {
+                    try {
+                        Log.e("Search Item Adapter",
+                                "onResponse is not success: " + response.errorBody().string());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProjectDetailResponse> call, Throwable t) {
+                Log.e("Search Item Adapter", "onResponse is failure: " + t.getMessage());
+            }
+        });
     }
 
     boolean isUser(User user) {
