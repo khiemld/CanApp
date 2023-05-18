@@ -1,6 +1,7 @@
 package com.example.canapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -66,6 +67,8 @@ public class ProjectInfo extends Fragment implements AddMemBer.ISendProjFromAddM
     List<User> mUsers;
     private String mParam2;
 
+    ConstraintLayout seeDetail;
+
     public ProjectInfo() {
         // Required empty public constructor
     }
@@ -106,6 +109,7 @@ public class ProjectInfo extends Fragment implements AddMemBer.ISendProjFromAddM
         }, 300);
         handleAddMemberClick();
         handleMemberListClick();
+        handleSeeDetail();
     }
 
     @Override
@@ -222,6 +226,22 @@ public class ProjectInfo extends Fragment implements AddMemBer.ISendProjFromAddM
                                 MemberList.newInstance(mProject));
                         fragmentTransaction.addToBackStack(MemberList.TAG);
                         fragmentTransaction.commit();
+                    }
+                });
+    }
+
+    void handleSeeDetail() {
+        ((ConstraintLayout) mView.findViewById(R.id.layout_projectInfo_seeDetail)).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent createProjectIntent = new Intent(getContext(),
+                                CreateAndEditProject.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putBoolean("isCreate", false);
+                        bundle.putSerializable("project", mProject);
+                        createProjectIntent.putExtras(bundle);
+                        startActivity(createProjectIntent);
                     }
                 });
     }

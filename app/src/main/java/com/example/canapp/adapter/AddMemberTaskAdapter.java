@@ -21,6 +21,7 @@ import com.example.canapp.model.project.ProjectInProjectDetail;
 import com.example.canapp.model.task.AddTaskResponse;
 import com.example.canapp.model.task.Task;
 import com.example.canapp.model.user.User;
+import com.example.canapp.ulti.SharedPrefManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -204,7 +205,11 @@ public class AddMemberTaskAdapter extends RecyclerView.Adapter<AddMemberTaskAdap
     }
 
     String getUserID() {
-        return "64640b2c7387efac4b4ab391";
+        if (SharedPrefManager.getInstance(getmContext()).getUser() != null) {
+            User user = SharedPrefManager.getInstance(getmContext()).getUser();
+            return user.get_id();
+        }
+        return "";
     }
 
 }

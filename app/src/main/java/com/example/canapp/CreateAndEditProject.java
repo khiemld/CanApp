@@ -1,6 +1,7 @@
 package com.example.canapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -15,6 +17,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,6 +29,7 @@ import android.widget.Toast;
 import com.example.canapp.api.PlanApi;
 import com.example.canapp.api.RetrofitClient;
 import com.example.canapp.model.project.ProjectFull;
+import com.example.canapp.model.project.ProjectInProjectDetail;
 import com.example.canapp.model.project.ProjectResponse;
 import com.example.canapp.model.user.User;
 import com.example.canapp.ulti.SharedPrefManager;
@@ -53,7 +59,11 @@ public class CreateAndEditProject extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener setListenerFrom;
     DatePickerDialog.OnDateSetListener setListenerTo;
 
+    ConstraintLayout container;
+
     ImageView createProjectBack;
+
+    ProjectInProjectDetail mProject;
 
     List<String> nameList = new ArrayList<>();
 
@@ -69,6 +79,16 @@ public class CreateAndEditProject extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_create_and_edit_project);
+
+        container = findViewById(R.id.layout_createPlan_mainContainer);
+
+        container = findViewById(R.id.layout_createPlan_mainContainer);
+        Animation animation =
+                AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up_login);
+        animation.setInterpolator(new DecelerateInterpolator());
+        animation.setDuration(300);
+        container.startAnimation(animation);
+
 
         isCreat = getIntent().getExtras().getBoolean("isCreate");
 
@@ -172,9 +192,25 @@ public class CreateAndEditProject extends AppCompatActivity {
 
     private void initialSettingActionLabel() {
         if (isCreat) {
+            actionButton.setVisibility(View.VISIBLE);
             actionButton.setText("Tạo mới");
+            edt_projectName.setEnabled(true);
+            edt_projectDesc.setEnabled(true);
         } else {
             actionButton.setText("Lưu");
+            actionButton.setVisibility(View.GONE);
+
+            mProject = (ProjectInProjectDetail) getIntent().getExtras().get("project");
+            if (mProject != null) {
+                edt_projectName.setText(mProject.getName());
+                edt_projectName.setEnabled(false);
+                edt_fromDate.setEnabled(false);
+                edt_toDate.setEnabled(false);
+                edt_projectDesc.setEnabled(false);
+                edt_projectDesc.setText(mProject.getDescription());
+                edt_fromDate.setText(mProject.getBeginTime());
+                edt_toDate.setText(mProject.getEndTime());
+            }
         }
     }
 
@@ -366,7 +402,20 @@ public class CreateAndEditProject extends AppCompatActivity {
         createProjectBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+
+                View container = findViewById(R.id.layout_createPlan_mainContainer);
+                Animation animation =
+                        AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down);
+                animation.setInterpolator(new DecelerateInterpolator());
+                animation.setDuration(300);
+                container.startAnimation(animation);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 300);
             }
         });
     }

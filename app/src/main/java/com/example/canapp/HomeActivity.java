@@ -153,8 +153,13 @@ public class HomeActivity extends Fragment {
                         getAllprojectEnjoy(listMemberPlan);
                         getAllmyProject(listMyPlan);
                     } else {
-                        Toast.makeText(getContext(), "Hãy tạo dự án mới 🙆‍♂️", Toast.LENGTH_SHORT)
-                                .show();
+                        try {
+
+                            Toast.makeText(getContext(), "Hãy tạo dự án mới 🙆‍♂️",
+                                            Toast.LENGTH_SHORT)
+                                    .show();
+                        } catch (Throwable throwable) {
+                        }
                     }
 
 
