@@ -11,13 +11,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -57,7 +62,8 @@ public class HomeActivity extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_home, container, false);
 
         myId = SharedPrefManager.getInstance(getContext()).getUser().get_id();
@@ -75,7 +81,8 @@ public class HomeActivity extends Fragment {
 
 
     private void getAllprojectEnjoy(List<DetailProject> list) {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager =
+                new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         rv_projectEnjoy.setLayoutManager(layoutManager);
 
         planAdapter = new PlanAdapter(getContext());
@@ -84,7 +91,8 @@ public class HomeActivity extends Fragment {
     }
 
     private void getAllmyProject(List<DetailProject> list) {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager =
+                new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         rv_myProject.setLayoutManager(layoutManager);
 
         planAdapter = new PlanAdapter(getContext());
@@ -94,7 +102,8 @@ public class HomeActivity extends Fragment {
 
     private void getAllprojectRecent(List<DetailProject> list) {
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager =
+                new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         rv_projectRecent.setLayoutManager(layoutManager);
 
         planAdapter = new PlanAdapter(getContext());
@@ -102,45 +111,56 @@ public class HomeActivity extends Fragment {
         rv_projectRecent.setAdapter(planAdapter);
     }
 
-    private void getListPlans(){
+    private void getListPlans() {
+
+        final Dialog dialog = createDialogFrom(R.layout.layout_progress_dialop);
+        dialog.show();
+
         taskApi = RetrofitClient.getRetrofit().create(TaskApi.class);
 
         Call<ListProjectofUser> call = taskApi.getAllPlanofUser(myId);
 
         call.enqueue(new Callback<ListProjectofUser>() {
             @Override
-            public void onResponse(Call<ListProjectofUser> call, Response<ListProjectofUser> response) {
-                if (response.isSuccessful()){
+            public void onResponse(Call<ListProjectofUser> call,
+                                   Response<ListProjectofUser> response) {
+                if (response.isSuccessful()) {
+                    dialog.dismiss();
+                    if (response.body().getPlan().size() > 0) {
+                        int countplan = response.body().getPlan().size();
 
+                        for (int i = 0; i < countplan; i++) {
+                            if (response.body().getPlan().get(i).getManager().get_id()
+                                    .equals(myId)) {
+                                listMyPlan.add(response.body().getPlan().get(i));
 
-                    int countplan = response.body().getPlan().size();
+                            } else {
+                                listMemberPlan.add(response.body().getPlan().get(i));
 
-                    for (int i = 0; i < countplan; i++){
-                        if (response.body().getPlan().get(i).getManager().get_id().equals(myId)){
-                            listMyPlan.add(response.body().getPlan().get(i));
+                            }
+                        }
 
-                        } else {
-                            listMemberPlan.add(response.body().getPlan().get(i));
+                        for (DetailProject project : response.body().getPlan()) {
+
 
                         }
+
+                        listRecentPlan.add(response.body().getPlan().get(countplan - 1));
+
+                        //Up data lên giao diện
+                        getAllprojectRecent(listRecentPlan);
+
+                        getAllprojectEnjoy(listMemberPlan);
+                        getAllmyProject(listMyPlan);
+                    } else {
+                        Toast.makeText(getContext(), "Hãy tạo dự án mới 🙆‍♂️", Toast.LENGTH_SHORT)
+                                .show();
                     }
 
-                    for (DetailProject project: response.body().getPlan()) {
 
-
-                    }
-
-                    listRecentPlan.add(response.body().getPlan().get(countplan - 1));
-
-                    //Up data lên giao diện
-                    getAllprojectRecent(listRecentPlan);
-
-                    getAllprojectEnjoy(listMemberPlan);
-                    getAllmyProject(listMyPlan);
-                }
-                else{
+                } else {
                     try {
-                        Log.e("homeactivity: ",response.errorBody().string() );
+                        Log.e("homeactivity: ", response.errorBody().string());
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -149,7 +169,7 @@ public class HomeActivity extends Fragment {
 
             @Override
             public void onFailure(Call<ListProjectofUser> call, Throwable t) {
-                Log.e( "onFailure: ",t.getMessage() );
+                Log.e("onFailure: ", t.getMessage());
             }
         });
     }
@@ -159,5 +179,23 @@ public class HomeActivity extends Fragment {
         rv_myProject = view.findViewById(R.id.rcv_myProject);
         rv_projectEnjoy = view.findViewById(R.id.rcv_projectEnjoy);
         /*account=findViewById(R.id.ic_account);*/
+    }
+
+    Dialog createDialogFrom(int layout) {
+        Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(layout);
+        dialog.setCancelable(false);
+
+        Window window = dialog.getWindow();
+        if (window == null) {
+            return null;
+        }
+
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        return dialog;
     }
 }

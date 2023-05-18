@@ -42,6 +42,7 @@ import com.example.canapp.model.task.AddTaskResponse;
 import com.example.canapp.model.task.Task;
 import com.example.canapp.model.type.Type;
 import com.example.canapp.model.user.User;
+import com.example.canapp.ulti.SharedPrefManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -129,9 +130,12 @@ public class DetailTaskFragment extends Fragment {
         getUserID();
     }
 
-    private String getUserID() {
-        // Sửa lại là lấy userID ở dưới shared gì gì đó
-        return "64640b2c7387efac4b4ab391";
+    String getUserID() {
+        if (SharedPrefManager.getInstance(getContext()).getUser() != null) {
+            User user = SharedPrefManager.getInstance(getContext()).getUser();
+            return user.get_id();
+        }
+        return "";
     }
 
     @Override

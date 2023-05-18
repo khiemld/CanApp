@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="18dp"
+        android:padding="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/vector_register" />
@@ -20,10 +21,10 @@
         android:id="@+id/constraint1"
         android:layout_width="320dp"
         android:layout_height="30dp"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/background_profile"
         android:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView19">
 
@@ -57,10 +58,10 @@
         android:id="@+id/constraint2"
         android:layout_width="320dp"
         android:layout_height="30dp"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_profile"
         android:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraint1">
 
@@ -98,6 +99,7 @@
         android:layout_marginTop="7dp"
         android:background="@drawable/background_profile"
         android:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView20">
 
@@ -205,7 +207,7 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
         android:text="Dự án của tôi"
         android:textColor="@color/third_blue"
@@ -217,7 +219,7 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
         android:text="Dự án tôi tham gia"
         android:textColor="@color/third_blue"

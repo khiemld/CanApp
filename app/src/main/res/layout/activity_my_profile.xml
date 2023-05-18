@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".My_Profile">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".My_Profile"
-        >
+        tools:context=".My_Profile">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -20,13 +19,13 @@
                 android:id="@+id/img_topmenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="3dp"
                 android:layout_marginTop="20dp"
+                android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintHorizontal_bias="0.93"
-                app:srcCompat="@drawable/pop_up" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/baseline_more_vert_24" />
 
             <FrameLayout
                 android:id="@+id/frame1"
@@ -53,13 +52,14 @@
                         android:layout_height="match_parent"
                         android:scaleType="fitXY"
                         android:src="@drawable/logo2" />
+
                     <TextView
                         android:id="@+id/textView15"
                         android:layout_width="34dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center|right"
                         android:layout_marginTop="30dp"
                         android:layout_marginRight="10dp"
-                        android:layout_gravity="center|right"
                         android:background="@color/orange"
                         android:text="4.2"
                         android:textAlignment="center"
@@ -298,11 +298,11 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint_infro"
-                android:layout_width="320dp"
+                android:layout_width="match_parent"
                 android:layout_height="242dp"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="29dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="12dp"
                 android:background="@drawable/background_profile"
                 android:elevation="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -310,6 +310,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/ratingBar5"
 
                 >
+
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
@@ -324,11 +325,11 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="286dp"
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="17dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="18dp"
                     android:layout_marginBottom="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -467,25 +468,27 @@
                     android:id="@+id/img_menu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="8sp"
                     android:layout_marginEnd="16dp"
+                    android:padding="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/pop_up" />
+                    app:srcCompat="@drawable/baseline_more_vert_24" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint_project"
-                android:layout_width="320dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="12dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/background_profile"
                 android:elevation="5dp"
+                android:paddingTop="8sp"
+                android:paddingBottom="8sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -495,12 +498,12 @@
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="12sp"
                     android:text="Các dự án đã tham gia"
                     android:textColor="@color/second_blue"
                     android:textSize="12sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -517,11 +520,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

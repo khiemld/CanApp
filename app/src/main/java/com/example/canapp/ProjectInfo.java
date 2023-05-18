@@ -33,6 +33,7 @@ import com.example.canapp.model.project.ProjectInProjectDetail;
 import com.example.canapp.model.task.Task;
 import com.example.canapp.model.type.Type;
 import com.example.canapp.model.user.User;
+import com.example.canapp.ulti.SharedPrefManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -242,6 +243,10 @@ public class ProjectInfo extends Fragment implements AddMemBer.ISendProjFromAddM
     }
 
     String getUserID() {
-        return "64511d75da6a2ab371790258a";
+        if (SharedPrefManager.getInstance(getContext()).getUser() != null) {
+            User user = SharedPrefManager.getInstance(getContext()).getUser();
+            return user.get_id();
+        }
+        return "";
     }
 }

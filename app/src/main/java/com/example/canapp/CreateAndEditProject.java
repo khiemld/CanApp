@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,8 @@ import com.example.canapp.api.PlanApi;
 import com.example.canapp.api.RetrofitClient;
 import com.example.canapp.model.project.ProjectFull;
 import com.example.canapp.model.project.ProjectResponse;
+import com.example.canapp.model.user.User;
+import com.example.canapp.ulti.SharedPrefManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,10 +48,12 @@ public class CreateAndEditProject extends AppCompatActivity {
     EditText edt_projectName, edt_projectDesc;
 
     /*Cờ kiểm tra xem có phải đang thực hiện thao tác thêm project hay không*/
-    static boolean isCreat = true;
+    boolean isCreat = true;
 
     DatePickerDialog.OnDateSetListener setListenerFrom;
     DatePickerDialog.OnDateSetListener setListenerTo;
+
+    ImageView createProjectBack;
 
     List<String> nameList = new ArrayList<>();
 
@@ -55,14 +61,16 @@ public class CreateAndEditProject extends AppCompatActivity {
 
     PlanApi planApi;
 
-    final String leaderID = "64640b2c7387efac4b4ab391";
     final static String TAG = "CreateAndEditProject";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_create_and_edit_project);
+
+        isCreat = getIntent().getExtras().getBoolean("isCreate");
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
@@ -88,6 +96,8 @@ public class CreateAndEditProject extends AppCompatActivity {
 
         // Xử lí sự kiện nhập chữ vào 2 ô edit text
         hanleNameTyping();
+
+        handleBackButtonClick();
 
     }
 
@@ -194,7 +204,8 @@ public class CreateAndEditProject extends AppCompatActivity {
                     ) {
                         // Dữ liệu chuẩn -> Bắt đầu thêm
                         Call<ProjectResponse> call =
-                                planApi.createProject(leaderID, projectName, projectDes, fromDate,
+                                planApi.createProject(getUserID(), projectName, projectDes,
+                                        fromDate,
                                         toDate);
                         call.enqueue(new Callback<ProjectResponse>() {
                             @Override
@@ -212,6 +223,13 @@ public class CreateAndEditProject extends AppCompatActivity {
                                                     "Thêm thành công " + projectFull.getName(),
                                                     Toast.LENGTH_SHORT)
                                             .show();
+
+                                    Intent projectIntent = new Intent(getApplicationContext(),
+                                            DetailProjectActivity.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("project", response.body().getPlan().get_id());
+                                    projectIntent.putExtras(bundle);
+                                    startActivity(projectIntent);
 
                                 } else {
                                     // Xử lí khi nhận 409
@@ -333,5 +351,23 @@ public class CreateAndEditProject extends AppCompatActivity {
         edt_projectDesc = findViewById(R.id.edt_projectDescription);
         projectNameError = findViewById(R.id.tv_projectNameError);
         dateError = findViewById(R.id.tv_dateError);
+        createProjectBack = findViewById(R.id.createProjectBack);
+    }
+
+    String getUserID() {
+        if (SharedPrefManager.getInstance(getApplicationContext()).getUser() != null) {
+            User user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+            return user.get_id();
+        }
+        return "";
+    }
+
+    void handleBackButtonClick() {
+        createProjectBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

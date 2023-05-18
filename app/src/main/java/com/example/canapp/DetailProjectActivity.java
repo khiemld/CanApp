@@ -42,6 +42,7 @@ import com.example.canapp.api.PlanApi;
 import com.example.canapp.api.RetrofitClient;
 import com.example.canapp.api.TaskApi;
 import com.example.canapp.api.TypeApi;
+import com.example.canapp.model.project.DetailProject;
 import com.example.canapp.model.project.ProjectDetailResponse;
 import com.example.canapp.model.project.ProjectInProjectDetail;
 import com.example.canapp.model.project.ProjectResponse;
@@ -80,6 +81,8 @@ public class DetailProjectActivity extends AppCompatActivity
     TextView cancelButton;
     TextView projectName, projectOwner;
 
+    ImageView backButton;
+
     // Tổng số cột hiện có (phải trừ đi 1 do có 1 cột ảo ở cuối)
     private static int mColumns;
 
@@ -99,7 +102,7 @@ public class DetailProjectActivity extends AppCompatActivity
 
     User mManager;
     User user;
-    final String projectID = "64653c0e6da61827dc5bdfb9";
+    private String projectID;
     String userID = "64511d75da6a2ab371790258";
 
     PlanApi planApi;
@@ -108,6 +111,8 @@ public class DetailProjectActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_project);
+
+        projectID = (String) getIntent().getExtras().get("project");
 
         mColumns = 0;
         initialMapping();
@@ -119,7 +124,16 @@ public class DetailProjectActivity extends AppCompatActivity
 
         handleMoreInfo();
 
+        handleBackButtonClick();
+    }
 
+    private void handleBackButtonClick() {
+        backButton.setOnClickListener(new View.OnClickListener() {
+             @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     void handleGetPlanDetailInfo() {
@@ -536,6 +550,7 @@ public class DetailProjectActivity extends AppCompatActivity
         cancelButton = findViewById(R.id.tv_cancelCreateCate);
         projectName = findViewById(R.id.projectName);
         projectOwner = findViewById(R.id.projectOwner);
+        backButton = findViewById(R.id.detailProjectBack);
     }
 
     void initialTypes() {
@@ -1242,7 +1257,11 @@ public class DetailProjectActivity extends AppCompatActivity
     }
 
     String getUserID() {
-        return "64640b2c7387efac4b4ab391";
+        if (SharedPrefManager.getInstance(getApplicationContext()).getUser() != null) {
+            user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+            return user.get_id();
+        }
+        return "";
     }
 
     void reloadData() {
