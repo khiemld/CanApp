@@ -32,7 +32,7 @@ public class BaseActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         mviewPager = findViewById(R.id.view_pager);
-
+        
         setUpViewPager();
 
 
@@ -67,20 +67,18 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     private void setUpViewPager() {
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),
-                FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mviewPager.setAdapter(viewPagerAdapter);
 
         mviewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset,
-                                       int positionOffsetPixels) {
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
             }
 
             @Override
             public void onPageSelected(int position) {
-                switch (position) {
+                switch (position){
                     case 0:
                         bottomNavigationView.getMenu().findItem(R.id.ic_home).setChecked(true);
                         break;

@@ -25,8 +25,11 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.PlanViewHolder
 
     private List<DetailProject> projects;
 
+    private boolean isowner;
+
     public PlanAdapter(Context context) {
         this.context = context;
+        this.isowner = isowner;
     }
 
     public void setProjects(List<DetailProject> list) {

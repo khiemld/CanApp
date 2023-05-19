@@ -22,12 +22,15 @@
         tools:targetApi="31">
         <activity
             android:name=".DiscussionActivity"
-            android:exported="true" >
-            <!--<intent-filter>
+            android:exported="true">
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <activity
             android:name=".RatingActivity"
@@ -37,7 +40,7 @@
             android:exported="false" />
         <activity
             android:name=".RateActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".BaseActivity"
             android:exported="false" />
@@ -74,7 +77,7 @@
         <activity
             android:name=".RegisterActivity"
             android:exported="false"
-            android:theme="@style/LoginActivityTheme"/>
+            android:theme="@style/LoginActivityTheme" />
         <activity
             android:name=".WelcomeActivity"
             android:exported="true">
@@ -88,12 +91,15 @@
             android:name=".LoginActivity"
             android:exported="false"
             android:theme="@style/LoginActivityTheme"
-            android:windowSoftInputMode="adjustResize" >
-            <!--<intent-filter>
+            android:windowSoftInputMode="adjustResize">
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <activity
             android:name=".MainActivity"

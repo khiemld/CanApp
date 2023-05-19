@@ -58,12 +58,12 @@ public class HomeActivity extends Fragment {
     private List<DetailProject> listMyPlan, listMemberPlan, listRecentPlan;
 
     private String myId;
+
     /*BottomNavigationItemView account;*/
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_home, container, false);
 
         myId = SharedPrefManager.getInstance(getContext()).getUser().get_id();
@@ -81,8 +81,7 @@ public class HomeActivity extends Fragment {
 
 
     private void getAllprojectEnjoy(List<DetailProject> list) {
-        RecyclerView.LayoutManager layoutManager =
-                new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         rv_projectEnjoy.setLayoutManager(layoutManager);
 
         planAdapter = new PlanAdapter(getContext());
@@ -91,8 +90,7 @@ public class HomeActivity extends Fragment {
     }
 
     private void getAllmyProject(List<DetailProject> list) {
-        RecyclerView.LayoutManager layoutManager =
-                new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         rv_myProject.setLayoutManager(layoutManager);
 
         planAdapter = new PlanAdapter(getContext());
@@ -102,8 +100,7 @@ public class HomeActivity extends Fragment {
 
     private void getAllprojectRecent(List<DetailProject> list) {
 
-        RecyclerView.LayoutManager layoutManager =
-                new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         rv_projectRecent.setLayoutManager(layoutManager);
 
         planAdapter = new PlanAdapter(getContext());
@@ -111,11 +108,9 @@ public class HomeActivity extends Fragment {
         rv_projectRecent.setAdapter(planAdapter);
     }
 
-    private void getListPlans() {
-
+    private void getListPlans(){
         final Dialog dialog = createDialogFrom(R.layout.layout_progress_dialop);
         dialog.show();
-
         taskApi = RetrofitClient.getRetrofit().create(TaskApi.class);
 
         Call<ListProjectofUser> call = taskApi.getAllPlanofUser(myId);
@@ -134,21 +129,21 @@ public class HomeActivity extends Fragment {
                                     .equals(myId)) {
                                 listMyPlan.add(response.body().getPlan().get(i));
 
-                            } else {
-                                listMemberPlan.add(response.body().getPlan().get(i));
-
-                            }
-                        }
-
-                        for (DetailProject project : response.body().getPlan()) {
-
+                        } else {
+                            listMemberPlan.add(response.body().getPlan().get(i));
 
                         }
+                    }
 
-                        listRecentPlan.add(response.body().getPlan().get(countplan - 1));
+                    for (DetailProject project: response.body().getPlan()) {
 
-                        //Up data lên giao diện
-                        getAllprojectRecent(listRecentPlan);
+
+                    }
+
+                    listRecentPlan.add(response.body().getPlan().get(countplan - 1));
+
+                    //Up data lên giao diện
+                    getAllprojectRecent(listRecentPlan);
 
                         getAllprojectEnjoy(listMemberPlan);
                         getAllmyProject(listMyPlan);
@@ -165,7 +160,7 @@ public class HomeActivity extends Fragment {
 
                 } else {
                     try {
-                        Log.e("homeactivity: ", response.errorBody().string());
+                        Log.e("homeactivity: ",response.errorBody().string() );
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -174,7 +169,7 @@ public class HomeActivity extends Fragment {
 
             @Override
             public void onFailure(Call<ListProjectofUser> call, Throwable t) {
-                Log.e("onFailure: ", t.getMessage());
+                Log.e( "onFailure: ",t.getMessage() );
             }
         });
     }
