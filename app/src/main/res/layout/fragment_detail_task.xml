@@ -242,9 +242,9 @@
                 android:text="Chỉnh sửa"
                 android:textColor="@color/orange"
                 android:textSize="14sp"
-                app:layout_constraintTop_toTopOf="@id/tv_taskDetail_memberLabel"
                 app:layout_constraintBottom_toBottomOf="@id/tv_taskDetail_memberLabel"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_taskDetail_memberLabel" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcv_taskDetail_members"
@@ -259,6 +259,7 @@
 
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/tv_taskDetail_saveChangeGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18sp"
@@ -280,7 +281,34 @@
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:visibility="gone"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18sp"
+                android:layout_marginTop="12sp"
+                android:layout_marginEnd="18sp"
+                app:cardCornerRadius="5sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_taskDetail_saveChangeGroup">
+
+                <TextView
+                    android:id="@+id/tv_taskDetail_closeTast"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/second_blue"
+                    android:gravity="center"
+                    android:padding="12sp"
+                    android:text="Đóng công việc"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
             </androidx.cardview.widget.CardView>

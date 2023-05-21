@@ -101,12 +101,18 @@ public class ItemAdapter extends DragItemAdapter<Pair<Long, Task>, ItemAdapter.V
             holder.memberGroup.setVisibility(View.VISIBLE);
             holder.memberCount.setText(Integer.toString(currentTask.getMembers().size()));
         }
-        if (true) {
+
+        if (currentTask.getBeginTime() != null && currentTask.getEndTime() != null) {
+            if (currentTask.getEndTime().isEmpty() && currentTask.getBeginTime().isEmpty()) {
+                holder.dateGroup.setVisibility(View.GONE);
+            } else {
+                holder.dateGroup.setVisibility(View.VISIBLE);
+                holder.startDate.setText(currentTask.getBeginTime());
+                holder.endDate.setText(currentTask.getEndTime());
+            }
+        }
+        else{
             holder.dateGroup.setVisibility(View.GONE);
-        } else {
-            holder.dateGroup.setVisibility(View.VISIBLE);
-            holder.startDate.setText("Ngày bắt đầu");
-            holder.endDate.setText("Ngày kết thúc");
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -121,9 +127,13 @@ public class ItemAdapter extends DragItemAdapter<Pair<Long, Task>, ItemAdapter.V
                         DetailTaskFragment.newInstance(taskLists.get(position), mProject));
                 fragmentTransaction.addToBackStack(DetailTaskFragment.TAG);
                 fragmentTransaction.commit();
-
             }
         });
+        if (!currentTask.isActive()) {
+            holder.itemView.setAlpha(0.7f);
+        } else {
+            holder.itemView.setAlpha(1f);
+        }
     }
 
     @Override
