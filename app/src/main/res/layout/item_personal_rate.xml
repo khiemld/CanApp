@@ -28,7 +28,7 @@
             android:src="@drawable/avatar_profile"/>
 
         <TextView
-            android:id="@+id/tv_namememberRate"
+            android:id="@+id/tv_name_user_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hoàng Vũ Trường Giang"
@@ -44,7 +44,7 @@
             app:layout_constraintHorizontal_bias="0"/>
 
         <TextView
-            android:id="@+id/tv_emailmemberRate"
+            android:id="@+id/tv_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="khiemld.0204@gmail.com"
@@ -52,7 +52,7 @@
             android:textColor="@color/hint"
             android:layout_marginTop="4dp"
             android:layout_marginStart="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_namememberRate"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name_user_comment"
             app:layout_constraintStart_toEndOf="@+id/cr_avatarRate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -60,7 +60,7 @@
             app:layout_constraintHorizontal_bias="0"/>
 
         <TextView
-            android:id="@+id/tv_doRate"
+            android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Đánh giá"

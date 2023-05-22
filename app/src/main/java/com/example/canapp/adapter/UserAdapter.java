@@ -64,8 +64,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         private ImageView img_avatarMember;
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
-            txt_nameMember = itemView.findViewById(R.id.tv_namememberRate);
-            txt_emailMember = itemView.findViewById(R.id.tv_emailmemberRate);
+            txt_nameMember = itemView.findViewById(R.id.tv_name_user_comment);
+            txt_emailMember = itemView.findViewById(R.id.tv_comment);
             img_avatarMember = itemView.findViewById(R.id.cr_avatarRate);
         }
     }

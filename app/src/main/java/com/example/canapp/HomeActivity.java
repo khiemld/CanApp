@@ -144,9 +144,8 @@ public class HomeActivity extends Fragment {
 
                     //Up data lên giao diện
                     getAllprojectRecent(listRecentPlan);
-
-                        getAllprojectEnjoy(listMemberPlan);
-                        getAllmyProject(listMyPlan);
+                    getAllprojectEnjoy(listMemberPlan);
+                    getAllmyProject(listMyPlan);
                     } else {
                         try {
 
