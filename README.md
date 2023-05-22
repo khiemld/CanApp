@@ -3,17 +3,21 @@
 # CAN
 CAN is a mobile app for student to keep track of group projects.
 
+## Overview
+<img src="https://img.icons8.com/color/48/000000/java-coffee-cup-logo.png"/><img src="https://img.icons8.com/color/48/000000/android-os.png"/>
+
 ## Key features
-###### 1. Board and columns
+##### 1. Board and columns
 - Create project as a board and divide it into columns, manage columns that align to your workflow.
 - Move task from one column to another to show work process.
-###### 2. Cards
+##### 2. Cards
 - Each task is represented by a card. You can create new cards, label them, set due dates, drag and drop cards into different lists, close task and assign them to team members.
-###### 3. Members
+##### 3. Members
 - Manage members in your projects, add members to your project, keep track of their work.
-###### 1. Rating
+##### 4. Rating
 - Rate members and give feedbacks for them after project finished, respectively with their behavior in project.
 
 ## References
 - DragListView: Click [*here*](https://github.com/woxblom/DragListView.git)
 - Glide: Click [*here*](https://github.com/bumptech/glide)
+- API: Click [*here*](https://github.com/khiemld/CanApp-be.git)
