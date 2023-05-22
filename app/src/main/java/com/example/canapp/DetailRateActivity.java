@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.canapp.adapter.CommentAdapter;
+import com.example.canapp.adapter.CommentRateAdapter;
 import com.example.canapp.api.RateApi;
 import com.example.canapp.api.RetrofitClient;
 import com.example.canapp.model.rate.Comment;
@@ -37,7 +38,7 @@ public class DetailRateActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
-    private CommentAdapter commentAdapter;
+    private CommentRateAdapter commentAdapter;
 
     private ImageView img_avatar, img_backButton;
 
@@ -131,7 +132,7 @@ public class DetailRateActivity extends AppCompatActivity {
 
                     getAllComment(comments);
                 } else {
-                    Toast.makeText(DetailRateActivity.this, "Lòi", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailRateActivity.this, "Lỗi", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -157,8 +158,8 @@ public class DetailRateActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        commentAdapter = new CommentAdapter(getApplicationContext());
-        commentAdapter.setComment(list);
+        commentAdapter = new CommentRateAdapter(getApplicationContext());
+        commentAdapter.setCommentRate(list);
         recyclerView.setAdapter(commentAdapter);
     }
     private void Mapping() {
