@@ -7,6 +7,7 @@
     tools:context=".RateActivity">
 
     <ScrollView
+        android:id="@+id/scroll_DetailRate"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/backgroud_fill"
@@ -32,8 +33,9 @@
                     android:id="@+id/img_backDetailRate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginStart="28dp"
+                    android:padding="8dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"
                     android:src="@drawable/ic_back_third_blue" />
 
                 <TextView
@@ -115,16 +117,17 @@
                     android:layout_marginStart="28dp" />
 
                 <RatingBar
-                    android:id="@+id/ratingBar1"
+                    android:id="@+id/ratingDetailRate_1"
                     style="@style/Widget.AppCompat.RatingBar.Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
                     android:progressTint="#FFAA4C"
-                    android:rating="4.5"
+                    android:progressBackgroundTint="@color/hint"
+                    android:rating="5"
                     android:scaleX="1"
                     android:scaleY="1"
-                    android:stepSize="0.5" />
+                    android:stepSize="0.1" />
             </LinearLayout>
 
             <LinearLayout
@@ -152,16 +155,17 @@
                     android:layout_marginStart="28dp" />
 
                 <RatingBar
-                    android:id="@+id/ratingBar2"
+                    android:id="@+id/ratingDetailRate_2"
                     style="@style/Widget.AppCompat.RatingBar.Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
                     android:progressTint="#FFAA4C"
+                    android:progressBackgroundTint="@color/hint"
                     android:rating="3.5"
                     android:scaleX="1"
                     android:scaleY="1"
-                    android:stepSize="0.5" />
+                    android:stepSize="0.1" />
             </LinearLayout>
 
             <LinearLayout
@@ -182,23 +186,24 @@
                     android:id="@+id/tv_mark3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4"
+                    android:text="4.0"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     android:textColor="@color/second_blue"
                     android:layout_marginStart="28dp" />
 
                 <RatingBar
-                    android:id="@+id/ratingBar3"
+                    android:id="@+id/ratingDetailRate_3"
                     style="@style/Widget.AppCompat.RatingBar.Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
                     android:progressTint="#FFAA4C"
+                    android:progressBackgroundTint="@color/hint"
                     android:rating="4"
                     android:scaleX="1"
                     android:scaleY="1"
-                    android:stepSize="0.5" />
+                    android:stepSize="0.1" />
             </LinearLayout>
 
             <LinearLayout
@@ -226,16 +231,17 @@
                     android:layout_marginStart="44dp" />
 
                 <RatingBar
-                    android:id="@+id/ratingBar4"
+                    android:id="@+id/ratingDetailRate_4"
                     style="@style/Widget.AppCompat.RatingBar.Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
                     android:progressTint="#FFAA4C"
+                    android:progressBackgroundTint="@color/hint"
                     android:rating="3.5"
                     android:scaleX="1"
                     android:scaleY="1"
-                    android:stepSize="0.5" />
+                    android:stepSize="0.1" />
             </LinearLayout>
 
 
@@ -264,16 +270,17 @@
                     android:layout_marginStart="30dp" />
 
                 <RatingBar
-                    android:id="@+id/ratingBar5"
+                    android:id="@+id/ratingDetailRate_5"
                     style="@style/Widget.AppCompat.RatingBar.Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
                     android:progressTint="#FFAA4C"
+                    android:progressBackgroundTint="@color/hint"
                     android:rating="3.5"
                     android:scaleX="1"
                     android:scaleY="1"
-                    android:stepSize="0.5" />
+                    android:stepSize="0.1" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

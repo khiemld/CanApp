@@ -7,6 +7,7 @@
     tools:context=".RateActivity">
 
     <ScrollView
+        android:id="@+id/scroll_addRating"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/backgroud_fill"
@@ -26,31 +27,47 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="4">
 
                 <ImageView
-                    android:id="@+id/img_backDetailRate"
+                    android:id="@+id/img_backRating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginStart="28dp"
-                    android:src="@drawable/ic_back_third_blue" />
+                    android:padding="8dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_back_third_blue"
+                    android:layout_weight="1"/>
 
                 <TextView
                     android:id="@+id/tv_titleDetailRate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:layout_marginStart="92dp"
                     android:text="Chi tiết đánh giá"
                     android:textColor="@color/second_blue"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"/>
+
+                <TextView
+                    android:id="@+id/tv_saveRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lưu"
+                    android:textSize="16sp"
+                    android:textColor="@color/orange"
+                    android:padding="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"/>
 
             </LinearLayout>
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/cr_avatarDetailRate"
+                android:id="@+id/cr_avatarRating"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:layout_marginTop="36dp"
@@ -58,7 +75,7 @@
                 android:src="@drawable/avatar_profile" />
 
             <TextView
-                android:id="@+id/tv_namememberDetailRate"
+                android:id="@+id/tv_namememberRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -82,27 +99,19 @@
                     android:textColor="@color/hint"
                     android:layout_marginStart="30dp" />
 
-                <TextView
-                    android:id="@+id/tv_mark1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4.5"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/second_blue"
-                    android:layout_marginStart="28dp" />
-
                 <RatingBar
-                    android:id="@+id/ratingBar1"
+                    android:id="@+id/ratingRating1"
                     style="@style/Widget.AppCompat.RatingBar.Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
+                    android:isIndicator="false"
                     android:progressTint="#FFAA4C"
-                    android:rating="4.5"
+                    android:progressBackgroundTint="@color/hint"
+                    android:rating="0"
                     android:scaleX="1"
                     android:scaleY="1"
-                    android:stepSize="0.5" />
+                    android:stepSize="1" />
             </LinearLayout>
 
             <LinearLayout
@@ -119,27 +128,19 @@
                     android:textColor="@color/hint"
                     android:layout_marginStart="30dp" />
 
-                <TextView
-                    android:id="@+id/tv_mark2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3.5"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/second_blue"
-                    android:layout_marginStart="28dp" />
-
                 <RatingBar
-                    android:id="@+id/ratingBar2"
+                    android:id="@+id/ratingRating2"
                     style="@style/Widget.AppCompat.RatingBar.Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
+                    android:isIndicator="false"
                     android:progressTint="#FFAA4C"
-                    android:rating="3.5"
+                    android:progressBackgroundTint="@color/hint"
+                    android:rating="0"
                     android:scaleX="1"
                     android:scaleY="1"
-                    android:stepSize="0.5" />
+                    android:stepSize="1" />
             </LinearLayout>
 
             <LinearLayout
@@ -156,27 +157,19 @@
                     android:textColor="@color/hint"
                     android:layout_marginStart="30dp" />
 
-                <TextView
-                    android:id="@+id/tv_mark3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4.0"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/second_blue"
-                    android:layout_marginStart="26dp" />
-
                 <RatingBar
-                    android:id="@+id/ratingBar3"
+                    android:id="@+id/ratingRating3"
                     style="@style/Widget.AppCompat.RatingBar.Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
+                    android:isIndicator="false"
                     android:progressTint="#FFAA4C"
-                    android:rating="4"
+                    android:progressBackgroundTint="@color/hint"
+                    android:rating="0"
                     android:scaleX="1"
                     android:scaleY="1"
-                    android:stepSize="0.5" />
+                    android:stepSize="1" />
             </LinearLayout>
 
             <LinearLayout
@@ -193,27 +186,20 @@
                     android:textColor="@color/hint"
                     android:layout_marginStart="30dp" />
 
-                <TextView
-                    android:id="@+id/tv_mark4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3.5"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/second_blue"
-                    android:layout_marginStart="44dp" />
 
                 <RatingBar
-                    android:id="@+id/ratingBar4"
+                    android:id="@+id/ratingRating4"
                     style="@style/Widget.AppCompat.RatingBar.Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="9dp"
+                    android:layout_marginStart="30dp"
+                    android:isIndicator="false"
                     android:progressTint="#FFAA4C"
-                    android:rating="3.5"
+                    android:progressBackgroundTint="@color/hint"
+                    android:rating="0"
                     android:scaleX="1"
                     android:scaleY="1"
-                    android:stepSize="0.5" />
+                    android:stepSize="1" />
             </LinearLayout>
 
 
@@ -231,27 +217,19 @@
                     android:textColor="@color/hint"
                     android:layout_marginStart="30dp" />
 
-                <TextView
-                    android:id="@+id/tv_mark5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3.5"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/second_blue"
-                    android:layout_marginStart="30dp" />
-
                 <RatingBar
-                    android:id="@+id/ratingBar5"
+                    android:id="@+id/ratingRating5"
                     style="@style/Widget.AppCompat.RatingBar.Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
+                    android:isIndicator="false"
                     android:progressTint="#FFAA4C"
-                    android:rating="3.5"
+                    android:progressBackgroundTint="@color/hint"
+                    android:rating="0"
                     android:scaleX="1"
                     android:scaleY="1"
-                    android:stepSize="0.5" />
+                    android:stepSize="1" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -273,6 +251,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nhập đánh giá"
+                android:textColor="@color/black"
                 android:inputType="textMultiLine"
                 android:maxLines="5"
                 android:background="@drawable/background_comment"

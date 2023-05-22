@@ -34,13 +34,16 @@
         </activity>
         <activity
             android:name=".RatingActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/LoginActivityTheme"/>
         <activity
             android:name=".DetailRateActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/LoginActivityTheme"/>
         <activity
             android:name=".RateActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/LoginActivityTheme"/>
         <activity
             android:name=".BaseActivity"
             android:exported="false" />
