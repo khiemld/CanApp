@@ -110,8 +110,7 @@ public class ItemAdapter extends DragItemAdapter<Pair<Long, Task>, ItemAdapter.V
                 holder.startDate.setText(currentTask.getBeginTime());
                 holder.endDate.setText(currentTask.getEndTime());
             }
-        }
-        else{
+        } else {
             holder.dateGroup.setVisibility(View.GONE);
         }
 
@@ -129,8 +128,8 @@ public class ItemAdapter extends DragItemAdapter<Pair<Long, Task>, ItemAdapter.V
                 fragmentTransaction.commit();
             }
         });
-        if (!currentTask.isActive()) {
-            holder.itemView.setAlpha(0.7f);
+        if (currentTask.isActive() == false) {
+            holder.itemView.setAlpha(0.4f);
         } else {
             holder.itemView.setAlpha(1f);
         }

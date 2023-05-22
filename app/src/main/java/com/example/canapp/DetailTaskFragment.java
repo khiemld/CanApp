@@ -181,7 +181,26 @@ public class DetailTaskFragment extends Fragment {
         closeTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Đóng task!", Toast.LENGTH_SHORT).show();
+                TaskApi taskApi = RetrofitClient.getRetrofit().create(TaskApi.class);
+                Call<AddTaskResponse> call =
+                        taskApi.closeTask(getUserID(), mProject.get_id(), mTask.get_id());
+                call.enqueue(new Callback<AddTaskResponse>() {
+                    @Override
+                    public void onResponse(Call<AddTaskResponse> call,
+                                           Response<AddTaskResponse> response) {
+                        reloadProject();
+                        mTask.setActive(false);
+                        iOnTaskUpdateListener.onTaskUpdate(mTask, mProject);
+                        closeTask.setText("Mở lại");
+                        Toast.makeText(getContext(), "Đã đóng task!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<AddTaskResponse> call, Throwable t) {
+
+                    }
+                });
+
             }
         });
     }

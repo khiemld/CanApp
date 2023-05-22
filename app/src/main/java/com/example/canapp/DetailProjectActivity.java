@@ -129,7 +129,7 @@ public class DetailProjectActivity extends AppCompatActivity
 
     private void handleBackButtonClick() {
         backButton.setOnClickListener(new View.OnClickListener() {
-             @Override
+            @Override
             public void onClick(View view) {
                 finish();
             }
@@ -458,7 +458,18 @@ public class DetailProjectActivity extends AppCompatActivity
         fragment.setmProject(mProject);
         fragment.setmTask(task);
 
-        /*reloadData();*/
+        initialTypes();
+        initialTask();
+        sortTaskList();
+        createDataLists();
+        for (int i = 0; i < detailTasks.size(); i++) {
+
+            ((ItemAdapter) mBoardView.getAdapter(i)).setmProject(mProject);
+            ((ItemAdapter) mBoardView.getAdapter(i)).setTaskLists(detailTasks.get(i));
+            mBoardView.getAdapter(i).setItemList(dataLists.get(i));
+            mBoardView.getAdapter(i).notifyDataSetChanged();
+
+        }
 
     }
 
