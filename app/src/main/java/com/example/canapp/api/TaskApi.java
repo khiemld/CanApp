@@ -56,4 +56,11 @@ public interface TaskApi {
             @Field("endTime") String toDate
     );
 
+    @PUT("task/block/{uid}/{planid}/{taskid}")
+    Call<AddTaskResponse> closeTask(
+            @Path("uid") String userID,
+            @Path("planid") String planID,
+            @Path("taskid") String taskID
+    );
+
 }

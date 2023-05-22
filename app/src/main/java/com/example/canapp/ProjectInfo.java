@@ -110,7 +110,9 @@ public class ProjectInfo extends Fragment implements AddMemBer.ISendProjFromAddM
         handleAddMemberClick();
         handleMemberListClick();
         handleSeeDetail();
+        handleRate();
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -244,6 +246,19 @@ public class ProjectInfo extends Fragment implements AddMemBer.ISendProjFromAddM
                         startActivity(createProjectIntent);
                     }
                 });
+    }
+
+    void handleRate() {
+        mView.findViewById(R.id.layout_projectRate).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent createRateIntent =  new Intent(getContext(), RateActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("project", mProject);
+                createRateIntent.putExtras(bundle);
+                startActivity(createRateIntent);
+            }
+        });
     }
 
     @Override

@@ -190,13 +190,6 @@ public class AddMemBer extends Fragment {
                             public void run() {
                                 getParentFragmentManager().popBackStack();
                                 getChildFragmentManager().popBackStack();
-                                /*FragmentTransaction fragmentTransaction =
-                                        getActivity().getSupportFragmentManager()
-                                                .beginTransaction();
-                                fragmentTransaction.replace(R.id.fragment_container,
-                                        ProjectInfo.newInstance(mProject));
-                                fragmentTransaction.addToBackStack(ProjectInfo.TAG);
-                                fragmentTransaction.commit();*/
                             }
                         }, 300);
                     }

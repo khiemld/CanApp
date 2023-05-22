@@ -170,6 +170,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/card_projectInfo_seeDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20sp"
@@ -208,6 +209,58 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/imv_projectInfo_iconInfo"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:rotation="180"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/vector_register" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="16sp"
+            android:layout_marginEnd="20sp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5sp"
+            app:cardElevation="5sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_projectInfo_seeDetail">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_projectRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16sp">
+
+                <ImageView
+                    android:id="@+id/imv_projectRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/second_blue"
+                    android:padding="-20sp"
+                    android:src="@drawable/outline_info_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8sp"
+                    android:text="Đánh giá"
+                    android:textColor="@color/second_blue"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imv_projectRate"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView

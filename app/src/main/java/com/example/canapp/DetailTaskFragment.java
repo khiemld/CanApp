@@ -52,6 +52,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.GET;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,7 +75,7 @@ public class DetailTaskFragment extends Fragment {
     static long date1 = 0, date2 = 0;
 
     ImageView backButton;
-    TextView taskName, columnName, taskDesc, editMember, saveButton;
+    TextView taskName, columnName, taskDesc, editMember, saveButton, closeTask;
     EditText toDate, fromDate;
     RecyclerView memberAvatarList;
     AvtarAdapter adapter;
@@ -165,6 +166,43 @@ public class DetailTaskFragment extends Fragment {
         handleTaskNameChange();
         handleCalendar();
         handleSave();
+        handleCalendar();
+        handleCloseTask();
+    }
+
+    private void handleCloseTask() {
+        if (!getUserID().equals(mProject.getManager().get(0).get_id())) {
+            closeTask.setText(View.GONE);
+            return;
+        } else {
+            closeTask.setVisibility(View.VISIBLE);
+        }
+
+        closeTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TaskApi taskApi = RetrofitClient.getRetrofit().create(TaskApi.class);
+                Call<AddTaskResponse> call =
+                        taskApi.closeTask(getUserID(), mProject.get_id(), mTask.get_id());
+                call.enqueue(new Callback<AddTaskResponse>() {
+                    @Override
+                    public void onResponse(Call<AddTaskResponse> call,
+                                           Response<AddTaskResponse> response) {
+                        reloadProject();
+                        mTask.setActive(false);
+                        iOnTaskUpdateListener.onTaskUpdate(mTask, mProject);
+                        closeTask.setText("Mở lại");
+                        Toast.makeText(getContext(), "Đã đóng task!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<AddTaskResponse> call, Throwable t) {
+
+                    }
+                });
+
+            }
+        });
     }
 
     private void handleSave() {
@@ -227,6 +265,7 @@ public class DetailTaskFragment extends Fragment {
         memberAvatarList = (RecyclerView) mView.findViewById(R.id.rcv_taskDetail_members);
         editMember = (TextView) mView.findViewById(R.id.tv_taskDetail_memberEdit);
         saveButton = (TextView) mView.findViewById(R.id.tv_taskDetail_saveChange);
+        closeTask = (TextView) mView.findViewById(R.id.tv_taskDetail_closeTast);
     }
 
     void setupView() {
@@ -246,9 +285,6 @@ public class DetailTaskFragment extends Fragment {
             taskDesc.setHint("Thêm mô tả cho task này nhé");
             taskDesc.setText("");
         }
-
-        toDate.setText("date");
-        fromDate.setText("date");
 
         if (mTask.getBeginTime() != null) {
             fromDate.setText(mTask.getBeginTime());
@@ -293,6 +329,13 @@ public class DetailTaskFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+        if (mTask.isActive()) {
+            closeTask.setText("Đóng");
+        } else {
+            closeTask.setText("Mở lại");
+        }
+
 
         saveButton.setVisibility(View.GONE);
         handleBackButton();
@@ -342,7 +385,7 @@ public class DetailTaskFragment extends Fragment {
 
     void handleTaskNameChange() {
 
-        if (!getUserID().equals(mProject.getManager().get(0).get_id())) {
+        if (!getUserID().equals(mProject.getManager().get(0).get_id()) || !mTask.isActive()) {
             return;
         }
 
