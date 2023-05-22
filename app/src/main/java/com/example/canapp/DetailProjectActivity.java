@@ -127,6 +127,8 @@ public class DetailProjectActivity extends AppCompatActivity
         handleBackButtonClick();
     }
 
+
+
     private void handleBackButtonClick() {
         backButton.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -210,7 +212,7 @@ public class DetailProjectActivity extends AppCompatActivity
         projectMoreInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Xử lý nhấn dô cái nút ba chấm nè
+                // Xử lý nhấn dô cái nút ba chấm nè (dị sao :))
                 FragmentTransaction fragmentTransaction =
                         getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container,
