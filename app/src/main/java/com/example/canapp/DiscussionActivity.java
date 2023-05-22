@@ -27,6 +27,7 @@ import com.example.canapp.model.discussion.CommentResponse;
 import com.example.canapp.model.discussion.DetailDiscussion;
 import com.example.canapp.model.discussion.Discussion;
 import com.example.canapp.model.project.DetailProject;
+import com.example.canapp.model.project.ProjectInProjectDetail;
 import com.example.canapp.ulti.SharedPrefManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -52,20 +53,25 @@ public class DiscussionActivity extends AppCompatActivity {
     private List<DetailDiscussion> listOtherPost;
 
     private String planId;
-    private String userId="64640b2c7387efac4b4ab391";
+
+    private String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discussion);
         Mapping();
+        userId=SharedPrefManager.getInstance(getApplicationContext()).getUser().get_id();
+        Bundle bundle = getIntent().getExtras();
+        ProjectInProjectDetail project = (ProjectInProjectDetail) bundle.getSerializable("project");
+        planId=project.get_id();
+        //Toast.makeText(this, planId, Toast.LENGTH_SHORT).show();
+
         listAll=new ArrayList<>();
         listMyPost=new ArrayList<>();
         listOtherPost=new ArrayList<>();
 
         discussionAdapter = new DiscussionAdapter(getApplicationContext());
         getListSiDiscussion();
-
-        //userId = SharedPrefManager.getInstance(this).getUser().get_id();
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +121,6 @@ public class DiscussionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String title = edt_title.getText().toString();
                 String content = edt_content.getText().toString();
-                planId="6465c3656da61827dc5beea6";
                 //ghep roi chuyen planId vao va userId vao
                 discussionApi= RetrofitClient.getRetrofit().create(DiscussionApi.class);
                 Call<CommentResponse> call = discussionApi.createPost(userId,planId,title,content);

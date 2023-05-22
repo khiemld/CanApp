@@ -27,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.example.canapp.Comment;
 import com.example.canapp.DetailProjectActivity;
 import com.example.canapp.DiscussionActivity;
+import com.example.canapp.ProjectInfo;
 import com.example.canapp.R;
 import com.example.canapp.api.ApiService;
 import com.example.canapp.api.DiscussionApi;
@@ -38,6 +39,7 @@ import com.example.canapp.model.discussion.DetailDiscussion;
 import com.example.canapp.model.discussion.Discussion;
 import com.example.canapp.model.discussion.LikeInDiscuss;
 import com.example.canapp.model.discussion.LikePost;
+import com.example.canapp.ulti.SharedPrefManager;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -89,6 +91,7 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.Di
                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                    dialog.setContentView(R.layout.detail_discussion_dialog);
                    String uId=discussion.getUser();
+                   //String uId= SharedPrefManager.getInstance(holder.itemView.getContext()).getUser().get_id();
                    String postId=discussion.get_id();
 
                    TextView tv_contentDetailDiscussion = dialog.findViewById(R.id.tv_contentDetailDiscussion);
@@ -106,7 +109,6 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.Di
                    ImageView img_like = dialog.findViewById(R.id.like);
                    int count = discussion.getLikes().size();
                    tv_countLikeDetailDiscussion.setText(String.valueOf(count) +" lượt thích");
-                  /* Log.e("kq",String.valueOf(count));*/
                    if(discussion.getLikes().size()>0){
                        for(LikeInDiscuss like:discussion.getLikes()){
                            if(uId.equals(like.getUser())){
@@ -115,7 +117,6 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.Di
                            }
                        }
                    }else {
-                       //Log.e("Lỗi","inlike");
                        img_like.setOnClickListener(new View.OnClickListener() {
                            @Override
                            public void onClick(View view) {
@@ -127,7 +128,7 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.Di
                                        if(response.isSuccessful()){
                                            Glide.with(holder.itemView.getContext()).load(R.drawable.ic_like_2).into(img_like);
                                            //Log.e("in like","thanh cong");
-                                           Intent intent=new Intent(holder.itemView.getContext(), DiscussionActivity.class);
+                                           Intent intent=new Intent(holder.itemView.getContext(), ProjectInfo.class);
                                            holder.itemView.getContext().startActivity(intent);
                                        }
                                        else {

@@ -22,7 +22,7 @@ public interface DiscussionApi {
     Call<List<DetailDiscussion>> getAll();
 
     @GET("post/{id}")
-    Call<AllDiscussion> getDiscussionDetail(@Path("id") String postID);
+    Call<List<DetailDiscussion>> getDiscussionDetail(@Path("id") String postID);
 
     @FormUrlEncoded
     @POST("post/create/{uid}/{planId}")

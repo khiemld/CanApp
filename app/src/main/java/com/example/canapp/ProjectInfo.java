@@ -111,6 +111,7 @@ public class ProjectInfo extends Fragment implements AddMemBer.ISendProjFromAddM
         handleMemberListClick();
         handleSeeDetail();
         handleRate();
+        handleComment();
     }
 
 
@@ -253,6 +254,18 @@ public class ProjectInfo extends Fragment implements AddMemBer.ISendProjFromAddM
             @Override
             public void onClick(View v) {
                 Intent createRateIntent =  new Intent(getContext(), RateActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("project", mProject);
+                createRateIntent.putExtras(bundle);
+                startActivity(createRateIntent);
+            }
+        });
+    }
+    void handleComment() {
+        mView.findViewById(R.id.layout_projectComment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent createRateIntent =  new Intent(getContext(), DiscussionActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("project", mProject);
                 createRateIntent.putExtras(bundle);

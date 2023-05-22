@@ -112,8 +112,8 @@ public class Comment extends AppCompatActivity {
                     if(response.isSuccessful()){
                         finish();
                        // Intent intent = new Intent(Comment.this,Comment.class);
-                        Intent intent = new Intent(Comment.this,DiscussionActivity.class);
-                        startActivity(intent);
+                        //Intent intent = new Intent(Comment.this,ProjectInfo.class);
+                        //startActivity(intent);
                     }
                     else {
                         Log.e("in comment","lỗi");
