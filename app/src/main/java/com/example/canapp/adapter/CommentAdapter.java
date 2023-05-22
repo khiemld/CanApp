@@ -10,66 +10,63 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.canapp.R;
-import com.example.canapp.model.rate.Comment;
+import com.example.canapp.model.discussion.CommentInDiscuss;
+import com.example.canapp.model.project.DetailProject;
 
 import java.util.List;
 
-public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
-
-    private Context context;
-    private List<Comment> comments;
+public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentiewHolder>{
+    Context context;
+    List<CommentInDiscuss> comment;
 
     public CommentAdapter(Context context) {
         this.context = context;
     }
-
-    public void setComment(List<Comment> list){
-        this.comments = list;
+    public void setComment(List<CommentInDiscuss> list) {
+        this.comment = list;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_comment_rate, parent, false);
-        return new CommentViewHolder(view);
+    public CommentiewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_comment, parent, false);
+        return new CommentiewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
-        Comment comment = comments.get(position);
-        if (comment == null){
+    public void onBindViewHolder(@NonNull CommentiewHolder holder, int position) {
+        CommentInDiscuss commentInDiscuss = comment.get(position);
+        if(commentInDiscuss==null){
             return;
         }
+        holder.comment.setText(commentInDiscuss.getText());
+        holder.userName.setText(commentInDiscuss.getName());
+        holder.date.setText(commentInDiscuss.getDate());
+        //holder.imageView.setImageResource(commentInDiscuss.getAvatar());
 
-        holder.txt_name.setText(comment.getName());
-        holder.txt_comment.setText(comment.getComment());
-        if (!comment.getAvatar().equals("null")){
-            Glide.with(context).load(comment.getAvatar()).into(holder.img_avatar);
-        } else {
-            holder.img_avatar.setImageResource(R.drawable.avatar_profile);
-        }
     }
 
     @Override
     public int getItemCount() {
-        if (comments != null){
-            return comments.size();
+        if (comment != null){
+            return comment.size();
         }
         return 0;
     }
+    public class CommentiewHolder extends RecyclerView.ViewHolder {
 
-    public class CommentViewHolder extends RecyclerView.ViewHolder{
-        private ImageView img_avatar;
-        private TextView txt_name, txt_comment;
+        ImageView imageView;
+        TextView userName, comment, date;
 
-        public CommentViewHolder(@NonNull View itemView) {
+        public CommentiewHolder(@NonNull View itemView) {
             super(itemView);
-            img_avatar = itemView.findViewById(R.id.cr_avatarCommentRate);
-            txt_name = itemView.findViewById(R.id.tv_namememberCommentRate);
-            txt_comment = itemView.findViewById(R.id.tv_doRateComment);
+            //imageView = itemView.findViewById(R.id.imv_memberList_avt);
+            userName = itemView.findViewById(R.id.tv_name_comment);
+            comment = itemView.findViewById(R.id.tv_context_comment);
+            date = itemView.findViewById(R.id.tv_comment_date);
         }
     }
 }
