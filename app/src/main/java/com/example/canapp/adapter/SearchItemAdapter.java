@@ -108,6 +108,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.My
 
             holder.addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
+
                 public void onClick(View view) {
 
                     final Dialog confirmDialog = dialog(R.layout.layout_confirm_dialog);
